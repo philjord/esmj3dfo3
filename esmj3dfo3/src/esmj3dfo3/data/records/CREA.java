@@ -20,7 +20,7 @@ import esmj3dfo3.data.subrecords.NIFT;
 import esmj3dfo3.data.subrecords.NIFZ;
 import esmj3dfo3.data.subrecords.RNAM;
 import esmj3dfo3.data.subrecords.SNAM;
-import esmj3dfo3.data.subrecords.TNAM;
+import esmj3dfo3.data.subrecords.TNAM_b;
 import esmj3dfo3.data.subrecords.WNAM;
 
 public class CREA extends RECO
@@ -65,7 +65,7 @@ public class CREA extends RECO
 
 	public BNAM BNAM = null;
 
-	public TNAM TNAM = null;
+	public TNAM_b TNAM = null;
 
 	public WNAM WNAM = null;
 
@@ -215,7 +215,7 @@ public class CREA extends RECO
 			}
 			else if (sr.getSubrecordType().equals("TNAM"))
 			{
-				TNAM = new TNAM(bs);
+				TNAM = new TNAM_b(bs);
 			}
 			else if (sr.getSubrecordType().equals("WNAM"))
 			{
