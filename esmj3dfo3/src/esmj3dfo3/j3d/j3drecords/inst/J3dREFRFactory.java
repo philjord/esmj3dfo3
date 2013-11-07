@@ -259,7 +259,7 @@ public class J3dREFRFactory
 			if (!makePhys)
 			{
 				TREE tree = new TREE(baseRecord);
-				Node node = TreeMaker.makeLODTree(tree.MODL.model.str, tree.billBoardWidth * ESConfig.ES_TO_METERS_SCALE,
+				Node node = TreeMaker.makeLODTreeX(tree.MODL.model.str, tree.billBoardWidth * ESConfig.ES_TO_METERS_SCALE,
 						tree.billBoardHeight * ESConfig.ES_TO_METERS_SCALE, textureSource);
 				J3dRECOStatInst j3dinst = new J3dRECOStatInst(refr, false, makePhys);
 				j3dinst.addNodeChild(node);
