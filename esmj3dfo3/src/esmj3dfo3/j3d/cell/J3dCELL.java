@@ -135,7 +135,7 @@ public class J3dCELL extends J3dCELLGeneral implements UpdateListener
 
 	protected boolean isDistant(Record record)
 	{
-		// ALL stats are part of distant Lod only
+		// ALL stats are not part of distant for now, do they have LODs in them?
 		if (record.getRecordType().equals("REFR"))
 		{
 			REFR refr = new REFR(record);
@@ -147,8 +147,8 @@ public class J3dCELL extends J3dCELLGeneral implements UpdateListener
 			Record baseRecord = master.getRecord(refr.NAME.formId);
 			if (baseRecord != null)
 			{
-				if (baseRecord.getRecordType().equals("STAT") || baseRecord.getRecordType().equals("SCOL")
-						|| baseRecord.getRecordType().equals("TREE"))
+				//baseRecord.getRecordType().equals("STAT") ||		
+				if (baseRecord.getRecordType().equals("SCOL") || baseRecord.getRecordType().equals("TREE"))
 				{
 					return true;
 				}
