@@ -135,6 +135,7 @@ public class J3dCELL extends J3dCELLGeneral implements UpdateListener
 
 	protected boolean isDistant(Record record)
 	{
+		//TODO: why can't I just use !makePhys here?
 		// ALL stats are not part of distant for now, do they have LODs in them?
 		if (record.getRecordType().equals("REFR"))
 		{
