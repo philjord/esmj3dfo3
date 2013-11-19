@@ -1,8 +1,7 @@
 package esmj3dfo3.j3d.j3drecords.type;
 
-import javax.media.j3d.Group;
+import java.util.ArrayList;
 
-import nif.NifToJ3d;
 import nif.character.NifCharacter;
 import utils.ESConfig;
 import utils.source.MeshSource;
@@ -22,38 +21,46 @@ import esmj3dfo3.data.subrecords.LVLO;
 
 public class J3dNPC_ extends J3dRECOType
 {
-	//private boolean upper = false;
+	private String helmetStr = null;
 
-	//private boolean lower = false;
+	private String headStr = null;
 
-	//private boolean hand = false;
+	private String bodyStr = null;
 
-	//private boolean foot = false;
+	private String handLStr = null;
 
-	//private boolean shield = false;
+	private String handRStr = null;
 
-	//private boolean female = false;
+	private String weapStr = null;
+
+	private boolean female = false;
 
 	public J3dNPC_(NPC_ npc_, IRecordStore master, MeshSource meshSource, TextureSource textureSource, SoundSource soundSource)
 	{
 		super(npc_, null);
-		//String path = npc_.MODL.getPath();
 
-		//female = npc_.ACBS.isFemale();
+		female = npc_.ACBS.isFemale();
 
 		Record rrec = master.getRecord(npc_.RNAM.formId);
 		RACE race = new RACE(rrec);
-
-		//attach neutral head models
 		MODL[] modls = race.MODLs;
-		Group head = NifToJ3d.loadShapes(modls[0].model.str, meshSource, textureSource).getVisualRoot();
 
-		// some of these have bad textures
-		/*for (int i = 1; i < modls.length; i++)
-		 {
-		 head.addChild(NifToJ3d.loadShapes(new File(NifConstants.NIF_PATH + modls[i].model)));
-		 }*/
-		addChild(head);
+		// the defaults
+		if (female)
+		{
+			headStr = ESConfig.TES_MESH_PATH + "characters\\head\\headfemale.nif";
+			//All beast races are just humans with a different texture
+			bodyStr = ESConfig.TES_MESH_PATH + "characters\\_male\\femaleupperbody.nif";
+			handLStr = ESConfig.TES_MESH_PATH + "characters\\_male\\femalelefthand.nif";
+			handLStr = ESConfig.TES_MESH_PATH + "characters\\_male\\femalerighthand.nif";
+		}
+		else
+		{
+			headStr = modls[0].model.str;
+			bodyStr = ESConfig.TES_MESH_PATH + "characters\\_male\\upperbody.nif";
+			handLStr = ESConfig.TES_MESH_PATH + "characters\\_male\\lefthand.nif";
+			handLStr = ESConfig.TES_MESH_PATH + "characters\\_male\\righthand.nif";
+		}
 
 		CNTO[] cntos = npc_.CNTOs;
 		for (int i = 0; i < cntos.length; i++)
@@ -67,7 +74,8 @@ public class J3dNPC_ extends J3dRECOType
 			}
 			else if (rec.getRecordType().equals("ARMO"))
 			{
-				//ARMO armo = new ARMO(rec);
+				ARMO armo = new ARMO(rec);
+				addARMO(armo);
 			}
 			else if (rec.getRecordType().equals("AMMO"))
 			{
@@ -152,29 +160,48 @@ public class J3dNPC_ extends J3dRECOType
 
 		String skeletonNifFile = ESConfig.TES_MESH_PATH + "characters\\_male\\skeleton.nif";
 
-		String[] fileNames = new String[5];
-		fileNames[0] = ESConfig.TES_MESH_PATH + "characters\\_male\\femaleupperbody.nif";
-		fileNames[1] = ESConfig.TES_MESH_PATH + "characters\\head\\headfemale.nif";
-		fileNames[2] = ESConfig.TES_MESH_PATH + "armor\\headgear\\lucassimmshat\\m\\lucassimmshat.nif";
-		fileNames[3] = ESConfig.TES_MESH_PATH + "armor\\wastelandmerchant01\\glovefl.nif";
-		fileNames[4] = ESConfig.TES_MESH_PATH + "armor\\wastelandmerchant01\\glovefr.nif";
+		ArrayList<String> fileNames = new ArrayList<String>();
+		fileNames.add(headStr);
+		fileNames.add(helmetStr);
+		fileNames.add(bodyStr);
+		fileNames.add(handLStr);
+		fileNames.add(handRStr);
+		fileNames.add(weapStr);
+		fileNames.add(ESConfig.TES_MESH_PATH + "armor\\headgear\\lucassimmshat\\m\\lucassimmshat.nif");
 
-		NifCharacter nifCharacter = new NifCharacter(skeletonNifFile, fileNames, meshSource, textureSource, ESConfig.TES_MESH_PATH
-				+ "characters\\_male\\idleanims\\lookingaround.kf");
+		ArrayList<String> idleAnimations = new ArrayList<String>();
+		idleAnimations.add(ESConfig.TES_MESH_PATH + "characters\\_male\\idleanims\\lookingaround.kf");
+
+		NifCharacter nifCharacter = new NifCharacter(skeletonNifFile, fileNames, meshSource, textureSource, soundSource, idleAnimations);
 		addChild(nifCharacter);
 
 	}
 
+	private void addARMO(ARMO armo)
+	{
+
+		MODL m = armo.MODL;
+		if (female && armo.MOD3 != null)
+		{
+			m = armo.MOD3;
+		}
+
+		helmetStr = armo.BMDT.isHair() ? m.model.str : helmetStr;
+		bodyStr = armo.BMDT.isUpperBody() ? m.model.str : bodyStr;
+		handLStr = armo.BMDT.isHand() ? m.model.str : handLStr;
+		handRStr = armo.BMDT.isHand() ? m.model.str : handRStr;
+	}
+
 	private void addWEAP(WEAP weap)
 	{
-		weap.getClass();
+		weapStr = weap.MODL.model.str;
 	}
 
 	@Override
 	public void renderSettingsUpdated()
 	{
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }
