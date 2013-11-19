@@ -31,8 +31,6 @@ public class CREA extends RECO
 
 	public MODL MODL = null;
 
-	 
-
 	public NIFZ NIFZ = null;
 
 	public NIFT NIFT = null;

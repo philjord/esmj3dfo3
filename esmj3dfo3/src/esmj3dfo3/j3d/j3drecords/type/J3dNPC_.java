@@ -35,6 +35,8 @@ public class J3dNPC_ extends J3dRECOType
 
 	private boolean female = false;
 
+	private NifCharacter nifCharacter;
+
 	public J3dNPC_(NPC_ npc_, IRecordStore master, MeshSource meshSource, TextureSource textureSource, SoundSource soundSource)
 	{
 		super(npc_, null);
@@ -167,12 +169,11 @@ public class J3dNPC_ extends J3dRECOType
 		fileNames.add(handLStr);
 		fileNames.add(handRStr);
 		fileNames.add(weapStr);
-		fileNames.add(ESConfig.TES_MESH_PATH + "armor\\headgear\\lucassimmshat\\m\\lucassimmshat.nif");
 
 		ArrayList<String> idleAnimations = new ArrayList<String>();
 		idleAnimations.add(ESConfig.TES_MESH_PATH + "characters\\_male\\idleanims\\lookingaround.kf");
 
-		NifCharacter nifCharacter = new NifCharacter(skeletonNifFile, fileNames, meshSource, textureSource, soundSource, idleAnimations);
+		nifCharacter = new NifCharacter(skeletonNifFile, fileNames, meshSource, textureSource, soundSource, idleAnimations);
 		addChild(nifCharacter);
 
 	}
