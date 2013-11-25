@@ -45,9 +45,12 @@ public class J3dCELL extends J3dCELLGeneral implements UpdateListener
 	@Override
 	public void renderSettingsUpdated()
 	{
-		for (J3dRECOInst j3dRECOInst : j3dRECOInsts)
+		if (!makePhys)
 		{
-			j3dRECOInst.renderSettingsUpdated();
+			for (J3dRECOInst j3dRECOInst : j3dRECOInsts)
+			{
+				j3dRECOInst.renderSettingsUpdated();
+			}
 		}
 	}
 
