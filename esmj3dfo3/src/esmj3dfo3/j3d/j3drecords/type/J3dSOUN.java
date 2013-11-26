@@ -62,7 +62,8 @@ public class J3dSOUN extends J3dRECOType
 			ps.setSchedulingBounds(new BoundingSphere(new Point3d(), Double.POSITIVE_INFINITY));
 			ps.setLoop(soun.SNDX.isLoop() ? -1 : 1);
 			ps.setContinuousEnable(soun.SNDX.isLoop());
-			addChild(ps);
+			//FIXME: bad wav formats etc
+			//addChild(ps);
 		}
 		
 		

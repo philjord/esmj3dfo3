@@ -52,7 +52,7 @@ import esmj3dfo3.j3d.j3drecords.type.J3dSOUN;
 
 public class J3dREFRFactory
 {
-	private static J3dRECODynInst makeJ3dRECOInstFader(REFR refr, RECO reco, ZString nifFileName, boolean makePhys, MeshSource meshSource,
+	private static J3dRECODynInst makeJ3dRECODynInst(REFR refr, RECO reco, ZString nifFileName, boolean makePhys, MeshSource meshSource,
 			TextureSource textureSource)
 	{
 		J3dRECODynInst j3dinst = new J3dRECODynInst(refr, true, makePhys);
@@ -63,7 +63,7 @@ public class J3dREFRFactory
 	private static J3dRECOStatInst makeJ3dRECOStatInst(REFR refr, RECO reco, ZString nifFileName, boolean makePhys, MeshSource meshSource,
 			TextureSource textureSource)
 	{
-		J3dRECOStatInst j3dinst = new J3dRECOStatInst(refr, makePhys);
+		J3dRECOStatInst j3dinst = new J3dRECOStatInst(refr, true, makePhys);
 		j3dinst.setJ3dRECOType(new J3dRECOTypeGeneral(reco, nifFileName.str, makePhys, meshSource, textureSource));
 		return j3dinst;
 	}
@@ -85,34 +85,33 @@ public class J3dREFRFactory
 		else if (baseRecord.getRecordType().equals("ADDN"))
 		{
 			ADDN addn = new ADDN(baseRecord);
-			return makeJ3dRECOInstFader(refr, addn, addn.MODL.model, makePhys, meshSource, textureSource);
+			return makeJ3dRECODynInst(refr, addn, addn.MODL.model, makePhys, meshSource, textureSource);
 		}
 		else if (baseRecord.getRecordType().equals("ALCH"))
 		{
 			ALCH alch = new ALCH(baseRecord);
-			return makeJ3dRECOInstFader(refr, alch, alch.MODL.model, makePhys, meshSource, textureSource);
+			return makeJ3dRECODynInst(refr, alch, alch.MODL.model, makePhys, meshSource, textureSource);
 		}
 		else if (baseRecord.getRecordType().equals("AMMO"))
 		{
 			AMMO ammo = new AMMO(baseRecord);
-			return makeJ3dRECOInstFader(refr, ammo, ammo.MODL.model, makePhys, meshSource, textureSource);
+			return makeJ3dRECODynInst(refr, ammo, ammo.MODL.model, makePhys, meshSource, textureSource);
 		}
 		else if (baseRecord.getRecordType().equals("ARMO"))
 		{
 			ARMO armo = new ARMO(baseRecord);
-			return makeJ3dRECOInstFader(refr, armo, armo.MODL.model, makePhys, meshSource, textureSource);
+			return makeJ3dRECODynInst(refr, armo, armo.MODL.model, makePhys, meshSource, textureSource);
 		}
 		else if (baseRecord.getRecordType().equals("BOOK"))
 		{
 			BOOK book = new BOOK(baseRecord);
-			return makeJ3dRECOInstFader(refr, book, book.MODL.model, makePhys, meshSource, textureSource);
+			return makeJ3dRECODynInst(refr, book, book.MODL.model, makePhys, meshSource, textureSource);
 		}
 		else if (baseRecord.getRecordType().equals("CONT"))
 		{
 			CONT cont = new CONT(baseRecord);
 			return makeJ3dRECOStatInst(refr, cont, cont.MODL.model, makePhys, meshSource, textureSource);
 		}
-
 		else if (baseRecord.getRecordType().equals("FURN"))
 		{
 			FURN furn = new FURN(baseRecord);
@@ -126,22 +125,22 @@ public class J3dREFRFactory
 		else if (baseRecord.getRecordType().equals("KEYM"))
 		{
 			KEYM keym = new KEYM(baseRecord);
-			return makeJ3dRECOInstFader(refr, keym, keym.MODL.model, makePhys, meshSource, textureSource);
+			return makeJ3dRECODynInst(refr, keym, keym.MODL.model, makePhys, meshSource, textureSource);
 		}
 		else if (baseRecord.getRecordType().equals("MISC"))
 		{
 			MISC misc = new MISC(baseRecord);
-			return makeJ3dRECOInstFader(refr, misc, misc.MODL.model, makePhys, meshSource, textureSource);
+			return makeJ3dRECODynInst(refr, misc, misc.MODL.model, makePhys, meshSource, textureSource);
 		}
 		else if (baseRecord.getRecordType().equals("MSTT"))
 		{
 			MSTT mstt = new MSTT(baseRecord);
-			return makeJ3dRECOInstFader(refr, mstt, mstt.MODL.model, makePhys, meshSource, textureSource);
+			return makeJ3dRECODynInst(refr, mstt, mstt.MODL.model, makePhys, meshSource, textureSource);
 		}
 		else if (baseRecord.getRecordType().equals("NOTE"))
 		{
 			NOTE note = new NOTE(baseRecord);
-			return makeJ3dRECOInstFader(refr, note, note.MODL.model, makePhys, meshSource, textureSource);
+			return makeJ3dRECODynInst(refr, note, note.MODL.model, makePhys, meshSource, textureSource);
 		}
 		else if (baseRecord.getRecordType().equals("PWAT"))
 		{
@@ -153,7 +152,7 @@ public class J3dREFRFactory
 			STAT stat = new STAT(baseRecord);
 			if (stat.MODL != null)
 			{
-				J3dRECOStatInst j3dinst = new J3dRECOStatInst(refr, makePhys);
+				J3dRECOStatInst j3dinst = new J3dRECOStatInst(refr, true, makePhys);
 				String statNif = stat.MODL.model.str;
 
 				//Has Distance LOD = 0x00008000
@@ -189,7 +188,7 @@ public class J3dREFRFactory
 			//SCOL are just exactly like STATS
 			SCOL scol = new SCOL(baseRecord);
 
-			J3dRECOStatInst j3dinst = new J3dRECOStatInst(refr, makePhys);
+			J3dRECOStatInst j3dinst = new J3dRECOStatInst(refr, true, makePhys);
 			String scolNif = scol.MODL.model.str;
 
 			//Has Distance LOD = 0x00008000
@@ -228,7 +227,7 @@ public class J3dREFRFactory
 		else if (baseRecord.getRecordType().equals("WEAP"))
 		{
 			WEAP weap = new WEAP(baseRecord);
-			return makeJ3dRECOInstFader(refr, weap, weap.MODL.model, makePhys, meshSource, textureSource);
+			return makeJ3dRECODynInst(refr, weap, weap.MODL.model, makePhys, meshSource, textureSource);
 		}
 		else if (baseRecord.getRecordType().equals("ASPC"))
 		{
@@ -242,7 +241,7 @@ public class J3dREFRFactory
 		{
 			DOOR door = new DOOR(baseRecord);
 			J3dDOOR j3dDoor = new J3dDOOR(door, door.MODL.model.str, makePhys, meshSource, textureSource);
-			J3dRECOStatInst j3dinst = new J3dRECOStatInst(refr, makePhys);
+			J3dRECOStatInst j3dinst = new J3dRECOStatInst(refr, true, makePhys);
 			j3dinst.setJ3dRECOType(j3dDoor);
 			return j3dinst;
 		}
@@ -250,7 +249,7 @@ public class J3dREFRFactory
 		{
 			LIGH ligh = new LIGH(baseRecord);
 			J3dLIGH j3dLIGH = new J3dLIGH(ligh, makePhys, meshSource, textureSource);
-			J3dRECOStatInst j3dinst = new J3dRECOStatInst(refr, makePhys);
+			J3dRECOStatInst j3dinst = new J3dRECOStatInst(refr, true, makePhys);
 			j3dinst.setJ3dRECOType(j3dLIGH);
 			return j3dinst;
 		}
@@ -281,7 +280,7 @@ public class J3dREFRFactory
 			if (!makePhys)
 			{
 				LVLC lvlc = new LVLC(baseRecord);
-				J3dRECODynInst j3dinst = new J3dRECODynInst(refr, makePhys);
+				J3dRECODynInst j3dinst = new J3dRECODynInst(refr, false, makePhys);
 				j3dinst.setJ3dRECOType(makeLVLC(lvlc, master, meshSource, textureSource, soundSource));
 				return j3dinst;
 			}
