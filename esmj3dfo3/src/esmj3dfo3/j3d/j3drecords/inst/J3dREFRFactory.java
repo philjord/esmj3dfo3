@@ -14,6 +14,7 @@ import esmj3d.j3d.TreeMaker;
 import esmj3d.j3d.j3drecords.inst.J3dRECODynInst;
 import esmj3d.j3d.j3drecords.inst.J3dRECOInst;
 import esmj3d.j3d.j3drecords.inst.J3dRECOStatInst;
+import esmj3d.j3d.j3drecords.type.J3dCONT;
 import esmj3d.j3d.j3drecords.type.J3dDOOR;
 import esmj3d.j3d.j3drecords.type.J3dRECOType;
 import esmj3d.j3d.j3drecords.type.J3dRECOTypeGeneral;
@@ -80,6 +81,8 @@ public class J3dREFRFactory
 		if (baseRecord.getRecordType().equals("ACTI"))
 		{
 			ACTI acti = new ACTI(baseRecord);
+			if (acti.MODL == null)
+				System.out.println("acti.MODL null");
 			return makeJ3dRECOStatInst(refr, acti, acti.MODL.model, makePhys, meshSource, textureSource);
 		}
 		else if (baseRecord.getRecordType().equals("ADDN"))
@@ -109,8 +112,9 @@ public class J3dREFRFactory
 		}
 		else if (baseRecord.getRecordType().equals("CONT"))
 		{
-			CONT cont = new CONT(baseRecord);
-			return makeJ3dRECOStatInst(refr, cont, cont.MODL.model, makePhys, meshSource, textureSource);
+			J3dRECOStatInst j3dinst = new J3dRECOStatInst(refr, new J3dCONT(new CONT(baseRecord), makePhys, meshSource, textureSource),
+					true, makePhys);
+			return j3dinst;
 		}
 		else if (baseRecord.getRecordType().equals("FURN"))
 		{
@@ -179,6 +183,8 @@ public class J3dREFRFactory
 			}
 			else
 			{
+				//TODO: what is a stat with no MODL in it? just lods?
+				System.out.println("STAT with no MODL there.");
 				return null;
 			}
 
@@ -217,6 +223,8 @@ public class J3dREFRFactory
 		else if (baseRecord.getRecordType().equals("TACT"))
 		{
 			TACT tact = new TACT(baseRecord);
+			if (tact.MODL == null)
+				System.out.println("tact.MODL null");
 			return makeJ3dRECOStatInst(refr, tact, tact.MODL.model, makePhys, meshSource, textureSource);
 		}
 		else if (baseRecord.getRecordType().equals("TERM"))

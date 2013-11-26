@@ -8,8 +8,8 @@ import esmj3d.data.shared.records.RECO;
 import esmj3d.data.shared.subrecords.FormID;
 import esmj3d.data.shared.subrecords.LString;
 import esmj3d.data.shared.subrecords.MODL;
+import esmj3d.data.shared.subrecords.OBND;
 import esmj3d.data.shared.subrecords.ZString;
-import esmj3dfo3.data.shared.subrecords.OBND;
 
 public class ACTI extends RECO
 {
