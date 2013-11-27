@@ -26,7 +26,7 @@ import esmj3d.j3d.j3drecords.inst.J3dLAND;
 public class Fo3LODLandscape extends BranchGroup
 {
 
-	//TODO: use teh J3DLand from cell to fill out, but dont' load the near cell nessasarily at all.
+	//TODO: use the J3DLand from cell to fill out, but dont' load the near cell nessasarily at all.
 	// same for Skyrim
 	public Fo3LODLandscape(int lodX, int lodY, int scale, String worldFormName, MeshSource meshSource, TextureSource textureSource)
 	{
