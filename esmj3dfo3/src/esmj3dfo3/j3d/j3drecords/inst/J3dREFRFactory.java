@@ -69,7 +69,7 @@ public class J3dREFRFactory
 		return j3dinst;
 	}
 
-	public static J3dRECOInst makeJ3DRefer(REFR refr, boolean makePhys, IRecordStore master, MeshSource meshSource,
+	public static J3dRECOInst makeJ3DRefer(REFR refr, boolean makePhys, boolean noFade, IRecordStore master, MeshSource meshSource,
 			TextureSource textureSource, SoundSource soundSource)
 	{
 		// doesn't exist in fallout.esm
@@ -81,9 +81,15 @@ public class J3dREFRFactory
 		if (baseRecord.getRecordType().equals("ACTI"))
 		{
 			ACTI acti = new ACTI(baseRecord);
-			if (acti.MODL == null)
-				System.out.println("acti.MODL null");
-			return makeJ3dRECOStatInst(refr, acti, acti.MODL.model, makePhys, meshSource, textureSource);
+			if (acti.MODL != null)
+			{
+				return makeJ3dRECOStatInst(refr, acti, acti.MODL.model, makePhys, meshSource, textureSource);
+			}
+			else
+			{
+				// must be a pure script
+				return null;
+			}
 		}
 		else if (baseRecord.getRecordType().equals("ADDN"))
 		{
@@ -156,7 +162,7 @@ public class J3dREFRFactory
 			STAT stat = new STAT(baseRecord);
 			if (stat.MODL != null)
 			{
-				J3dRECOStatInst j3dinst = new J3dRECOStatInst(refr, true, makePhys);
+				J3dRECOStatInst j3dinst = new J3dRECOStatInst(refr, !noFade, makePhys);
 				String statNif = stat.MODL.model.str;
 
 				//Has Distance LOD = 0x00008000
@@ -184,7 +190,7 @@ public class J3dREFRFactory
 			else
 			{
 				//TODO: what is a stat with no MODL in it? just lods?
-				System.out.println("STAT with no MODL there.");
+				System.out.println("STAT with no MODL there. " + stat);
 				return null;
 			}
 
@@ -268,7 +274,7 @@ public class J3dREFRFactory
 		else if (baseRecord.getRecordType().equals("SOUN"))
 		{
 			if (!makePhys)
-			{			 
+			{
 				return new J3dRECOStatInst(refr, new J3dSOUN(new SOUN(baseRecord), master, soundSource), false, makePhys);
 			}
 		}

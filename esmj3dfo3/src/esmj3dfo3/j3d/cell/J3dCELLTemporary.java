@@ -29,7 +29,7 @@ public class J3dCELLTemporary extends J3dCELL
 			// no stats are part of distant  
 			if (!isDistant(record))
 			{						
-				J3dRECOInst jri = makeJ3dRECO(record);
+				J3dRECOInst jri = makeJ3dRECO(record, false);
 				addJ3dRECOInst(jri);
 			}
 		}

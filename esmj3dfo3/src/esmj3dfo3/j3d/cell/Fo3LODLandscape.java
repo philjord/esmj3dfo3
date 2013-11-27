@@ -50,7 +50,7 @@ public class Fo3LODLandscape extends BranchGroup
 				GeometryInfo gi = J3dNiTriShape.makeGeometryInfo(data);
 				if (gi != null)
 				{
-					GeometryArray baseItsa = J3dNiTriShape.makeGeometry(gi, false, null);
+					GeometryArray baseItsa = J3dNiTriShape.makeGeometry(gi, true, data);
 
 					Shape3D shape = new Shape3D();
 					shape.setGeometry(baseItsa);
