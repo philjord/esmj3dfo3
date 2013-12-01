@@ -30,12 +30,8 @@ public class Fo3LODLandscape extends BranchGroup
 	// same for Skyrim
 	public Fo3LODLandscape(int lodX, int lodY, int scale, String worldFormName, MeshSource meshSource, TextureSource textureSource)
 	{
-		String cellName = "wasteland"; //TODO: should be based on id
 
-		//TODO: level32 and level16 and level 8 and level 4
-
-		//TODO: there is a distantlod directory with lod files in it how do they work?
-		String meshName = "landscape\\lod\\" + cellName + "\\" + cellName + ".level" + scale + ".x" + lodX + ".y" + lodY + ".nif";
+		String meshName = "landscape\\lod\\" + worldFormName + "\\" + worldFormName + ".level" + scale + ".x" + lodX + ".y" + lodY + ".nif";
 
 		setCapability(BranchGroup.ALLOW_DETACH);
 		if (meshSource.nifFileExists(meshName))
