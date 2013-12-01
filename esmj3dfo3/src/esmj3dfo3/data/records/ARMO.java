@@ -123,6 +123,10 @@ public class ARMO extends RECO
 			{
 
 			}
+			else if (sr.getSubrecordType().equals("MIC2"))
+			{
+
+			}
 			else if (sr.getSubrecordType().equals("MOSD"))
 			{
 
@@ -148,6 +152,14 @@ public class ARMO extends RECO
 
 			}
 			else if (sr.getSubrecordType().equals("DNAM"))
+			{
+
+			}
+			else if (sr.getSubrecordType().equals("BNAM"))
+			{
+
+			}
+			else if (sr.getSubrecordType().equals("TNAM"))
 			{
 
 			}

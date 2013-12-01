@@ -98,6 +98,10 @@ public class ACTI extends RECO
 			{
 
 			}
+			else if (sr.getSubrecordType().equals("XATO"))
+			{
+
+			}
 			else
 			{
 				System.out.println("unhandled : " + sr.getSubrecordType() + " in record " + recordData + " in " + this);
