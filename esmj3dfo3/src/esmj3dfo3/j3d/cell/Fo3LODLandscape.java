@@ -69,12 +69,16 @@ public class Fo3LODLandscape extends BranchGroup
 				}
 
 			}
+			else
+			{
+				System.out.println("Bad landscape GI " + meshName);
+			}
 
 		}
 		else
 		{
 			//fine the systems just askign for empty space which is fine
-			//System.out.println("Bad landscape name " + meshName + " lodX " + lodX + " lodY " + lodY);
+			System.out.println("Bad landscape name " + meshName);
 		}
 
 	}
