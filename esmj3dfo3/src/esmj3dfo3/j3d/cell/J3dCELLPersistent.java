@@ -10,6 +10,7 @@ import utils.source.SoundSource;
 import utils.source.TextureSource;
 import esmLoader.common.data.record.IRecordStore;
 import esmLoader.common.data.record.Record;
+import esmj3d.data.shared.records.CommonWRLD;
 import esmj3d.j3d.cell.GridSpaces;
 import esmj3d.j3d.cell.J3dICELLPersistent;
 import esmj3dfo3.data.records.ACHR;
@@ -87,6 +88,12 @@ public class J3dCELLPersistent extends J3dCELL implements J3dICELLPersistent
 	public GridSpaces getGridSpaces()
 	{
 		return gridSpaces;
+	}
+
+	@Override
+	public CommonWRLD getWRLD()
+	{
+		return wrld;
 	}
 
 }

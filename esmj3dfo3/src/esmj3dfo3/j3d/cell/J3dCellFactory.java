@@ -40,52 +40,31 @@ public class J3dCellFactory implements J3dICellFactory
 		this.soundSource = soundSource;
 	}
 
-	public BranchGroup makeLODLandscape(int lodX, int lodY, int scale, int worldFormId, String worldFormName)
+	@Override
+	public BranchGroup makeLODLandscape(int lodX, int lodY, int scale, int worldFormId)
 	{
-		return new Fo3LODLandscape(lodX, lodY, scale, worldFormName, meshSource, textureSource);
+		String lodWorldName = "";
+		WRLD wrld = getWRLD(worldFormId);
+		// use parent first
+		if (wrld.WNAM != null && wrld.WNAM.formId != -1)
+		{
+			WRLD parentWrld = getWRLD(wrld.WNAM.formId);
+			lodWorldName = parentWrld.EDID.str;
+		}
+		else
+		{
+			lodWorldName = wrld.EDID.str;
+		}
+		return new Fo3LODLandscape(lodX, lodY, scale, lodWorldName, meshSource, textureSource);
 	}
 
-	public boolean isWRLD(int formId)
-	{
-		try
-		{
-			return esmManager.getWRLD(new Integer(formId)) != null;
-		}
-		catch (DataFormatException e)
-		{
-			e.printStackTrace();
-		}
-		catch (IOException e)
-		{
-			e.printStackTrace();
-		}
-		catch (PluginException e)
-		{
-			e.printStackTrace();
-		}
-		return false;
-	}
-
-	public J3dCELLPersistent makeBGWRLDPersistent(int formId, boolean makePhys)
+	private WRLD getWRLD(int formId)
 	{
 		try
 		{
 			PluginRecord record = esmManager.getWRLD(formId);
-
 			WRLD wrld = new WRLD(new Record(record, -1));
-
-			WRLDChildren children = esmManager.getWRLDChildren(formId);
-
-			PluginRecord cell = children.getCell();
-			if (cell != null)
-			{
-				PluginGroup cellChildren = children.getCellChildren();
-				if (cellChildren != null)
-				{
-					return new J3dCELLPersistent(wrld, recordStore, new Record(cell, -1), ESMManager.getChildren(cellChildren,
-							PluginGroup.CELL_PERSISTENT), makePhys, meshSource, textureSource, soundSource);
-				}
-			}
+			return wrld;
 		}
 		catch (DataFormatException e)
 		{
@@ -102,12 +81,47 @@ public class J3dCellFactory implements J3dICellFactory
 		return null;
 	}
 
+	@Override
+	public boolean isWRLD(int formId)
+	{
+		return getWRLD(formId) != null;
+	}
+
+	@Override
+	public J3dCELLPersistent makeBGWRLDPersistent(int formId, boolean makePhys)
+	{
+		WRLD wrld = getWRLD(formId);
+		if (wrld != null)
+		{
+
+			WRLDChildren children = esmManager.getWRLDChildren(formId);
+
+			PluginRecord cell = children.getCell();
+			if (cell != null)
+			{
+				PluginGroup cellChildren = children.getCellChildren();
+				if (cellChildren != null)
+				{
+					return new J3dCELLPersistent(wrld, recordStore, new Record(cell, -1), ESMManager.getChildren(cellChildren,
+							PluginGroup.CELL_PERSISTENT), makePhys, meshSource, textureSource, soundSource);
+				}
+			}
+		}
+		else
+		{
+			System.out.println("makeBGWRLDPersistent bad formId not wrld " + formId);
+		}
+		return null;
+	}
+
+	@Override
 	public J3dCELLTemporary makeBGWRLDTemporary(int wrldFormId, int x, int y, boolean makePhys)
 	{
 		int cellId = esmManager.getWRLDExtBlockCELLId(wrldFormId, x, y);
 		return makeBGWRLDTemporary(cellId, makePhys);
 	}
 
+	@Override
 	public J3dCELLTemporary makeBGWRLDTemporary(int cellId, boolean makePhys)
 	{
 		if (cellId == -1)
@@ -150,6 +164,7 @@ public class J3dCellFactory implements J3dICellFactory
 	 * DISTANT only exists in Oblivion, not used in Fo3 or Skyrim!!
 	 * @see esmj3d.j3d.cell.J3dICellFactory#makeBGWRLDDistant(int, boolean)
 	 */
+	@Override
 	public J3dCELLDistant makeBGWRLDDistant(int wrldFormId, int x, int y, boolean makePhys)
 	{
 		int cellId = esmManager.getWRLDExtBlockCELLId(wrldFormId, x, y);
@@ -160,6 +175,7 @@ public class J3dCellFactory implements J3dICellFactory
 	 * DISTANT only exists in Oblivion, not used in Fo3 or Skyrim!!
 	 * @see esmj3d.j3d.cell.J3dICellFactory#makeBGWRLDDistant(int, boolean)
 	 */
+	@Override
 	public J3dCELLDistant makeBGWRLDDistant(int cellId, boolean makePhys)
 	{
 		if (cellId == -1)
@@ -195,6 +211,7 @@ public class J3dCellFactory implements J3dICellFactory
 		return null;
 	}
 
+	@Override
 	public J3dCELLPersistent makeBGInteriorCELLPersistent(int cellId, boolean makePhys)
 	{
 		try
@@ -224,6 +241,7 @@ public class J3dCellFactory implements J3dICellFactory
 		return null;
 	}
 
+	@Override
 	public J3dCELLTemporary makeBGInteriorCELLTemporary(int cellId, boolean makePhys)
 	{
 
@@ -254,6 +272,7 @@ public class J3dCellFactory implements J3dICellFactory
 		return null;
 	}
 
+	@Override
 	public J3dCELLDistant makeBGInteriorCELLDistant(int cellId, boolean makePhys)
 	{
 
