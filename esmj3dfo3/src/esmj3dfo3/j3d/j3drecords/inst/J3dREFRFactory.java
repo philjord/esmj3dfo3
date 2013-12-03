@@ -189,8 +189,8 @@ public class J3dREFRFactory
 			}
 			else
 			{
-				//TODO: what is a stat with no MODL in it? just lods?
-				System.out.println("STAT with no MODL there. " + stat);
+				//collision marker probably has a valid OBND 
+				//System.out.println("STAT with no MODL there. " + stat);
 				return null;
 			}
 
