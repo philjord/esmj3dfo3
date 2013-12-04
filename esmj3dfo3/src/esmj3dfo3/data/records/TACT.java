@@ -15,7 +15,6 @@ public class TACT extends RECO
 
 	public MODL MODL = null;
 
-	 
 	public TACT(Record recordData)
 	{
 		super(recordData);
@@ -33,7 +32,7 @@ public class TACT extends RECO
 			{
 				MODL = new MODL(bs);
 			}
- 
+
 			else if (sr.getSubrecordType().equals("MODT"))
 			{
 				MODL.addMODTSub(bs);
@@ -67,6 +66,10 @@ public class TACT extends RECO
 
 			}
 			else if (sr.getSubrecordType().equals("DSTD"))
+			{
+
+			}//FALLOUTNV only ////////////////////////////
+			else if (sr.getSubrecordType().equals("INAM"))
 			{
 
 			}

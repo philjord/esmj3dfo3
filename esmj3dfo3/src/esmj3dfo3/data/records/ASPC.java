@@ -44,6 +44,10 @@ public class ASPC extends RECO
 			else if (sr.getSubrecordType().equals("WNAM"))
 			{
 
+			} 
+			else if (sr.getSubrecordType().equals("INAM"))
+			{
+
 			}
 			else
 			{

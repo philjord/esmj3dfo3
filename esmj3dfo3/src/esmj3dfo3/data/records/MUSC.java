@@ -29,7 +29,11 @@ public class MUSC extends RECO
 			{
 				//string
 			}
+			//FALLOUTNV only ////////////////////////////
+			else if (sr.getSubrecordType().equals("ANAM"))
+			{
 
+			}
 			else
 			{
 				System.out.println("unhandled : " + sr.getSubrecordType() + " in record " + recordData + " in " + this);
