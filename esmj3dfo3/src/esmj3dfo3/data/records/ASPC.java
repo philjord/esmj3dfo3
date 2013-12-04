@@ -40,6 +40,11 @@ public class ASPC extends RECO
 			{
 
 			}
+			//FALLOUTNV only ////////////////////////////
+			else if (sr.getSubrecordType().equals("WNAM"))
+			{
+
+			}
 			else
 			{
 				System.out.println("unhandled : " + sr.getSubrecordType() + " in record " + recordData + " in " + this);

@@ -183,7 +183,11 @@ public class ARMO extends RECO
 			{
 
 			}
+			//FALLOUTNV only ////////////////////////////
+			else if (sr.getSubrecordType().equals("SNAM"))
+			{
 
+			}
 			else
 			{
 				System.out.println("unhandled : " + sr.getSubrecordType() + " in record " + recordData + " in " + this);

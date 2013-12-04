@@ -11,7 +11,6 @@ import utils.source.SoundSource;
 import utils.source.TextureSource;
 import esmLoader.common.data.record.IRecordStore;
 import esmLoader.common.data.record.Record;
-import esmj3d.data.shared.subrecords.CNTO;
 import esmj3d.data.shared.subrecords.MODL;
 import esmj3d.j3d.j3drecords.type.J3dRECOType;
 import esmj3dfo3.data.records.ARMO;
@@ -55,11 +54,10 @@ public class J3dCREA extends J3dRECOType
 
 			female = crea.ACBS.isFemale();
 
-			CNTO[] cntos = crea.CNTOs;
-			for (int i = 0; i < cntos.length; i++)
+			for (int i = 0; i < crea.CNTOs.size(); i++)
 			{
 				//	int count = cntos[i].count;
-				Record rec = master.getRecord(cntos[i].itemFormId);
+				Record rec = master.getRecord(crea.CNTOs.get(i).itemFormId);
 				if (rec.getRecordType().equals("WEAP"))
 				{
 					WEAP weap = new WEAP(rec);

@@ -24,8 +24,6 @@ public class ACRE extends InstRECO
 
 	public FormID XGLB = null;
 
- 
-
 	public XRGD XRGD = null;
 
 	public ACRE(Record recordData)
@@ -90,10 +88,44 @@ public class ACRE extends InstRECO
 			else if (sr.getSubrecordType().equals("XAPR"))
 			{
 
-			}else if (sr.getSubrecordType().equals("XEZN"))
+			}
+			else if (sr.getSubrecordType().equals("XEZN"))
 			{
 
-			}else if (sr.getSubrecordType().equals("XRGB"))
+			}
+			else if (sr.getSubrecordType().equals("XRGB"))
+			{
+
+			}
+			else if (sr.getSubrecordType().equals("XEMI"))
+			{
+
+			}
+			else if (sr.getSubrecordType().equals("XRDS"))
+			{
+
+			}
+			else if (sr.getSubrecordType().equals("XPRD"))
+			{
+
+			}
+			else if (sr.getSubrecordType().equals("XPPA"))
+			{
+
+			}
+			else if (sr.getSubrecordType().equals("INAM"))
+			{
+
+			}
+			else if (sr.getSubrecordType().equals("SCHR"))
+			{
+
+			}
+			else if (sr.getSubrecordType().equals("TNAM"))
+			{
+
+			}
+			else if (sr.getSubrecordType().equals("XATO"))
 			{
 
 			}
@@ -104,5 +136,4 @@ public class ACRE extends InstRECO
 
 		}
 	}
-
 }

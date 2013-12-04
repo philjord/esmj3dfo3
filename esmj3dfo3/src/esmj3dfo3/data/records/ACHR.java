@@ -106,6 +106,15 @@ public class ACHR extends InstRECO
 			{
 
 			}
+			//FALLOUTNV only ////////////////////////////
+			else if (sr.getSubrecordType().equals("XAPD"))
+			{
+
+			}
+			else if (sr.getSubrecordType().equals("XATO"))
+			{
+
+			}
 			else
 			{
 				System.out.println("unhandled : " + sr.getSubrecordType() + " in record " + recordData + " in " + this);

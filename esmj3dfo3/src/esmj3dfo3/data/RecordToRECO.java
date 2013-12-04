@@ -10,6 +10,7 @@ import esmj3d.data.shared.records.LTEX;
 import esmj3d.data.shared.records.RECO;
 import esmj3d.data.shared.records.TXST;
 import esmj3dfo3.data.records.ACHR;
+import esmj3dfo3.data.records.ACRE;
 import esmj3dfo3.data.records.ACTI;
 import esmj3dfo3.data.records.ADDN;
 import esmj3dfo3.data.records.ALCH;
@@ -379,7 +380,6 @@ public class RecordToRECO
 		{
 			return new LIGH(baseRecord);
 		}
-
 		else if (baseRecord.getRecordType().equals("MISC"))
 		{
 			return new MISC(baseRecord);
@@ -388,7 +388,6 @@ public class RecordToRECO
 		{
 			return new STAT(baseRecord);
 		}
-
 		else if (baseRecord.getRecordType().equals("SCOL"))
 		{
 			return new SCOL(baseRecord);
@@ -417,7 +416,6 @@ public class RecordToRECO
 		{
 			return new WEAP(baseRecord);
 		}
-
 		else if (baseRecord.getRecordType().equals("AMMO"))
 		{
 			return new AMMO(baseRecord);
@@ -426,12 +424,10 @@ public class RecordToRECO
 		{
 			return new NPC_(baseRecord);
 		}
-
 		else if (baseRecord.getRecordType().equals("CREA"))
 		{
 			return new CREA(baseRecord);
 		}
-
 		else if (baseRecord.getRecordType().equals("KEYM"))
 		{
 			return new KEYM(baseRecord);
@@ -448,7 +444,6 @@ public class RecordToRECO
 		{
 			return new NOTE(baseRecord);
 		}
-
 		else if (baseRecord.getRecordType().equals("PROJ"))
 		{
 			return new PROJ(baseRecord);
@@ -457,7 +452,6 @@ public class RecordToRECO
 		{
 			return new LVLI(baseRecord);
 		}
-
 		else if (baseRecord.getRecordType().equals("WTHR"))
 		{
 			return new WTHR(baseRecord);
@@ -478,7 +472,6 @@ public class RecordToRECO
 		{
 			return new DIAL(baseRecord);
 		}
-
 		else if (baseRecord.getRecordType().equals("QUST"))
 		{
 			return new QUST(baseRecord);
@@ -487,12 +480,10 @@ public class RecordToRECO
 		{
 			return new IDLE(baseRecord);
 		}
-
 		else if (baseRecord.getRecordType().equals("PACK"))
 		{
 			return new PACK(baseRecord);
 		}
-
 		else if (baseRecord.getRecordType().equals("CSTY"))
 		{
 			return new CSTY(baseRecord);
@@ -558,7 +549,6 @@ public class RecordToRECO
 		{
 			return new CAMS(baseRecord);
 		}
-
 		else if (baseRecord.getRecordType().equals("CPTH"))
 		{
 			return new CPTH(baseRecord);
@@ -629,6 +619,93 @@ public class RecordToRECO
 		{
 			return new ACHR(baseRecord);
 		}
+		else if (baseRecord.getRecordType().equals("ACRE"))
+		{
+			return new ACRE(baseRecord);
+		}
+		else if (baseRecord.getRecordType().equals("NAVM"))
+		{
+			//return new NAVM(baseRecord);
+		}
+		else if (baseRecord.getRecordType().equals("PGRE"))
+		{
+			//return new PGRE(baseRecord);
+		}
+		else if (baseRecord.getRecordType().equals("LAND"))
+		{
+			return new LAND(baseRecord);
+		}
+
+		//FALLOUTNV ONLY!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		else if (baseRecord.getRecordType().equals("IMOD"))
+		{
+			//return new IMOD(baseRecord);
+		}
+		else if (baseRecord.getRecordType().equals("REPU"))
+		{
+			//return new REPU(baseRecord);
+		}
+		else if (baseRecord.getRecordType().equals("RCPE"))
+		{
+			//return new RCPE(baseRecord);
+		}
+		else if (baseRecord.getRecordType().equals("RCCT"))
+		{
+			//return new RCCT(baseRecord);
+		}
+		else if (baseRecord.getRecordType().equals("CHIP"))
+		{
+			//return new CHIP(baseRecord);
+		}
+		else if (baseRecord.getRecordType().equals("CSNO"))
+		{
+			//return new CSNO(baseRecord);
+		}
+		else if (baseRecord.getRecordType().equals("LSCT"))
+		{
+			//return new LSCT(baseRecord);
+		}
+		else if (baseRecord.getRecordType().equals("MSET"))
+		{
+			//return new MSET(baseRecord);
+		}
+		else if (baseRecord.getRecordType().equals("ALOC"))
+		{
+			//return new ALOC(baseRecord);
+		}
+		else if (baseRecord.getRecordType().equals("CHAL"))
+		{
+			//return new CHAL(baseRecord);
+		}
+		else if (baseRecord.getRecordType().equals("AMEF"))
+		{
+			//return new AMEF(baseRecord);
+		}
+		else if (baseRecord.getRecordType().equals("CCRD"))
+		{
+			//return new CCRD(baseRecord);
+		}
+		else if (baseRecord.getRecordType().equals("CMNY"))
+		{
+			//return new CMNY(baseRecord);
+		}
+		else if (baseRecord.getRecordType().equals("CDCK"))
+		{
+			//return new CDCK(baseRecord);
+		}
+		else if (baseRecord.getRecordType().equals("DEHY"))
+		{
+			//return new DEHY(baseRecord);
+		}
+		else if (baseRecord.getRecordType().equals("HUNG"))
+		{
+			//return new HUNG(baseRecord);
+		}
+		else if (baseRecord.getRecordType().equals("SLPD"))
+		{
+			//return new SLPD(baseRecord);
+		}
+
 		else
 		{
 			if (!constructorsShowen.contains(baseRecord.getRecordType()))

@@ -14,13 +14,10 @@ import esmj3d.data.shared.subrecords.ZString;
 import esmj3dfo3.data.subrecords.ACBS;
 import esmj3dfo3.data.subrecords.AIDT;
 import esmj3dfo3.data.subrecords.CSDC;
-import esmj3dfo3.data.subrecords.CSDT;
 import esmj3dfo3.data.subrecords.KFFZ;
 import esmj3dfo3.data.subrecords.NIFT;
 import esmj3dfo3.data.subrecords.NIFZ;
-import esmj3dfo3.data.subrecords.RNAM;
 import esmj3dfo3.data.subrecords.SNAM;
-import esmj3dfo3.data.subrecords.TNAM_b;
 import esmj3dfo3.data.subrecords.WNAM;
 
 public class CREA extends RECO
@@ -37,21 +34,21 @@ public class CREA extends RECO
 
 	public ACBS ACBS = null;
 
-	public SNAM[] SNAMs = null;
+	public ArrayList<SNAM> SNAMs = new ArrayList<SNAM>();
 
 	public FormID INAM = null;
 
 	public RNAM RNAM = null;
 
-	public FormID[] SPLOs = null;
+	public ArrayList<FormID> SPLOs = new ArrayList<FormID>();
 
 	public FormID SCRI = null;
 
-	public CNTO[] CNTOs = null;
+	public ArrayList<CNTO> CNTOs = new ArrayList<CNTO>();
 
 	public AIDT AIDT = null;
 
-	public FormID[] PKIDs = null;
+	public ArrayList<FormID> PKIDs = new ArrayList<FormID>();
 
 	public DATA DATA = null;
 
@@ -59,11 +56,11 @@ public class CREA extends RECO
 
 	public FormID CSCR = null;
 
-	public CSDT[] CSDTs = null;
+	public ArrayList<CSDT> CSDTs = new ArrayList<CSDT>();
 
 	public BNAM BNAM = null;
 
-	public TNAM_b TNAM = null;
+	public TNAM TNAM = null;
 
 	public WNAM WNAM = null;
 
@@ -104,12 +101,6 @@ public class CREA extends RECO
 	{
 		super(recordData);
 
-		ArrayList<SNAM> SNAMsl = new ArrayList<SNAM>();
-		ArrayList<FormID> SPLOsl = new ArrayList<FormID>();
-		ArrayList<CNTO> CNTOsl = new ArrayList<CNTO>();
-		ArrayList<FormID> PKIDsl = new ArrayList<FormID>();
-		ArrayList<CSDT> CSDTsl = new ArrayList<CSDT>();
-
 		ArrayList<Subrecord> subrecords = recordData.getSubrecords();
 		for (int i = 0; i < subrecords.size(); i++)
 		{
@@ -146,7 +137,7 @@ public class CREA extends RECO
 			}
 			else if (sr.getSubrecordType().equals("SNAM"))
 			{
-				SNAMsl.add(new SNAM(bs));
+				SNAMs.add(new SNAM(bs));
 			}
 			else if (sr.getSubrecordType().equals("INAM"))
 			{
@@ -158,7 +149,7 @@ public class CREA extends RECO
 			}
 			else if (sr.getSubrecordType().equals("SPLO"))
 			{
-				SPLOsl.add(new FormID(bs));
+				SPLOs.add(new FormID(bs));
 			}
 			else if (sr.getSubrecordType().equals("SCRI"))
 			{
@@ -166,7 +157,7 @@ public class CREA extends RECO
 			}
 			else if (sr.getSubrecordType().equals("CNTO"))
 			{
-				CNTOsl.add(new CNTO(bs));
+				CNTOs.add(new CNTO(bs));
 			}
 			else if (sr.getSubrecordType().equals("AIDT"))
 			{
@@ -174,7 +165,7 @@ public class CREA extends RECO
 			}
 			else if (sr.getSubrecordType().equals("PKID"))
 			{
-				PKIDsl.add(new FormID(bs));
+				PKIDs.add(new FormID(bs));
 			}
 			else if (sr.getSubrecordType().equals("DATA"))
 			{
@@ -192,12 +183,19 @@ public class CREA extends RECO
 			{
 				CSDT csdt = new CSDT(bs);
 				i++;
-				Subrecord sr2 = subrecords.get(i);
-				csdt.csdi = new FormID(sr2.getSubrecordData());
-				i++;
-				Subrecord sr3 = subrecords.get(i);
-				csdt.csdc = new CSDC(sr3.getSubrecordData());
-				CSDTsl.add(csdt);
+				if (i < subrecords.size())
+				{
+					Subrecord sr2 = subrecords.get(i);
+					csdt.csdi = new FormID(sr2.getSubrecordData());
+					i++;
+					if (i < subrecords.size())
+					{
+						Subrecord sr3 = subrecords.get(i);
+						csdt.csdc = new CSDC(sr3.getSubrecordData());
+
+					}
+				}
+				CSDTs.add(csdt);
 			}
 			else if (sr.getSubrecordType().equals("CSDI"))
 			{
@@ -213,13 +211,12 @@ public class CREA extends RECO
 			}
 			else if (sr.getSubrecordType().equals("TNAM"))
 			{
-				TNAM = new TNAM_b(bs);
+				TNAM = new TNAM(bs);
 			}
 			else if (sr.getSubrecordType().equals("WNAM"))
 			{
 				WNAM = new WNAM(bs);
 			}
-
 			else if (sr.getSubrecordType().equals("KFFZ"))
 			{
 				KFFZ = new KFFZ(bs);
@@ -286,22 +283,6 @@ public class CREA extends RECO
 				System.out.println("unhandled : " + sr.getSubrecordType() + " in record " + recordData + " in " + this);
 			}
 
-			// transfer to arrays
-			SNAMs = new SNAM[SNAMsl.size()];
-			SNAMsl.toArray(SNAMs);
-
-			SPLOs = new FormID[SPLOsl.size()];
-			SPLOsl.toArray(SPLOs);
-
-			CNTOs = new CNTO[CNTOsl.size()];
-			CNTOsl.toArray(CNTOs);
-
-			PKIDs = new FormID[PKIDsl.size()];
-			PKIDsl.toArray(PKIDs);
-
-			CSDTs = new CSDT[CSDTsl.size()];
-			CSDTsl.toArray(CSDTs);
-
 			//extract data data
 			if (DATA != null)
 			{
@@ -342,6 +323,40 @@ public class CREA extends RECO
 		public BNAM(byte[] bytes)
 		{
 			baseScale = ESMByteConvert.extractFloat(bytes, 0);
+		}
+	}
+
+	public class RNAM
+	{
+		public byte attackReach;
+
+		public RNAM(byte[] bytes)
+		{
+			attackReach = ESMByteConvert.extractByte(bytes, 0);
+		}
+	}
+
+	public class CSDT
+	{
+		public int soundType;
+
+		public FormID csdi;
+
+		public CSDC csdc;
+
+		public CSDT(byte[] bytes)
+		{
+			soundType = ESMByteConvert.extractInt(bytes, 0);
+		}
+	}
+
+	public class TNAM
+	{
+		public float turningSpeed;
+
+		public TNAM(byte[] bytes)
+		{
+			turningSpeed = ESMByteConvert.extractFloat(bytes, 0);
 		}
 	}
 }

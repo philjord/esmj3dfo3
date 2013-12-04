@@ -14,7 +14,7 @@ public class TREE extends RECO
 	public ZString EDID;
 
 	public MODL MODL;
- 
+
 	public ZString ICON;
 
 	public float billBoardWidth = 0;
@@ -39,7 +39,6 @@ public class TREE extends RECO
 			{
 				MODL = new MODL(bs);
 			}
-			 
 			else if (sr.getSubrecordType().equals("ICON"))
 			{
 				ICON = new ZString(bs);

@@ -102,6 +102,15 @@ public class ACTI extends RECO
 			{
 
 			}
+			//FALLOUTNV only ////////////////////////////
+			else if (sr.getSubrecordType().equals("INAM"))
+			{
+
+			}
+			else if (sr.getSubrecordType().equals("MODS"))
+			{
+
+			}
 			else
 			{
 				System.out.println("unhandled : " + sr.getSubrecordType() + " in record " + recordData + " in " + this);

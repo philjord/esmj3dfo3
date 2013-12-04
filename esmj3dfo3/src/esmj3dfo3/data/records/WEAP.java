@@ -215,7 +215,29 @@ public class WEAP extends RECO
 			else if (sr.getSubrecordType().equals("VANM"))
 			{
 
-			}else if (sr.getSubrecordType().equals("VATS"))
+			}
+			else if (sr.getSubrecordType().equals("VATS"))
+			{
+
+			}
+			//FALLOUTNV only ////////////////////////////
+			else if (sr.getSubrecordType().equals("MODS"))
+			{
+
+			}
+			else if (sr.getSubrecordType().startsWith("MWD"))//1-7
+			{
+
+			}
+			else if (sr.getSubrecordType().startsWith("WNM"))//1-7
+			{
+
+			}
+			else if (sr.getSubrecordType().startsWith("WMI"))//1-3
+			{
+
+			}
+			else if (sr.getSubrecordType().startsWith("WMS"))//1-2
 			{
 
 			}

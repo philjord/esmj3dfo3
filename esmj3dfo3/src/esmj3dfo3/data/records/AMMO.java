@@ -18,8 +18,6 @@ public class AMMO extends RECO
 
 	public MODL MODL;
 
-	 
-
 	public ZString ICON;
 
 	public ANAM ANAM;
@@ -49,7 +47,7 @@ public class AMMO extends RECO
 			{
 				MODL = new MODL(bs);
 			}
-			 
+
 			else if (sr.getSubrecordType().equals("MODT"))
 			{
 				MODL.addMODTSub(bs);
@@ -77,7 +75,23 @@ public class AMMO extends RECO
 			else if (sr.getSubrecordType().equals("ONAM"))
 			{
 			}
+			//FALLOUTNV only ////////////////////////////
+			else if (sr.getSubrecordType().equals("DAT2"))
+			{
 
+			}
+			else if (sr.getSubrecordType().equals("QNAM"))
+			{
+
+			}
+			else if (sr.getSubrecordType().equals("RCIL"))
+			{
+
+			} 
+			else if (sr.getSubrecordType().equals("SCRI"))
+			{
+
+			}
 			else
 			{
 				System.out.println("unhandled : " + sr.getSubrecordType() + " in record " + recordData + " in " + this);

@@ -68,7 +68,19 @@ public class REGN extends RECO
 			{
 
 			}
+			//FALLOUTNV only ////////////////////////////
+			else if (sr.getSubrecordType().equals("RDSI"))
+			{
 
+			}
+			else if (sr.getSubrecordType().equals("RDSB"))
+			{
+
+			}
+			else if (sr.getSubrecordType().equals("RDID"))
+			{
+
+			}
 			else
 			{
 				System.out.println("unhandled : " + sr.getSubrecordType() + " in record " + recordData + " in " + this);
