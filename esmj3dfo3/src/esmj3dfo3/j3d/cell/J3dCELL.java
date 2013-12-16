@@ -65,12 +65,19 @@ public class J3dCELL extends J3dCELLGeneral implements UpdateListener
 
 	public J3dRECOInst makeJ3dRECO(Record record, boolean noFade)
 	{
+		//does it start disabled? ignore if so
+		//TODO: what is the disable flag?
+		if ((record.getRecordFlags1() & 0x800) != 0)
+		{
+			return null;
+		}
+
 		J3dRECOInst ret = null;
 		try
 		{
 			if (record.getRecordType().equals("REFR"))
 			{
-				ret = J3dREFRFactory.makeJ3DRefer(new REFR(record), makePhys, noFade,master, meshSource, textureSource, soundSource);
+				ret = J3dREFRFactory.makeJ3DRefer(new REFR(record), makePhys, noFade, master, meshSource, textureSource, soundSource);
 			}
 			else if (record.getRecordType().equals("ACRE"))
 			{
@@ -138,9 +145,8 @@ public class J3dCELL extends J3dCELLGeneral implements UpdateListener
 
 	protected boolean isDistant(Record record)
 	{
-		//TODO: why can't I just use !makePhys here?
 		// ALL stats are not part of distant for now, do they have LODs in them?
-		if (record.getRecordType().equals("REFR"))
+		if (record.getRecordType().equals("REFR") && !makePhys)
 		{
 			REFR refr = new REFR(record);
 
@@ -151,9 +157,13 @@ public class J3dCELL extends J3dCELLGeneral implements UpdateListener
 			Record baseRecord = master.getRecord(refr.NAME.formId);
 			if (baseRecord != null)
 			{
-				//baseRecord.getRecordType().equals("STAT") ||		
-				if (baseRecord.getRecordType().equals("SCOL") || baseRecord.getRecordType().equals("TREE"))
+				if (baseRecord.getRecordType().equals("TREE"))
 				{
+					return true;
+				}
+				else if ((baseRecord.getRecordFlags1() & 0x00008000) != 0)
+				{
+					//anythig with LOD, STAT, SCOL, ACTI
 					return true;
 				}
 			}

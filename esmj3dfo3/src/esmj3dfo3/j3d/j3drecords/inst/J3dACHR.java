@@ -25,6 +25,5 @@ public class J3dACHR extends J3dRECODynInst
 		{
 			System.out.println("ACHR record type not converted to j3d " + baseRecord.getRecordType());
 		}
-
 	}
 }

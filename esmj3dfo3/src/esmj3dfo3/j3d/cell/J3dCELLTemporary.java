@@ -26,12 +26,13 @@ public class J3dCELLTemporary extends J3dCELL
 		{
 			Record record = i.next();
 
-			// no stats are part of distant  
+			// distants of this list are added by teh distant cell 
 			if (!isDistant(record))
-			{						
+			{
 				J3dRECOInst jri = makeJ3dRECO(record, false);
 				addJ3dRECOInst(jri);
 			}
+
 		}
 	}
 }
