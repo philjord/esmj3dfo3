@@ -3,6 +3,7 @@ package esmj3dfo3.j3d.cell;
 import javax.media.j3d.Appearance;
 import javax.media.j3d.BranchGroup;
 import javax.media.j3d.GeometryArray;
+import javax.media.j3d.IndexedGeometryArray;
 import javax.media.j3d.Shape3D;
 import javax.media.j3d.Texture;
 import javax.media.j3d.Transform3D;
@@ -21,16 +22,17 @@ import utils.source.TextureSource;
 
 import com.sun.j3d.utils.geometry.GeometryInfo;
 
+import esmj3d.j3d.cell.MorphingLandscape;
 import esmj3d.j3d.j3drecords.inst.J3dLAND;
 
-public class Fo3LODLandscape extends BranchGroup
+public class Fo3LODLandscape extends MorphingLandscape
 {
 
 	//TODO: use the J3DLand from cell to fill out, but dont' load the near cell nessasarily at all.
 	// same for Skyrim
 	public Fo3LODLandscape(int lodX, int lodY, int scale, String worldFormName, MeshSource meshSource, TextureSource textureSource)
 	{
-
+		super(lodX, lodY, scale);
 		String meshName = "landscape\\lod\\" + worldFormName + "\\" + worldFormName + ".level" + scale + ".x" + lodX + ".y" + lodY + ".nif";
 
 		setCapability(BranchGroup.ALLOW_DETACH);
@@ -46,7 +48,9 @@ public class Fo3LODLandscape extends BranchGroup
 				GeometryInfo gi = J3dNiTriShape.makeGeometryInfo(data);
 				if (gi != null)
 				{
-					GeometryArray baseItsa = J3dNiTriShape.makeGeometry(gi, true, data);
+					//scale 4 will get morph treatment later
+					boolean compact = scale != 4;
+					GeometryArray baseItsa = J3dNiTriShape.makeGeometry(gi, compact, data);
 
 					Shape3D shape = new Shape3D();
 					shape.setGeometry(baseItsa);
@@ -66,6 +70,13 @@ public class Fo3LODLandscape extends BranchGroup
 					tg.setTransform(t);
 					tg.addChild(shape);
 					addChild(tg);
+
+					//scale 4 will get morph treatment later
+					if (scale == 4)
+					{
+						baseItsa.setCapability(GeometryArray.ALLOW_REF_DATA_WRITE);
+						this.setGeometryArray((IndexedGeometryArray) baseItsa);
+					}
 				}
 
 			}
@@ -82,4 +93,5 @@ public class Fo3LODLandscape extends BranchGroup
 		}
 
 	}
+
 }
