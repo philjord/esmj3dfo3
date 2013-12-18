@@ -35,53 +35,53 @@ public class CELL extends CommonCELL
 		for (int i = 0; i < subrecords.size(); i++)
 		{
 			Subrecord sr = subrecords.get(i);
-			byte[] bs = sr.getSubrecordData();
+			byte[] bs = sr.getData();
 
-			if (sr.getSubrecordType().equals("DATA"))
+			if (sr.getType().equals("DATA"))
 			{
 				DATA = new DATA(bs);
 			}
 			// in tes4
-			else if (sr.getSubrecordType().equals("XCMT"))
+			else if (sr.getType().equals("XCMT"))
 			{
 				musicType = bs[0];
 			}
-			else if (sr.getSubrecordType().equals("XRNK"))
+			else if (sr.getType().equals("XRNK"))
 			{
 				XRNK = ESMByteConvert.extractInt(bs, 0);
 			}
 			// in tes5
-			else if (sr.getSubrecordType().equals("LNAM"))
+			else if (sr.getType().equals("LNAM"))
 			{
 
 			}
-			else if (sr.getSubrecordType().equals("LTMP"))
+			else if (sr.getType().equals("LTMP"))
 			{
 				LTMP = new FormID(bs);
 			}
-			else if (sr.getSubrecordType().equals("XCMO"))
+			else if (sr.getType().equals("XCMO"))
 			{
 				XCMO = new FormID(bs);
 			}
-			else if (sr.getSubrecordType().equals("XCIM"))
+			else if (sr.getType().equals("XCIM"))
 			{
 				XCIM = new FormID(bs);
 			}
-			else if (sr.getSubrecordType().equals("XCAS"))
+			else if (sr.getType().equals("XCAS"))
 			{
 				XCAS = new FormID(bs);
 			}
-			else if (sr.getSubrecordType().equals("XEZN"))
+			else if (sr.getType().equals("XEZN"))
 			{
 				XEZN = new FormID(bs);
 			}
 			// diff from xnam in tes5
-			else if (sr.getSubrecordType().equals("XNAM"))
+			else if (sr.getType().equals("XNAM"))
 			{
 
 			}
 			// only in fo3
-			else if (sr.getSubrecordType().equals("XCET"))
+			else if (sr.getType().equals("XCET"))
 			{
 
 			}

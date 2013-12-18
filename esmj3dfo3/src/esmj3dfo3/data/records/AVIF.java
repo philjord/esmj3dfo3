@@ -19,32 +19,32 @@ public class AVIF extends RECO
 		for (int i = 0; i < subrecords.size(); i++)
 		{
 			Subrecord sr = subrecords.get(i);
-			byte[] bs = sr.getSubrecordData();
+			byte[] bs = sr.getData();
 
-			if (sr.getSubrecordType().equals("EDID"))
+			if (sr.getType().equals("EDID"))
 			{
 				EDID = new ZString(bs);
 			}
-			else if (sr.getSubrecordType().equals("FULL"))
+			else if (sr.getType().equals("FULL"))
 			{
 
 			}
-			else if (sr.getSubrecordType().equals("DESC"))
+			else if (sr.getType().equals("DESC"))
 			{
 
 			}
-			else if (sr.getSubrecordType().equals("ICON"))
+			else if (sr.getType().equals("ICON"))
 			{
 
 			}
-			else if (sr.getSubrecordType().equals("ANAM"))
+			else if (sr.getType().equals("ANAM"))
 			{
 
 			}
 
 			else
 			{
-				System.out.println("unhandled : " + sr.getSubrecordType() + " in record " + recordData + " in " + this);
+				System.out.println("unhandled : " + sr.getType() + " in record " + recordData + " in " + this);
 			}
 
 		}

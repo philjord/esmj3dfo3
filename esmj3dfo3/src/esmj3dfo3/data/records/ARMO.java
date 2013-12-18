@@ -41,156 +41,156 @@ public class ARMO extends RECO
 		for (int i = 0; i < subrecords.size(); i++)
 		{
 			Subrecord sr = subrecords.get(i);
-			byte[] bs = sr.getSubrecordData();
+			byte[] bs = sr.getData();
 
-			if (sr.getSubrecordType().equals("EDID"))
+			if (sr.getType().equals("EDID"))
 			{
 				EDID = new ZString(bs);
 			}
-			else if (sr.getSubrecordType().equals("FULL"))
+			else if (sr.getType().equals("FULL"))
 			{
 
 			}
-			else if (sr.getSubrecordType().equals("SCRI"))
+			else if (sr.getType().equals("SCRI"))
 			{
 				SCRI = new FormID(bs);
 			}
-			else if (sr.getSubrecordType().equals("BMDT"))
+			else if (sr.getType().equals("BMDT"))
 			{
 				BMDT = new BMDT(bs);
 			}
-			else if (sr.getSubrecordType().equals("MODL"))
+			else if (sr.getType().equals("MODL"))
 			{
 				MODL = new MODL(bs);
 			}
-			else if (sr.getSubrecordType().equals("MODB"))
+			else if (sr.getType().equals("MODB"))
 			{
 				MODL.addMODBSub(bs);
 			}
-			else if (sr.getSubrecordType().equals("MODT"))
+			else if (sr.getType().equals("MODT"))
 			{
 				MODL.addMODTSub(bs);
 			}
-			else if (sr.getSubrecordType().equals("MOD2"))
+			else if (sr.getType().equals("MOD2"))
 			{
 				MOD2 = new MODL(bs);
 			}
-			else if (sr.getSubrecordType().equals("MO2T"))
+			else if (sr.getType().equals("MO2T"))
 			{
 				MOD2.addMODTSub(bs);
 			}
-			else if (sr.getSubrecordType().equals("MOD3"))
+			else if (sr.getType().equals("MOD3"))
 			{
 				MOD3 = new MODL(bs);
 			}
-			else if (sr.getSubrecordType().equals("MO3T"))
+			else if (sr.getType().equals("MO3T"))
 			{
 				MOD3.addMODTSub(bs);
 			}
-			else if (sr.getSubrecordType().equals("MOD4"))
+			else if (sr.getType().equals("MOD4"))
 			{
 				MOD4 = new MODL(bs);
 			}
-			else if (sr.getSubrecordType().equals("MO4T"))
+			else if (sr.getType().equals("MO4T"))
 			{
 				MOD4.addMODTSub(bs);
 			}
-			else if (sr.getSubrecordType().equals("ICON"))
+			else if (sr.getType().equals("ICON"))
 			{
 				ICON = new ZString(bs);
 			}
-			else if (sr.getSubrecordType().equals("ICO2"))
+			else if (sr.getType().equals("ICO2"))
 			{
 				ICO2 = new ZString(bs);
 			}
-			else if (sr.getSubrecordType().equals("DATA"))
+			else if (sr.getType().equals("DATA"))
 			{
 				DATA = new DATA(bs);
 			}
-			else if (sr.getSubrecordType().equals("OBND"))
+			else if (sr.getType().equals("OBND"))
 			{
 
 			}
-			else if (sr.getSubrecordType().equals("EITM"))
+			else if (sr.getType().equals("EITM"))
 			{
 
 			}
-			else if (sr.getSubrecordType().equals("MODD"))
+			else if (sr.getType().equals("MODD"))
 			{
 
 			}
-			else if (sr.getSubrecordType().equals("MICO"))
+			else if (sr.getType().equals("MICO"))
 			{
 
 			}
-			else if (sr.getSubrecordType().equals("MIC2"))
+			else if (sr.getType().equals("MIC2"))
 			{
 
 			}
-			else if (sr.getSubrecordType().equals("MOSD"))
+			else if (sr.getType().equals("MOSD"))
 			{
 
 			}
-			else if (sr.getSubrecordType().equals("REPL"))
+			else if (sr.getType().equals("REPL"))
 			{
 
 			}
-			else if (sr.getSubrecordType().equals("BIPL"))
+			else if (sr.getType().equals("BIPL"))
 			{
 
 			}
-			else if (sr.getSubrecordType().equals("ETYP"))
+			else if (sr.getType().equals("ETYP"))
 			{
 
 			}
-			else if (sr.getSubrecordType().equals("YNAM"))
+			else if (sr.getType().equals("YNAM"))
 			{
 
 			}
-			else if (sr.getSubrecordType().equals("ZNAM"))
+			else if (sr.getType().equals("ZNAM"))
 			{
 
 			}
-			else if (sr.getSubrecordType().equals("DNAM"))
+			else if (sr.getType().equals("DNAM"))
 			{
 
 			}
-			else if (sr.getSubrecordType().equals("BNAM"))
+			else if (sr.getType().equals("BNAM"))
 			{
 
 			}
-			else if (sr.getSubrecordType().equals("TNAM"))
+			else if (sr.getType().equals("TNAM"))
 			{
 
 			}
-			else if (sr.getSubrecordType().equals("MODS"))
+			else if (sr.getType().equals("MODS"))
 			{
 
 			}
-			else if (sr.getSubrecordType().equals("MO2S"))
+			else if (sr.getType().equals("MO2S"))
 			{
 
 			}
-			else if (sr.getSubrecordType().equals("MO3S"))
+			else if (sr.getType().equals("MO3S"))
 			{
 
 			}
-			else if (sr.getSubrecordType().equals("MO4S"))
+			else if (sr.getType().equals("MO4S"))
 			{
 
 			}
-			else if (sr.getSubrecordType().equals("BMCT"))
+			else if (sr.getType().equals("BMCT"))
 			{
 
 			}
 			//FALLOUTNV only ////////////////////////////
-			else if (sr.getSubrecordType().equals("SNAM"))
+			else if (sr.getType().equals("SNAM"))
 			{
 
 			}
 			else
 			{
-				System.out.println("unhandled : " + sr.getSubrecordType() + " in record " + recordData + " in " + this);
+				System.out.println("unhandled : " + sr.getType() + " in record " + recordData + " in " + this);
 			}
 		}
 	}

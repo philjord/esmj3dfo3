@@ -32,143 +32,143 @@ public class REFR extends CommonREFR
 		for (int i = 0; i < subrecords.size(); i++)
 		{
 			Subrecord sr = subrecords.get(i);
-			byte[] bs = sr.getSubrecordData();
+			byte[] bs = sr.getData();
 
 			//also in tes5
-			if (sr.getSubrecordType().equals("XPRM"))
+			if (sr.getType().equals("XPRM"))
 			{
 				XPRM = new XPRM(bs);
 			}
-			else if (sr.getSubrecordType().equals("XMBO"))
+			else if (sr.getType().equals("XMBO"))
 			{
 				XMBO = new XMBO(bs);
 			}
-			else if (sr.getSubrecordType().equals("XRMR"))
+			else if (sr.getType().equals("XRMR"))
 			{
 				XRMR = bs;
 			}
-			else if (sr.getSubrecordType().equals("XLRM"))
+			else if (sr.getType().equals("XLRM"))
 			{
 				XLMRs.add(new FormID(bs));
 			}
-			else if (sr.getSubrecordType().equals("XEMI"))
+			else if (sr.getType().equals("XEMI"))
 			{
 			}
-			else if (sr.getSubrecordType().equals("XRGD"))
+			else if (sr.getType().equals("XRGD"))
 			{
 			}
-			else if (sr.getSubrecordType().equals("XAPD"))
+			else if (sr.getType().equals("XAPD"))
 			{
 			}
-			else if (sr.getSubrecordType().equals("XAPR"))
+			else if (sr.getType().equals("XAPR"))
 			{
 			}
-			else if (sr.getSubrecordType().equals("XLKR"))
+			else if (sr.getType().equals("XLKR"))
 			{
 			}
-			else if (sr.getSubrecordType().equals("XPWR"))
+			else if (sr.getType().equals("XPWR"))
 			{
 			}
-			else if (sr.getSubrecordType().equals("XPOD"))
+			else if (sr.getType().equals("XPOD"))
 			{
 			}
-			else if (sr.getSubrecordType().equals("XTRI"))
+			else if (sr.getType().equals("XTRI"))
 			{
 			}
-			else if (sr.getSubrecordType().equals("XOCP"))
+			else if (sr.getType().equals("XOCP"))
 			{
 			}
-			else if (sr.getSubrecordType().equals("XMBR"))
+			else if (sr.getType().equals("XMBR"))
 			{
 			}
-			else if (sr.getSubrecordType().equals("XPRD"))
+			else if (sr.getType().equals("XPRD"))
 			{
 			}
-			else if (sr.getSubrecordType().equals("XPPA"))
+			else if (sr.getType().equals("XPPA"))
 			{
 			}
-			else if (sr.getSubrecordType().equals("INAM"))
+			else if (sr.getType().equals("INAM"))
 			{
 			}
-			else if (sr.getSubrecordType().equals("SCHR"))
+			else if (sr.getType().equals("SCHR"))
 			{
 			}
-			else if (sr.getSubrecordType().equals("XNDP"))
+			else if (sr.getType().equals("XNDP"))
 			{
 			}
-			else if (sr.getSubrecordType().equals("SCTX"))
+			else if (sr.getType().equals("SCTX"))
 			{
 			}
 
 			//not in tes5
-			else if (sr.getSubrecordType().equals("XSED"))
+			else if (sr.getType().equals("XSED"))
 			{
 				XSED = new XSED(bs);
 			}
-			else if (sr.getSubrecordType().equals("XRDS"))
+			else if (sr.getType().equals("XRDS"))
 			{
 			}
-			else if (sr.getSubrecordType().equals("XHLP"))
+			else if (sr.getType().equals("XHLP"))
 			{
 			}
-			else if (sr.getSubrecordType().equals("XLTW"))
+			else if (sr.getType().equals("XLTW"))
 			{
 			}
-			else if (sr.getSubrecordType().equals("XORD"))
+			else if (sr.getType().equals("XORD"))
 			{
 			}
-			else if (sr.getSubrecordType().equals("XRAD"))
+			else if (sr.getType().equals("XRAD"))
 			{
 			}
-			else if (sr.getSubrecordType().equals("XAMT"))
+			else if (sr.getType().equals("XAMT"))
 			{
 			}
-			else if (sr.getSubrecordType().equals("XAMC"))
+			else if (sr.getType().equals("XAMC"))
 			{
 			}
-			else if (sr.getSubrecordType().equals("RCLR"))
+			else if (sr.getType().equals("RCLR"))
 			{
 			}
-			else if (sr.getSubrecordType().equals("XIBS"))
+			else if (sr.getType().equals("XIBS"))
 			{
 			}
-			else if (sr.getSubrecordType().equals("XRDO"))
+			else if (sr.getType().equals("XRDO"))
 			{
 			}
-			else if (sr.getSubrecordType().equals("XCLP"))
+			else if (sr.getType().equals("XCLP"))
 			{
 			}
-			else if (sr.getSubrecordType().equals("SCDA"))
+			else if (sr.getType().equals("SCDA"))
 			{
 			}
-			else if (sr.getSubrecordType().equals("SCRO"))
+			else if (sr.getType().equals("SCRO"))
 			{
 			}
-			else if (sr.getSubrecordType().equals("MMRK"))
+			else if (sr.getType().equals("MMRK"))
 			{
 			}
-			else if (sr.getSubrecordType().equals("CNAM"))
+			else if (sr.getType().equals("CNAM"))
 			{
 			}
-			else if (sr.getSubrecordType().equals("BNAM"))
+			else if (sr.getType().equals("BNAM"))
 			{
 			}
-			else if (sr.getSubrecordType().equals("MNAM"))
+			else if (sr.getType().equals("MNAM"))
 			{
 			}
-			else if (sr.getSubrecordType().equals("NNAM"))
+			else if (sr.getType().equals("NNAM"))
 			{
 			}
-			else if (sr.getSubrecordType().equals("XSRF"))
+			else if (sr.getType().equals("XSRF"))
 			{
 			}
-			else if (sr.getSubrecordType().equals("XSRD"))
+			else if (sr.getType().equals("XSRD"))
 			{
 			}
-			else if (sr.getSubrecordType().equals("XATO"))
+			else if (sr.getType().equals("XATO"))
 			{
 			}
-			else if (sr.getSubrecordType().equals("WMI1"))
+			else if (sr.getType().equals("WMI1"))
 			{
 			}
 			else

@@ -31,93 +31,93 @@ public class ACHR extends InstRECO
 		for (int i = 0; i < subrecords.size(); i++)
 		{
 			Subrecord sr = subrecords.get(i);
-			byte[] bs = sr.getSubrecordData();
+			byte[] bs = sr.getData();
 
-			if (sr.getSubrecordType().equals("EDID"))
+			if (sr.getType().equals("EDID"))
 			{
 				EDID = new ZString(bs);
 			}
-			else if (sr.getSubrecordType().equals("NAME"))
+			else if (sr.getType().equals("NAME"))
 			{
 				NAME = new FormID(bs);
 			}
-			else if (sr.getSubrecordType().equals("XESP"))
+			else if (sr.getType().equals("XESP"))
 			{
 				XESP = new FormID(bs);
 			}
 
-			else if (sr.getSubrecordType().equals("XMRC"))
+			else if (sr.getType().equals("XMRC"))
 			{
 				XMRC = new FormID(bs);
 			}
-			else if (sr.getSubrecordType().equals("XRGD"))
+			else if (sr.getType().equals("XRGD"))
 			{
 				XRGD = new XRGD(bs);
 			}
-			else if (sr.getSubrecordType().equals("XSCL"))
+			else if (sr.getType().equals("XSCL"))
 			{
 				scale = ESMByteConvert.extractFloat(bs, 0);
 			}
-			else if (sr.getSubrecordType().equals("DATA"))
+			else if (sr.getType().equals("DATA"))
 			{
 				this.extractInstData(bs);
 			}
-			else if (sr.getSubrecordType().equals("XRGB"))
+			else if (sr.getType().equals("XRGB"))
 			{
 
 			}
-			else if (sr.getSubrecordType().equals("XLCM"))
+			else if (sr.getType().equals("XLCM"))
 			{
 
 			}
-			else if (sr.getSubrecordType().equals("XLKR"))
+			else if (sr.getType().equals("XLKR"))
 			{
 
 			}
-			else if (sr.getSubrecordType().equals("XEZN"))
+			else if (sr.getType().equals("XEZN"))
 			{
 
 			}
-			else if (sr.getSubrecordType().equals("XIBS"))
+			else if (sr.getType().equals("XIBS"))
 			{
 
 			}
-			else if (sr.getSubrecordType().equals("XRDS"))
+			else if (sr.getType().equals("XRDS"))
 			{
 
 			}
-			else if (sr.getSubrecordType().equals("XPRD"))
+			else if (sr.getType().equals("XPRD"))
 			{
 
 			}
-			else if (sr.getSubrecordType().equals("XPPA"))
+			else if (sr.getType().equals("XPPA"))
 			{
 
 			}
-			else if (sr.getSubrecordType().equals("INAM"))
+			else if (sr.getType().equals("INAM"))
 			{
 
 			}
-			else if (sr.getSubrecordType().equals("TNAM"))
+			else if (sr.getType().equals("TNAM"))
 			{
 
 			}
-			else if (sr.getSubrecordType().equals("SCHR"))
+			else if (sr.getType().equals("SCHR"))
 			{
 
 			}
 			//FALLOUTNV only ////////////////////////////
-			else if (sr.getSubrecordType().equals("XAPD"))
+			else if (sr.getType().equals("XAPD"))
 			{
 
 			}
-			else if (sr.getSubrecordType().equals("XATO"))
+			else if (sr.getType().equals("XATO"))
 			{
 
 			}
 			else
 			{
-				System.out.println("unhandled : " + sr.getSubrecordType() + " in record " + recordData + " in " + this);
+				System.out.println("unhandled : " + sr.getType() + " in record " + recordData + " in " + this);
 			}
 
 		}

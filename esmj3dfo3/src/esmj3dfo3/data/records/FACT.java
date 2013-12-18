@@ -19,52 +19,52 @@ public class FACT extends RECO
 		for (int i = 0; i < subrecords.size(); i++)
 		{
 			Subrecord sr = subrecords.get(i);
-			byte[] bs = sr.getSubrecordData();
+			byte[] bs = sr.getData();
 
-			if (sr.getSubrecordType().equals("EDID"))
+			if (sr.getType().equals("EDID"))
 			{
 				EDID = new ZString(bs);
 			}
-			else if (sr.getSubrecordType().equals("FULL"))
+			else if (sr.getType().equals("FULL"))
 			{
 
 			}
-			else if (sr.getSubrecordType().equals("DATA"))
+			else if (sr.getType().equals("DATA"))
 			{
 
 			}
-			else if (sr.getSubrecordType().equals("MNAM"))
+			else if (sr.getType().equals("MNAM"))
 			{
 
 			}
-			else if (sr.getSubrecordType().equals("CNAM"))
+			else if (sr.getType().equals("CNAM"))
 			{
 
 			}
-			else if (sr.getSubrecordType().equals("FNAM"))
+			else if (sr.getType().equals("FNAM"))
 			{
 
 			}
-			else if (sr.getSubrecordType().equals("RNAM"))
+			else if (sr.getType().equals("RNAM"))
 			{
 
 			}
-			else if (sr.getSubrecordType().equals("XNAM"))
+			else if (sr.getType().equals("XNAM"))
 			{
 
 			}
 			//FALLOUTNV only ////////////////////////////
-			else if (sr.getSubrecordType().equals("WMTI"))
+			else if (sr.getType().equals("WMTI"))
 			{
 
 			}
-			else if (sr.getSubrecordType().equals("WMI1"))
+			else if (sr.getType().equals("WMI1"))
 			{
 
 			}
 			else
 			{
-				System.out.println("unhandled : " + sr.getSubrecordType() + " in record " + recordData + " in " + this);
+				System.out.println("unhandled : " + sr.getType() + " in record " + recordData + " in " + this);
 			}
 
 		}
