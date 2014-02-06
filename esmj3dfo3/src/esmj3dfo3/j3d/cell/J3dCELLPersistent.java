@@ -3,8 +3,6 @@ package esmj3dfo3.j3d.cell;
 import java.util.Iterator;
 import java.util.List;
 
-import javax.media.j3d.Group;
-
 import utils.source.MeshSource;
 import utils.source.SoundSource;
 import utils.source.TextureSource;
@@ -16,14 +14,13 @@ import esmj3d.j3d.cell.J3dICELLPersistent;
 import esmj3dfo3.data.records.ACHR;
 import esmj3dfo3.data.records.ACRE;
 import esmj3dfo3.data.records.REFR;
-import esmj3dfo3.data.records.WRLD;
 
 public class J3dCELLPersistent extends J3dCELL implements J3dICELLPersistent
 {
+	
 	private GridSpaces gridSpaces = new GridSpaces(this);
 
-	private WRLD wrld;
-
+	private CommonWRLD wrld;
 	/**
 	 * CELL presistent is differnt from temp and distant as it's dynamic refs and achar can move away
 	 * but they are sitll managed by the cell persistent itself, so we have this crazy grid space sub system to quickly 
@@ -39,13 +36,11 @@ public class J3dCELLPersistent extends J3dCELL implements J3dICELLPersistent
 	 * @param recordToRECO
 	 */
 
-	public J3dCELLPersistent(WRLD wrld, IRecordStore master, Record cellRecord, List<Record> children, boolean makePhys,
+	public J3dCELLPersistent(CommonWRLD wrld, IRecordStore master, Record cellRecord, List<Record> children, boolean makePhys,
 			MeshSource meshSource, TextureSource textureSource, SoundSource soundSource)
 	{
 		super(master, cellRecord, children, makePhys, meshSource, textureSource, soundSource);
 		this.wrld = wrld;
-		this.setCapability(Group.ALLOW_CHILDREN_EXTEND);
-		this.setCapability(Group.ALLOW_CHILDREN_WRITE);
 		indexRecords();
 		addChild(gridSpaces);
 	}
