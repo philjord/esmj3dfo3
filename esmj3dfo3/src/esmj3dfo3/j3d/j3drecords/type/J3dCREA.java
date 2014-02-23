@@ -208,7 +208,15 @@ public class J3dCREA extends J3dRECOType
 
 	private void addWEAP(WEAP weap)
 	{
-		weapStr = weap.MODL.model.str;
+		if (weap.MODL != null)
+		{
+			weapStr = weap.MODL.model.str;
+		}
+		else if (weap.MOD3 != null)
+		{
+			weapStr = weap.MOD3.model.str;
+		}
+
 	}
 
 	@Override

@@ -21,7 +21,7 @@ public class J3dLIGH extends J3dRECOType
 {
 	public J3dLIGH(LIGH ligh, boolean makePhys, MeshSource meshSource, TextureSource textureSource)
 	{
-		super(ligh, ligh.MODL.model.str);
+		super(ligh, ligh.MODL != null ? ligh.MODL.model.str : "");
 		J3dNiAVObject j3dNiAVObject = null;
 		if (ligh.MODL != null)
 		{
