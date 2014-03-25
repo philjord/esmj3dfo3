@@ -6,9 +6,7 @@ import javax.media.j3d.Transform3D;
 import javax.media.j3d.TransformGroup;
 
 import nif.character.NifCharacter;
-import utils.source.MeshSource;
-import utils.source.SoundSource;
-import utils.source.TextureSource;
+import utils.source.MediaSources;
 import esmLoader.common.data.record.IRecordStore;
 import esmLoader.common.data.record.Record;
 import esmj3d.data.shared.subrecords.MODL;
@@ -35,7 +33,7 @@ public class J3dCREA extends J3dRECOType
 
 	private NifCharacter nifCharacter;
 
-	public J3dCREA(CREA crea, IRecordStore master, MeshSource meshSource, TextureSource textureSource, SoundSource soundSource)
+	public J3dCREA(CREA crea, IRecordStore master, MediaSources mediaSources)
 	{
 		super(crea, null);
 		//MODL is a bone file and the NIFZ are no path othe files to add
@@ -167,7 +165,7 @@ public class J3dCREA extends J3dRECOType
 
 			idleAnimations.add(path + "\\mtidle.kf");
 
-			nifCharacter = new NifCharacter(skeletonNifFile, fileNames, meshSource, textureSource, soundSource, idleAnimations);
+			nifCharacter = new NifCharacter(skeletonNifFile, fileNames, mediaSources, idleAnimations);
 
 			if (crea.BNAM.baseScale == 1)
 			{

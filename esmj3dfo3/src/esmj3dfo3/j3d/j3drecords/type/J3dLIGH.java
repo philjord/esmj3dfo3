@@ -11,15 +11,14 @@ import nif.NifJ3dHavokRoot;
 import nif.NifToJ3d;
 import nif.j3d.J3dNiAVObject;
 import utils.ESConfig;
-import utils.source.MeshSource;
-import utils.source.TextureSource;
+import utils.source.MediaSources;
 import esmLoader.EsmFileLocations;
 import esmj3d.j3d.j3drecords.type.J3dRECOType;
 import esmj3dfo3.data.records.LIGH;
 
 public class J3dLIGH extends J3dRECOType
 {
-	public J3dLIGH(LIGH ligh, boolean makePhys, MeshSource meshSource, TextureSource textureSource)
+	public J3dLIGH(LIGH ligh, boolean makePhys, MediaSources mediaSources)
 	{
 		super(ligh, ligh.MODL != null ? ligh.MODL.model.str : "");
 		J3dNiAVObject j3dNiAVObject = null;
@@ -29,7 +28,7 @@ public class J3dLIGH extends J3dRECOType
 			String nifFileName = ligh.MODL.model.str;
 			if (makePhys)
 			{
-				NifJ3dHavokRoot hr = NifToJ3d.loadHavok(nifFileName, meshSource);
+				NifJ3dHavokRoot hr = NifToJ3d.loadHavok(nifFileName, mediaSources.getMeshSource());
 				if (hr != null)
 				{
 					j3dNiAVObject = hr.getHavokRoot();
@@ -37,7 +36,8 @@ public class J3dLIGH extends J3dRECOType
 			}
 			else
 			{
-				j3dNiAVObject = NifToJ3d.loadShapes(nifFileName, meshSource, textureSource).getVisualRoot();
+				j3dNiAVObject = NifToJ3d.loadShapes(nifFileName, mediaSources.getMeshSource(), mediaSources.getTextureSource())
+						.getVisualRoot();
 
 				if (EsmFileLocations.ESM_MAKE_J3D_POINTLIGHTS)
 				{

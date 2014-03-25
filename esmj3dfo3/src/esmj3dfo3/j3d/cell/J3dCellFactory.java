@@ -5,9 +5,7 @@ import java.util.zip.DataFormatException;
 
 import javax.media.j3d.BranchGroup;
 
-import utils.source.MeshSource;
-import utils.source.SoundSource;
-import utils.source.TextureSource;
+import utils.source.MediaSources;
 import esmLoader.common.PluginException;
 import esmLoader.common.data.plugin.PluginGroup;
 import esmLoader.common.data.plugin.PluginRecord;
@@ -24,20 +22,14 @@ public class J3dCellFactory implements J3dICellFactory
 
 	private IRecordStore recordStore;
 
-	private MeshSource meshSource;
+	private MediaSources mediaSources;
 
-	private TextureSource textureSource;
-
-	private SoundSource soundSource;
-
-	public J3dCellFactory(ESMManager esmManager, IRecordStore recordStore, MeshSource meshSource, TextureSource textureSource,
-			SoundSource soundSource)
+	public J3dCellFactory(ESMManager esmManager, IRecordStore recordStore, MediaSources mediaSources)
 	{
 		this.esmManager = esmManager;
 		this.recordStore = recordStore;
-		this.meshSource = meshSource;
-		this.textureSource = textureSource;
-		this.soundSource = soundSource;
+		this.mediaSources = mediaSources;
+
 	}
 
 	@Override
@@ -61,7 +53,7 @@ public class J3dCellFactory implements J3dICellFactory
 	@Override
 	public BranchGroup makeLODLandscape(int lodX, int lodY, int scale, String lodWorldName)
 	{
-		return new Fo3LODLandscape(lodX, lodY, scale, lodWorldName, meshSource, textureSource);
+		return new Fo3LODLandscape(lodX, lodY, scale, lodWorldName, mediaSources.getMeshSource(), mediaSources.getTextureSource());
 	}
 
 	private WRLD getWRLD(int formId)
@@ -109,7 +101,7 @@ public class J3dCellFactory implements J3dICellFactory
 				if (cellChildren != null)
 				{
 					return new J3dCELLPersistent(wrld, recordStore, new Record(cell, -1), ESMManager.getChildren(cellChildren,
-							PluginGroup.CELL_PERSISTENT), makePhys, meshSource, textureSource, soundSource);
+							PluginGroup.CELL_PERSISTENT), makePhys, mediaSources);
 				}
 			}
 		}
@@ -145,7 +137,7 @@ public class J3dCellFactory implements J3dICellFactory
 				if (cellChildren != null)
 				{
 					return new J3dCELLTemporary(recordStore, new Record(record, -1), ESMManager.getChildren(cellChildren,
-							PluginGroup.CELL_TEMPORARY), makePhys, meshSource, textureSource, soundSource);
+							PluginGroup.CELL_TEMPORARY), makePhys, mediaSources);
 				}
 			}
 
@@ -198,7 +190,7 @@ public class J3dCellFactory implements J3dICellFactory
 				{
 					//note stats only not distant
 					return new J3dCELLDistant(recordStore, new Record(record, -1), ESMManager.getChildren(cellChildren,
-							PluginGroup.CELL_TEMPORARY), makePhys, meshSource, textureSource, soundSource);
+							PluginGroup.CELL_TEMPORARY), makePhys, mediaSources);
 				}
 			}
 		}
@@ -229,7 +221,7 @@ public class J3dCellFactory implements J3dICellFactory
 				PluginGroup cellChildren = esmManager.getInteriorCELLChildren(cellId);
 
 				return new J3dCELLPersistent(null, recordStore, new Record(record, -1), ESMManager.getChildren(cellChildren,
-						PluginGroup.CELL_PERSISTENT), makePhys, meshSource, textureSource, soundSource);
+						PluginGroup.CELL_PERSISTENT), makePhys, mediaSources);
 			}
 		}
 		catch (PluginException e1)
@@ -260,7 +252,7 @@ public class J3dCellFactory implements J3dICellFactory
 				PluginGroup cellChildren = esmManager.getInteriorCELLChildren(cellId);
 
 				return new J3dCELLTemporary(recordStore, new Record(record, -1), ESMManager.getChildren(cellChildren,
-						PluginGroup.CELL_TEMPORARY), makePhys, meshSource, textureSource, soundSource);
+						PluginGroup.CELL_TEMPORARY), makePhys, mediaSources);
 			}
 		}
 		catch (PluginException e1)
@@ -291,7 +283,7 @@ public class J3dCellFactory implements J3dICellFactory
 				PluginGroup cellChildren = esmManager.getInteriorCELLChildren(cellId);
 
 				return new J3dCELLDistant(recordStore, new Record(record, -1), ESMManager.getChildren(cellChildren,
-						PluginGroup.CELL_TEMPORARY), makePhys, meshSource, textureSource, soundSource);
+						PluginGroup.CELL_TEMPORARY), makePhys, mediaSources);
 			}
 		}
 		catch (PluginException e1)
