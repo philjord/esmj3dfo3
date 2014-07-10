@@ -17,13 +17,17 @@ public class WEAP extends RECO
 
 	public DATA DATA;
 
-	public MODL MODL; // male worn (or if no sex)
+	public MODL MODL;  // male or default worn
 
-	public MODL MOD2; // male ground
+	public MODL MOD2;  // male on ground
 
-	public MODL MOD3; // female worn  
+	public MODL MOD3;  // female worn
 
-	public MODL MOD4; // female ground
+	public MODL MOD4;  // female on ground
+	
+	//No NPC_ weap.MODL but weap.EDID of WeapBrassKnuckles and 
+	//MOD4 model string of Weapons\Hand2Hand\BrassKnucklesWorldObject.NIF
+	// HA ha H2H have male and female version!
 
 	public ZString ICON;
 

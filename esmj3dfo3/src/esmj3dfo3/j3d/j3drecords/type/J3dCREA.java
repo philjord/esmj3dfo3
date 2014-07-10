@@ -210,11 +210,10 @@ public class J3dCREA extends J3dRECOType
 		{
 			weapStr = weap.MODL.model.str;
 		}
-		else if (weap.MOD3 != null)
+		else
 		{
-			weapStr = weap.MOD3.model.str;
+			//TODO:  male female H2H models		 see WEAP	
 		}
-
 	}
 
 	@Override

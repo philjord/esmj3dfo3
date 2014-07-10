@@ -29,6 +29,7 @@ public class J3dNPC_ extends J3dRECOType
 
 	private String handRStr = null;
 
+	// TODO: worn vs carried weaps
 	private String weapStr = null;
 
 	private boolean female = false;
@@ -193,7 +194,15 @@ public class J3dNPC_ extends J3dRECOType
 
 	private void addWEAP(WEAP weap)
 	{
-		weapStr = weap.MODL.model.str;
+		if (weap.MODL != null)
+		{
+			weapStr = weap.MODL.model.str;
+		}
+		else
+		{
+			//TODO:  male female H2H models		 see WEAP	
+		}
+
 	}
 
 	@Override
