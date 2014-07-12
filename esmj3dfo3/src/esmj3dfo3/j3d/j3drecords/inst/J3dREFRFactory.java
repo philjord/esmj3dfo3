@@ -3,6 +3,7 @@ package esmj3dfo3.j3d.j3drecords.inst;
 import javax.media.j3d.Node;
 
 import utils.ESConfig;
+import utils.ESUtils;
 import utils.source.MediaSources;
 import esmLoader.common.data.record.IRecordStore;
 import esmLoader.common.data.record.Record;
@@ -252,7 +253,7 @@ public class J3dREFRFactory
 		{
 			if (refr.XTEL != null && !makePhys)
 			{
-				System.out.println("DOOR at " + refr.getTrans());
+				System.out.println("DOOR at " + ESUtils.makeTrans(refr.getTrans()));
 			}
 			return new J3dRECOStatInst(refr, new J3dDOOR(new DOOR(baseRecord), makePhys, mediaSources), true, makePhys);
 		}
