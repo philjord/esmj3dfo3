@@ -53,14 +53,14 @@ public class J3dNPC_ extends J3dRECOType
 			//All beast races are just humans with a different texture
 			bodyStr = ESConfig.TES_MESH_PATH + "characters\\_male\\femaleupperbody.nif";
 			handLStr = ESConfig.TES_MESH_PATH + "characters\\_male\\femalelefthand.nif";
-			handLStr = ESConfig.TES_MESH_PATH + "characters\\_male\\femalerighthand.nif";
+			handRStr = ESConfig.TES_MESH_PATH + "characters\\_male\\femalerighthand.nif";
 		}
 		else
 		{
 			headStr = modls[0].model.str;
 			bodyStr = ESConfig.TES_MESH_PATH + "characters\\_male\\upperbody.nif";
 			handLStr = ESConfig.TES_MESH_PATH + "characters\\_male\\lefthand.nif";
-			handLStr = ESConfig.TES_MESH_PATH + "characters\\_male\\righthand.nif";
+			handRStr = ESConfig.TES_MESH_PATH + "characters\\_male\\righthand.nif";
 		}
 
 		CNTO[] cntos = npc_.CNTOs;
@@ -165,6 +165,7 @@ public class J3dNPC_ extends J3dRECOType
 		fileNames.add(headStr);
 		fileNames.add(helmetStr);
 		fileNames.add(bodyStr);
+		System.out.println("l hend added " + handLStr);
 		fileNames.add(handLStr);
 		fileNames.add(handRStr);
 		fileNames.add(weapStr);
@@ -179,7 +180,6 @@ public class J3dNPC_ extends J3dRECOType
 
 	private void addARMO(ARMO armo)
 	{
-
 		MODL m = armo.MODL;
 		if (female && armo.MOD3 != null)
 		{
