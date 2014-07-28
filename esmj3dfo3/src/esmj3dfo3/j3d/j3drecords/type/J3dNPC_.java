@@ -165,7 +165,6 @@ public class J3dNPC_ extends J3dRECOType
 		fileNames.add(headStr);
 		fileNames.add(helmetStr);
 		fileNames.add(bodyStr);
-		System.out.println("l hend added " + handLStr);
 		fileNames.add(handLStr);
 		fileNames.add(handRStr);
 		fileNames.add(weapStr);
