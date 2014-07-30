@@ -164,6 +164,7 @@ public class J3dCREA extends J3dRECOType
 			}
 
 			idleAnimations.add(path + "\\mtidle.kf");
+			idleAnimations.addAll(mediaSources.getMeshSource().getFilesInFolder(path + "\\idleanims"));
 
 			nifCharacter = new NifCharacter(skeletonNifFile, fileNames, mediaSources, idleAnimations);
 

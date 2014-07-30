@@ -50,7 +50,6 @@ public class J3dNPC_ extends J3dRECOType
 		if (female)
 		{
 			headStr = ESConfig.TES_MESH_PATH + "characters\\head\\headfemale.nif";
-			//All beast races are just humans with a different texture
 			bodyStr = ESConfig.TES_MESH_PATH + "characters\\_male\\femaleupperbody.nif";
 			handLStr = ESConfig.TES_MESH_PATH + "characters\\_male\\femalelefthand.nif";
 			handRStr = ESConfig.TES_MESH_PATH + "characters\\_male\\femalerighthand.nif";
@@ -170,7 +169,9 @@ public class J3dNPC_ extends J3dRECOType
 		fileNames.add(weapStr);
 
 		ArrayList<String> idleAnimations = new ArrayList<String>();
-		idleAnimations.add(ESConfig.TES_MESH_PATH + "characters\\_male\\idleanims\\lookingaround.kf");
+		idleAnimations.addAll(mediaSources.getMeshSource().getFilesInFolder(ESConfig.TES_MESH_PATH + "characters\\_male\\idleanims"));
+
+		//idleAnimations.add(ESConfig.TES_MESH_PATH + "characters\\_male\\idleanims\\lookingaround.kf");
 
 		nifCharacter = new NifCharacter(skeletonNifFile, fileNames, mediaSources, idleAnimations);
 		addChild(nifCharacter);
