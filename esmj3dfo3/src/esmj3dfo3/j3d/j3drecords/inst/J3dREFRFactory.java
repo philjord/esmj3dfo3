@@ -1,8 +1,5 @@
 package esmj3dfo3.j3d.j3drecords.inst;
 
-import javax.media.j3d.Node;
-
-import utils.ESConfig;
 import utils.ESUtils;
 import utils.source.MediaSources;
 import esmLoader.common.data.record.IRecordStore;
@@ -263,15 +260,10 @@ public class J3dREFRFactory
 		}
 		else if (baseRecord.getRecordType().equals("TREE"))
 		{
-			if (!makePhys)
-			{
-				TREE tree = new TREE(baseRecord);
-				Node node = TreeMaker.makeLODTreeX(tree.MODL.model.str, tree.billBoardWidth * ESConfig.ES_TO_METERS_SCALE,
-						tree.billBoardHeight * ESConfig.ES_TO_METERS_SCALE, mediaSources.getTextureSource());
-				J3dRECOStatInst j3dinst = new J3dRECOStatInst(refr, false, makePhys);
-				j3dinst.addNodeChild(node);
-				return j3dinst;
-			}
+			TREE tree = new TREE(baseRecord);			
+			String treeNif = tree.MODL.model.str;
+			J3dRECOStatInst j3dinst = TreeMaker.makeTree(refr, makePhys, mediaSources, treeNif, tree.billBoardWidth, tree.billBoardHeight);
+			return j3dinst;
 		}
 		else if (baseRecord.getRecordType().equals("SOUN"))
 		{
