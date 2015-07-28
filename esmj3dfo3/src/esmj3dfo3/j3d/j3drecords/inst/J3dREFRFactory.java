@@ -69,31 +69,11 @@ public class J3dREFRFactory
 		if (modl != null)
 		{
 			J3dRECOStatInst j3dinst = new J3dRECOStatInst(refr, true, makePhys);
-			j3dinst.setJ3dRECOType(new J3dRECOTypeGeneral(reco, modl.model.str, makePhys, mediaSources));
-			return j3dinst;
-		}
-		else
-		{
-			System.out.println("null modl there " + reco);
-			return null;
-		}
-	}
-
-	private static J3dRECOStatInst makeJ3dRECOStatInstLOD(REFR refr, RECO reco, MODL modl, boolean noFade, boolean makePhys,
-			MediaSources mediaSources)
-	{
-		if (modl != null)
-		{
-
-			J3dRECOStatInst j3dinst = new J3dRECOStatInst(refr, !noFade, makePhys);
 			String statNif = modl.model.str;
 
-			//TODO: where is megatongatehouse01? fader marker is not showing up
+			// megatongatehouse01_lod_pa.nif is the lod for the dist "post atomic" (I believe)
 
-			//TODO: this system must be wrong, as megatongatehouse01_lod_pa.nif is the lod for the dist 
-
-			//Has Distance LOD = 0x00008000
-			if (!makePhys && reco.isFlagSet(0x00008000))
+			if (!makePhys && reco.isFlagSet(RECO.VisibleWhenDistant_Flag))
 			{
 				String statLod = statNif.substring(0, statNif.toLowerCase().indexOf(".nif")) + "_lod.nif";
 				if (mediaSources.getMeshSource().nifFileExists(statLod))
@@ -104,7 +84,7 @@ public class J3dREFRFactory
 				}
 				else
 				{
-					System.out.println("stat.isFlagSet(0x00008000) set but meshSource.nifFileExists(statLod) false");
+					System.out.println("reco.isFlagSet(RECO.VisibleWhenDistant_Flag) set but meshSource.nifFileExists(statLod) false");
 					System.out.println("for nif " + statNif);
 				}
 			}
@@ -123,7 +103,53 @@ public class J3dREFRFactory
 		}
 	}
 
-	public static J3dRECOInst makeJ3DRefer(REFR refr, boolean makePhys, boolean noFade, IRecordStore master, MediaSources mediaSources)
+	public static J3dRECOInst makeJ3DReferFar(REFR refr, IRecordStore master, MediaSources mediaSources)
+	{
+		Record baseRecord = master.getRecord(refr.NAME.formId);
+	
+		if (baseRecord.getRecordType().equals("ACTI"))
+		{
+			ACTI acti = new ACTI(baseRecord);
+			String farNif = acti.MODL.model.str.substring(0, acti.MODL.model.str.toLowerCase().indexOf(".nif")) + "_lod.nif";
+			J3dRECOStatInst j3dinst = new J3dRECOStatInst(refr, false, false);
+			j3dinst.addNodeChild(new J3dRECOTypeGeneral(acti, farNif, false, mediaSources));
+			return j3dinst;
+
+		}
+		else if (baseRecord.getRecordType().equals("SCOL"))
+		{
+			//SCOL are just exactly like STATS
+			SCOL scol = new SCOL(baseRecord);
+			String farNif = scol.MODL.model.str.substring(0, scol.MODL.model.str.toLowerCase().indexOf(".nif")) + "_lod.nif";
+			J3dRECOStatInst j3dinst = new J3dRECOStatInst(refr, false, false);
+			j3dinst.addNodeChild(new J3dRECOTypeGeneral(scol, farNif, false, mediaSources));
+			return j3dinst;
+		}
+		else if (baseRecord.getRecordType().equals("STAT"))
+		{
+			STAT stat = new STAT(baseRecord);
+			J3dRECOStatInst j3dinst = new J3dRECOStatInst(refr, false, false);
+			String statLod = stat.MODL.model.str.substring(0, stat.MODL.model.str.toLowerCase().indexOf(".nif")) + "_lod.nif";
+			j3dinst.addNodeChild(new J3dRECOTypeGeneral(stat, statLod, false, mediaSources));
+			return j3dinst;
+		}
+		else if (baseRecord.getRecordType().equals("TREE"))
+		{
+			TREE tree = new TREE(baseRecord);
+			String treeNif = tree.MODL.model.str;
+			J3dRECOStatInst j3dinst = TreeMaker.makeTree(refr, false, mediaSources, treeNif, tree.billBoardWidth, tree.billBoardHeight,
+					true);
+			return j3dinst;
+		}
+		else
+		{
+			System.out.println("Far REFR record type not converted to j3d " + baseRecord.getRecordType());
+		}
+
+		return null;
+	}
+
+	public static J3dRECOInst makeJ3DRefer(REFR refr, boolean makePhys, IRecordStore master, MediaSources mediaSources)
 	{
 		// doesn't exist in fallout.esm
 		if (refr.NAME.formId == 32 || refr.NAME.formId == 23)
@@ -145,7 +171,7 @@ public class J3dREFRFactory
 		if (baseRecord.getRecordType().equals("ACTI"))
 		{
 			ACTI acti = new ACTI(baseRecord);
-			return makeJ3dRECOStatInstLOD(refr, acti, acti.MODL, noFade, makePhys, mediaSources);
+			return makeJ3dRECOStatInst(refr, acti, acti.MODL, makePhys, mediaSources);
 		}
 		else if (baseRecord.getRecordType().equals("ADDN"))
 		{
@@ -215,13 +241,13 @@ public class J3dREFRFactory
 		else if (baseRecord.getRecordType().equals("STAT"))
 		{
 			STAT stat = new STAT(baseRecord);
-			return makeJ3dRECOStatInstLOD(refr, stat, stat.MODL, noFade, makePhys, mediaSources);
+			return makeJ3dRECOStatInst(refr, stat, stat.MODL, makePhys, mediaSources);
 		}
 		else if (baseRecord.getRecordType().equals("SCOL"))
 		{
 			//SCOL are just exactly like STATS
 			SCOL scol = new SCOL(baseRecord);
-			return makeJ3dRECOStatInstLOD(refr, scol, scol.MODL, noFade, makePhys, mediaSources);
+			return makeJ3dRECOStatInst(refr, scol, scol.MODL, makePhys, mediaSources);
 		}
 		else if (baseRecord.getRecordType().equals("TACT"))
 		{
@@ -260,9 +286,10 @@ public class J3dREFRFactory
 		}
 		else if (baseRecord.getRecordType().equals("TREE"))
 		{
-			TREE tree = new TREE(baseRecord);			
+			TREE tree = new TREE(baseRecord);
 			String treeNif = tree.MODL.model.str;
-			J3dRECOStatInst j3dinst = TreeMaker.makeTree(refr, makePhys, mediaSources, treeNif, tree.billBoardWidth, tree.billBoardHeight);
+			J3dRECOStatInst j3dinst = TreeMaker.makeTree(refr, makePhys, mediaSources, treeNif, tree.billBoardWidth, tree.billBoardHeight,
+					false);
 			return j3dinst;
 		}
 		else if (baseRecord.getRecordType().equals("SOUN"))

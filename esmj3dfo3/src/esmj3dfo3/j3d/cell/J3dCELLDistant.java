@@ -10,8 +10,9 @@ import esmj3d.j3d.j3drecords.inst.J3dRECOInst;
 
 public class J3dCELLDistant extends J3dCELL
 {
-	//Notice this distant uses the temp children cell but only adds the in the distant ones
-
+	/*
+	 * Distant for Skyrim and FO3 are just statics that have lods, along with trees
+	 */
 	public J3dCELLDistant(IRecordStore master, Record cellRecord, List<Record> children, boolean makePhys, MediaSources mediaSources)
 	{
 		super(master, cellRecord, children, makePhys, mediaSources);
@@ -24,13 +25,12 @@ public class J3dCELLDistant extends J3dCELL
 		{
 			Record record = i.next();
 
-			// some stats are part of distant (Lod only?)
-			if (isDistant(record))
+			// a lot of  stats are part of distant (if they have the lod flag on)
+			if (isVisibleDistant(record))
 			{
-				J3dRECOInst jri = makeJ3dRECO(record, true);
+				J3dRECOInst jri = makeJ3dRECOFar(record);
 				addJ3dRECOInst(jri);
 			}
-
 		}
 	}
 }
