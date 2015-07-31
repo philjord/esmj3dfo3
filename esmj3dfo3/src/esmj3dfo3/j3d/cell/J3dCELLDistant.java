@@ -3,10 +3,11 @@ package esmj3dfo3.j3d.cell;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.media.j3d.Node;
+
 import utils.source.MediaSources;
 import esmLoader.common.data.record.IRecordStore;
 import esmLoader.common.data.record.Record;
-import esmj3d.j3d.j3drecords.inst.J3dRECOInst;
 
 public class J3dCELLDistant extends J3dCELL
 {
@@ -24,12 +25,15 @@ public class J3dCELLDistant extends J3dCELL
 		for (Iterator<Record> i = children.iterator(); i.hasNext();)
 		{
 			Record record = i.next();
+			
+			//Fallout trees are only spt files, teh actual trees are STATs? so mustt look for them too
+			// they have an odd lod_flat distant image
 
 			// a lot of  stats are part of distant (if they have the lod flag on)
 			if (isVisibleDistant(record))
 			{
-				J3dRECOInst jri = makeJ3dRECOFar(record);
-				addJ3dRECOInst(jri);
+				Node n = makeJ3dRECOFar(record);
+				addChild(n);
 			}
 		}
 	}
