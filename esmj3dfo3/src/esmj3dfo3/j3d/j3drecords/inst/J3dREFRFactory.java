@@ -85,7 +85,7 @@ public class J3dREFRFactory
 					{
 						j3dinst.setJ3dRECOType(//
 								new J3dRECOTypeGeneral(reco, statNif, makePhys, mediaSources),//
-								J3dRECOTypeGeneral.loadNif(statLod, false, mediaSources));
+								J3dRECOTypeGeneral.loadNif(statLod, false, mediaSources).getRootNode());
 					}
 					else
 					{
@@ -99,7 +99,7 @@ public class J3dREFRFactory
 					{
 						j3dinst.setJ3dRECOType(//
 								new J3dRECOTypeGeneral(reco, statNif, makePhys, mediaSources),//
-								J3dRECOTypeGeneral.loadNif(statLod, false, mediaSources));
+								J3dRECOTypeGeneral.loadNif(statLod, false, mediaSources).getRootNode());
 					}
 					else
 					{
@@ -108,7 +108,7 @@ public class J3dREFRFactory
 						{
 							j3dinst.setJ3dRECOType(//
 									new J3dRECOTypeGeneral(reco, statNif, makePhys, mediaSources),//
-									J3dRECOTypeGeneral.loadNif(statLod, false, mediaSources));
+									J3dRECOTypeGeneral.loadNif(statLod, false, mediaSources).getRootNode());
 						}
 						else
 						{
