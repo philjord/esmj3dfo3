@@ -112,7 +112,10 @@ public class J3dREFRFactory
 						}
 						else
 						{
-							System.out.println("  nif " + statNif + " isFlagSet(RECO.HasTreeLOD_Flag) but " + statLod + " no exist");
+							//FalloutNV has lots of missing lods
+							j3dinst.setJ3dRECOType(//
+							new J3dRECOTypeGeneral(reco, statNif, makePhys, mediaSources));
+							//System.out.println("  nif " + statNif + " isFlagSet(RECO.HasTreeLOD_Flag) but " + statLod + " no exist");
 						}
 					}
 				}
@@ -182,7 +185,7 @@ public class J3dREFRFactory
 			else if (reco.isFlagSet(RECO.HasTreeLOD_Flag))
 			{
 				String statLod = nif.substring(0, nif.toLowerCase().indexOf(".nif")) + "_lod_flat.nif";
-				//falloutNV uses just the _lod
+				
 				if (mediaSources.getMeshSource().nifFileExists(statLod))
 				{
 					J3dRECOStatInst j3dinst = new J3dRECOStatInst(refr, false, false);
@@ -191,17 +194,20 @@ public class J3dREFRFactory
 				}
 				else
 				{
+					//falloutNV uses just the _lod
+					J3dRECOStatInst j3dinst = new J3dRECOStatInst(refr, false, false);
 					statLod = nif.substring(0, nif.toLowerCase().indexOf(".nif")) + "_lod.nif";
 					if (mediaSources.getMeshSource().nifFileExists(statLod))
 					{
-						J3dRECOStatInst j3dinst = new J3dRECOStatInst(refr, false, false);
 						j3dinst.addNodeChild(new LODNif(statLod, mediaSources));
-						return j3dinst;
 					}
 					else
 					{
-						System.out.println("  nif " + statLod + " isFlagSet(RECO.HasTreeLOD_Flag) but " + statLod + " no exist");
+						//FalloutNV has lots of missing lods
+						j3dinst.addNodeChild(new J3dRECOTypeGeneral(reco, nif, false, mediaSources));
+						//System.out.println("  nif " + statLod + " isFlagSet(RECO.HasTreeLOD_Flag) but " + statLod + " no exist");
 					}
+					return j3dinst;
 				}
 			}
 
