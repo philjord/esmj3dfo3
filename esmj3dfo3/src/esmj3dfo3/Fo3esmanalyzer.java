@@ -20,12 +20,13 @@ import esmLoader.EsmFileLocations;
 import esmLoader.common.PluginException;
 import esmLoader.common.data.record.Record;
 import esmLoader.loader.ESMManager;
+import esmLoader.loader.IESMManager;
 import esmj3dfo3.data.RecordToRECO;
 import esmj3dfo3.j3d.cell.J3dCellFactory;
 
 public class Fo3esmanalyzer extends EsmFormatAnalyzer
 {
-	private static ESMManager esmManager;
+	private static IESMManager esmManager;
 
 	private static J3dCellFactory j3dCellFactory;
 
