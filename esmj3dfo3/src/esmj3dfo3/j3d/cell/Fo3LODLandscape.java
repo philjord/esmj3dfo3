@@ -96,7 +96,7 @@ public class Fo3LODLandscape extends MorphingLandscape
 				
 				// add child blocks, but notice they are not transformed
 				//TODO: these need to unload when a far replaces them I suspect they need a new seperate system
-				addChild(createBlocks(lodX, lodY, scale, worldFormName, meshSource, textureSource));
+			//	addChild(createBlocks(lodX, lodY, scale, worldFormName, meshSource, textureSource));
 				
 			}
 			else
