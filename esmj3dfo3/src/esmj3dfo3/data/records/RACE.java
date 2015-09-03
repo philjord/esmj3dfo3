@@ -159,7 +159,7 @@ public class RACE extends RECO
 			}
 			else if (sr.getType().equals("ENAM"))
 			{
-				ENAM = new FormID(bs);
+				//ENAM = new FormID(bs);
 			}
 			else if (sr.getType().equals("FGGS"))
 			{
