@@ -25,7 +25,12 @@ public class J3dCellFactory implements J3dICellFactory
 
 	private MediaSources mediaSources;
 
-	public J3dCellFactory(IMaster esmManager2, IRecordStore recordStore, MediaSources mediaSources)
+	public J3dCellFactory()
+	{
+		
+	}
+	
+	public void setSources(IMaster esmManager2, IRecordStore recordStore, MediaSources mediaSources)
 	{
 		this.esmManager = esmManager2;
 		this.recordStore = recordStore;
