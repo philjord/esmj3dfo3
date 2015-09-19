@@ -130,6 +130,9 @@ public class J3dCREA extends J3dRECOType
 					else if (baseRecord.getRecordType().equals("SLGM"))
 					{
 					}
+					else if (baseRecord.getRecordType().equals("CMNY"))
+					{
+					}
 					else if (baseRecord.getRecordType().equals("WEAP"))
 					{
 						WEAP weap = new WEAP(baseRecord);
