@@ -56,7 +56,7 @@ public class J3dCELLPersistent extends J3dCELL implements J3dICELLPersistent
 		{
 			if (waterApp == null)
 			{
-				waterApp = new WaterApp("textures\\water\\waterwaves.dds", mediaSources.getTextureSource());
+				waterApp = new WaterApp("textures\\landscape\\MuckPoolWasteland01.dds", mediaSources.getTextureSource());
 			}
 			else
 			{
