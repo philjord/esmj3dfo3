@@ -11,14 +11,14 @@ import utils.source.MediaSources;
 import esmLoader.common.data.record.IRecordStore;
 import esmLoader.common.data.record.Record;
 import esmj3d.data.shared.subrecords.MODL;
-import esmj3d.j3d.j3drecords.type.J3dRECOType;
+import esmj3d.j3d.j3drecords.type.J3dRECOTypeCha;
 import esmj3dfo3.data.records.ARMO;
 import esmj3dfo3.data.records.CREA;
 import esmj3dfo3.data.records.LVLI;
 import esmj3dfo3.data.records.WEAP;
 import esmj3dfo3.data.subrecords.LVLO;
 
-public class J3dCREA extends J3dRECOType
+public class J3dCREA extends J3dRECOTypeCha
 {
 	private String helmetStr = null;
 
@@ -32,11 +32,9 @@ public class J3dCREA extends J3dRECOType
 
 	private boolean female = false;
 
-	private NifCharacter nifCharacter;
-
 	public J3dCREA(CREA crea, IRecordStore master, MediaSources mediaSources)
 	{
-		super(crea, null);
+		super(crea);
 		//MODL is a bone file and the NIFZ are no path othe files to add
 		if (crea.NIFZ != null && crea.MODL != null)
 		{
@@ -167,8 +165,8 @@ public class J3dCREA extends J3dRECOType
 				}
 			}
 
-			idleAnimations.add(ESConfig.TES_MESH_PATH +path + "\\mtidle.kf");
-			idleAnimations.addAll(mediaSources.getMeshSource().getFilesInFolder(ESConfig.TES_MESH_PATH +path + "\\idleanims"));
+			idleAnimations.add(ESConfig.TES_MESH_PATH + path + "\\mtidle.kf");
+			idleAnimations.addAll(mediaSources.getMeshSource().getFilesInFolder(ESConfig.TES_MESH_PATH + path + "\\idleanims"));
 
 			nifCharacter = new NifCharacter(skeletonNifFile, fileNames, mediaSources, idleAnimations);
 

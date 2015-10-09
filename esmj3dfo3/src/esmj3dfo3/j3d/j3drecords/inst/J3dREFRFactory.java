@@ -10,12 +10,13 @@ import esmj3d.data.shared.records.RECO;
 import esmj3d.data.shared.subrecords.MODL;
 import esmj3d.j3d.LODNif;
 import esmj3d.j3d.TreeMaker;
+import esmj3d.j3d.j3drecords.inst.J3dRECOChaInst;
 import esmj3d.j3d.j3drecords.inst.J3dRECODynInst;
 import esmj3d.j3d.j3drecords.inst.J3dRECOInst;
 import esmj3d.j3d.j3drecords.inst.J3dRECOStatInst;
 import esmj3d.j3d.j3drecords.type.J3dCONT;
 import esmj3d.j3d.j3drecords.type.J3dDOOR;
-import esmj3d.j3d.j3drecords.type.J3dRECOType;
+import esmj3d.j3d.j3drecords.type.J3dRECOTypeCha;
 import esmj3d.j3d.j3drecords.type.J3dRECOTypeGeneral;
 import esmj3dfo3.data.records.ACTI;
 import esmj3dfo3.data.records.ADDN;
@@ -52,6 +53,9 @@ import esmj3dfo3.j3d.j3drecords.type.J3dSOUN;
 
 public class J3dREFRFactory
 {
+
+	public static boolean DEBUG_FIRST_LIST_ITEM_ONLY = false;
+
 	private static J3dRECODynInst makeJ3dRECODynInst(REFR refr, RECO reco, MODL modl, boolean makePhys, MediaSources mediaSources)
 	{
 		if (modl != null)
@@ -185,7 +189,7 @@ public class J3dREFRFactory
 			else if (reco.isFlagSet(RECO.HasTreeLOD_Flag))
 			{
 				String statLod = nif.substring(0, nif.toLowerCase().indexOf(".nif")) + "_lod_flat.nif";
-				
+
 				if (mediaSources.getMeshSource().nifFileExists(statLod))
 				{
 					J3dRECOStatInst j3dinst = new J3dRECOStatInst(refr, false, false);
@@ -278,7 +282,9 @@ public class J3dREFRFactory
 		}
 		else if (baseRecord.getRecordType().equals("CONT"))
 		{
-			J3dRECOStatInst j3dinst = new J3dRECOStatInst(refr, new J3dCONT(new CONT(baseRecord), makePhys, mediaSources), true, makePhys);
+			CONT cont = new CONT(baseRecord);
+			J3dRECOStatInst j3dinst = new J3dRECOStatInst(refr, true, makePhys);
+			j3dinst.setJ3dRECOType(new J3dCONT(cont, makePhys, mediaSources));
 			return j3dinst;
 		}
 		else if (baseRecord.getRecordType().equals("FURN"))
@@ -382,7 +388,7 @@ public class J3dREFRFactory
 			if (!makePhys)
 			{
 				LVLC lvlc = new LVLC(baseRecord);
-				J3dRECODynInst j3dinst = new J3dRECODynInst(refr, false, makePhys);
+				J3dRECOChaInst j3dinst = new J3dRECOChaInst(refr);
 				j3dinst.setJ3dRECOType(makeLVLC(lvlc, master, mediaSources));
 				return j3dinst;
 			}
@@ -404,13 +410,16 @@ public class J3dREFRFactory
 	 * @param soundSource
 	 * @return
 	 */
-	protected static J3dRECOType makeLVLC(LVLC lvlc, IRecordStore master, MediaSources mediaSources)
+	protected static J3dRECOTypeCha makeLVLC(LVLC lvlc, IRecordStore master, MediaSources mediaSources)
 	{
 		// TODO: randomly picked for now
 		LVLO[] LVLOs = lvlc.LVLOs;
 
 		int idx = (int) (Math.random() * LVLOs.length);
 		idx = idx == LVLOs.length ? 0 : idx;
+
+		if (DEBUG_FIRST_LIST_ITEM_ONLY)
+			idx = 0;
 
 		Record baseRecord = master.getRecord(LVLOs[idx].itemFormId);
 
