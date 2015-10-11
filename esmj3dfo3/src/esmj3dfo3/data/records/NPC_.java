@@ -64,6 +64,8 @@ public class NPC_ extends RECO
 	public FGGA FGGA = null;
 
 	public FGTS FGTS = null;
+	
+	public FormID TPLT;
 
 	//data data
 	public byte Armorer;
@@ -125,6 +127,8 @@ public class NPC_ extends RECO
 	public byte Per;
 
 	public byte Luc;
+
+	
 
 	public NPC_(Record recordData)
 	{
@@ -267,7 +271,7 @@ public class NPC_ extends RECO
 			}
 			else if (sr.getType().equals("TPLT"))
 			{
-
+				TPLT = new FormID(bs);
 			}
 			else if (sr.getType().equals("ZNAM"))
 			{
@@ -294,56 +298,55 @@ public class NPC_ extends RECO
 			{
 				System.out.println("unhandled : " + sr.getType() + " in record " + recordData + " in " + this);
 			}
-
-			// transfer to arrays
-			SNAMs = new SNAM[SNAMsl.size()];
-			SNAMsl.toArray(SNAMs);
-
-			SPLOs = new FormID[SPLOsl.size()];
-			SPLOsl.toArray(SPLOs);
-
-			CNTOs = new CNTO[CNTOsl.size()];
-			CNTOsl.toArray(CNTOs);
-
-			PKIDs = new FormID[PKIDsl.size()];
-			PKIDsl.toArray(PKIDs);
-
-			//extract data data
-			if (DATA != null)
-			{
-				/*	Armorer = ByteConvert.extractByte(DATA.data, 0);
-				 Athletics = ByteConvert.extractByte(DATA.data, 1);
-				 Blade = ByteConvert.extractByte(DATA.data, 2);
-				 Block = ByteConvert.extractByte(DATA.data, 3);
-				 Blunt = ByteConvert.extractByte(DATA.data, 4);
-				 HandtoHand = ByteConvert.extractByte(DATA.data, 5);
-				 HeavyArmor = ByteConvert.extractByte(DATA.data, 6);
-				 Alchemy = ByteConvert.extractByte(DATA.data, 7);
-				 Alteration = ByteConvert.extractByte(DATA.data, 8);
-				 Conjuration = ByteConvert.extractByte(DATA.data, 9);
-				 Destruction = ByteConvert.extractByte(DATA.data, 10);
-				 Illusion = ByteConvert.extractByte(DATA.data, 11);
-				 Mysticism = ByteConvert.extractByte(DATA.data, 12);
-				 Restoration = ByteConvert.extractByte(DATA.data, 13);
-				 Acrobatics = ByteConvert.extractByte(DATA.data, 14);
-				 LightArmor = ByteConvert.extractByte(DATA.data, 15);
-				 Marksman = ByteConvert.extractByte(DATA.data, 16);
-				 Mercantile = ByteConvert.extractByte(DATA.data, 17);
-				 Security = ByteConvert.extractByte(DATA.data, 18);
-				 Sneak = ByteConvert.extractByte(DATA.data, 19);
-				 Speechcraft = ByteConvert.extractByte(DATA.data, 20);
-				 health = ByteConvert.extractInt(DATA.data, 21);
-				 Str = ByteConvert.extractByte(DATA.data, 25);
-				 Int = ByteConvert.extractByte(DATA.data, 26);
-				 Wil = ByteConvert.extractByte(DATA.data, 27);
-				 Agi = ByteConvert.extractByte(DATA.data, 28);
-				 Spd = ByteConvert.extractByte(DATA.data, 29);
-				 End = ByteConvert.extractByte(DATA.data, 30);
-				 Per = ByteConvert.extractByte(DATA.data, 31);
-				 Luc = ByteConvert.extractByte(DATA.data, 32);*/
-			}
-
 		}
+		// transfer to arrays
+		SNAMs = new SNAM[SNAMsl.size()];
+		SNAMsl.toArray(SNAMs);
+
+		SPLOs = new FormID[SPLOsl.size()];
+		SPLOsl.toArray(SPLOs);
+
+		CNTOs = new CNTO[CNTOsl.size()];
+		CNTOsl.toArray(CNTOs);
+
+		PKIDs = new FormID[PKIDsl.size()];
+		PKIDsl.toArray(PKIDs);
+
+		//extract data data
+		if (DATA != null)
+		{
+			/*	Armorer = ByteConvert.extractByte(DATA.data, 0);
+			 Athletics = ByteConvert.extractByte(DATA.data, 1);
+			 Blade = ByteConvert.extractByte(DATA.data, 2);
+			 Block = ByteConvert.extractByte(DATA.data, 3);
+			 Blunt = ByteConvert.extractByte(DATA.data, 4);
+			 HandtoHand = ByteConvert.extractByte(DATA.data, 5);
+			 HeavyArmor = ByteConvert.extractByte(DATA.data, 6);
+			 Alchemy = ByteConvert.extractByte(DATA.data, 7);
+			 Alteration = ByteConvert.extractByte(DATA.data, 8);
+			 Conjuration = ByteConvert.extractByte(DATA.data, 9);
+			 Destruction = ByteConvert.extractByte(DATA.data, 10);
+			 Illusion = ByteConvert.extractByte(DATA.data, 11);
+			 Mysticism = ByteConvert.extractByte(DATA.data, 12);
+			 Restoration = ByteConvert.extractByte(DATA.data, 13);
+			 Acrobatics = ByteConvert.extractByte(DATA.data, 14);
+			 LightArmor = ByteConvert.extractByte(DATA.data, 15);
+			 Marksman = ByteConvert.extractByte(DATA.data, 16);
+			 Mercantile = ByteConvert.extractByte(DATA.data, 17);
+			 Security = ByteConvert.extractByte(DATA.data, 18);
+			 Sneak = ByteConvert.extractByte(DATA.data, 19);
+			 Speechcraft = ByteConvert.extractByte(DATA.data, 20);
+			 health = ByteConvert.extractInt(DATA.data, 21);
+			 Str = ByteConvert.extractByte(DATA.data, 25);
+			 Int = ByteConvert.extractByte(DATA.data, 26);
+			 Wil = ByteConvert.extractByte(DATA.data, 27);
+			 Agi = ByteConvert.extractByte(DATA.data, 28);
+			 Spd = ByteConvert.extractByte(DATA.data, 29);
+			 End = ByteConvert.extractByte(DATA.data, 30);
+			 Per = ByteConvert.extractByte(DATA.data, 31);
+			 Luc = ByteConvert.extractByte(DATA.data, 32);*/
+		}
+
 	}
 
 	public class DATA

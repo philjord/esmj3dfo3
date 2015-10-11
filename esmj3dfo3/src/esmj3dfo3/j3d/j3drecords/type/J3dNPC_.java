@@ -12,6 +12,7 @@ import esmj3d.data.shared.subrecords.MODL;
 import esmj3d.j3d.j3drecords.type.J3dRECOTypeCha;
 import esmj3dfo3.data.records.ARMO;
 import esmj3dfo3.data.records.LVLI;
+import esmj3dfo3.data.records.LVLN;
 import esmj3dfo3.data.records.NPC_;
 import esmj3dfo3.data.records.RACE;
 import esmj3dfo3.data.records.WEAP;
@@ -60,7 +61,75 @@ public class J3dNPC_ extends J3dRECOTypeCha
 			handRStr = ESConfig.TES_MESH_PATH + "characters\\_male\\righthand.nif";
 		}
 
-		CNTO[] cntos = npc_.CNTOs;
+		// deal with templates first
+		if (npc_.TPLT != null)
+		{
+			Record trec = master.getRecord(npc_.TPLT.formId);
+			if (trec.getRecordType().equals("NPC_"))
+			{
+				NPC_ npcTemplate = new NPC_(trec);
+				organiseCNTOs(npcTemplate.CNTOs, master);
+			}
+			else if (trec.getRecordType().equals("LVLN"))
+			{
+				LVLN lvln = new LVLN(trec);
+				organiseLVLN(lvln, master);
+			}
+		}
+
+		// now sort out overrrides of any template at this level
+		organiseCNTOs(npc_.CNTOs, master);
+
+		String skeletonNifFile = ESConfig.TES_MESH_PATH + "characters\\_male\\skeleton.nif";
+
+		ArrayList<String> fileNames = new ArrayList<String>();
+		fileNames.add(headStr);
+		fileNames.add(helmetStr);
+		fileNames.add(bodyStr);
+		fileNames.add(handLStr);
+		fileNames.add(handRStr);
+		fileNames.add(weapStr);
+
+		ArrayList<String> idleAnimations = new ArrayList<String>();
+		idleAnimations.addAll(mediaSources.getMeshSource().getFilesInFolder(ESConfig.TES_MESH_PATH + "characters\\_male\\idleanims"));
+
+		//idleAnimations.add(ESConfig.TES_MESH_PATH + "characters\\_male\\idleanims\\lookingaround.kf");
+
+		nifCharacter = new NifCharacter(skeletonNifFile, fileNames, mediaSources, idleAnimations);
+		addChild(nifCharacter);
+
+	}
+
+	private void organiseLVLN(LVLN lvln, IRecordStore master)
+	{
+		// TODO: randomly picked for now
+		LVLO[] LVLOs = lvln.LVLOs;
+
+		int idx = (int) (Math.random() * LVLOs.length);
+		idx = idx == LVLOs.length ? 0 : idx;
+
+		Record baseRecord = master.getRecord(LVLOs[idx].itemFormId);
+
+		if (baseRecord.getRecordType().equals("NPC_"))
+		{
+			NPC_ npcTemplate = new NPC_(baseRecord);
+			organiseCNTOs(npcTemplate.CNTOs, master);
+		}
+		else if (baseRecord.getRecordType().equals("LVLN"))
+		{
+			LVLN lvln2 = new LVLN(baseRecord);
+			organiseLVLN(lvln2, master);
+		}
+		else
+		{
+			System.out.println("LVLN record type not converted to j3d " + baseRecord.getRecordType());
+		}
+
+	}
+
+	private void organiseCNTOs(CNTO[] cntos, IRecordStore master)
+	{
+
 		for (int i = 0; i < cntos.length; i++)
 		{
 			//	int count = cntos[i].count;
@@ -110,47 +179,7 @@ public class J3dNPC_ extends J3dRECOTypeCha
 			else if (rec.getRecordType().equals("LVLI"))
 			{
 				LVLI lvli = new LVLI(rec);
-				LVLO[] LVLOs = lvli.LVLOs;
-
-				int idx = (int) (Math.random() * LVLOs.length);
-				idx = idx == LVLOs.length ? 0 : idx;
-
-				Record baseRecord = master.getRecord(LVLOs[idx].itemFormId);
-				if (baseRecord.getRecordType().equals("ARMO"))
-				{
-					ARMO armo = new ARMO(baseRecord);
-					armo.getClass();
-				}
-				else if (baseRecord.getRecordType().equals("LVLI"))
-				{
-				}
-				else if (baseRecord.getRecordType().equals("MISC"))
-				{
-				}
-				else if (baseRecord.getRecordType().equals("AMMO"))
-				{
-				}
-				else if (baseRecord.getRecordType().equals("INGR"))
-				{
-				}
-				else if (baseRecord.getRecordType().equals("ALCH"))
-				{
-				}
-				else if (baseRecord.getRecordType().equals("SLGM"))
-				{
-				}
-				else if (baseRecord.getRecordType().equals("CMNY"))
-				{
-				}
-				else if (baseRecord.getRecordType().equals("WEAP"))
-				{
-					WEAP weap = new WEAP(baseRecord);
-					addWEAP(weap);
-				}
-				else
-				{
-					System.out.println("LVLI record type not converted to j3d " + baseRecord.getRecordType());
-				}
+				organiseLVLI(lvli, master);
 			}
 			else
 			{
@@ -158,25 +187,53 @@ public class J3dNPC_ extends J3dRECOTypeCha
 			}
 
 		}
+	}
 
-		String skeletonNifFile = ESConfig.TES_MESH_PATH + "characters\\_male\\skeleton.nif";
+	private void organiseLVLI(LVLI lvli, IRecordStore master)
+	{
+		LVLO[] LVLOs = lvli.LVLOs;
 
-		ArrayList<String> fileNames = new ArrayList<String>();
-		fileNames.add(headStr);
-		fileNames.add(helmetStr);
-		fileNames.add(bodyStr);
-		fileNames.add(handLStr);
-		fileNames.add(handRStr);
-		fileNames.add(weapStr);
+		int idx = (int) (Math.random() * LVLOs.length);
+		idx = idx == LVLOs.length ? 0 : idx;
 
-		ArrayList<String> idleAnimations = new ArrayList<String>();
-		idleAnimations.addAll(mediaSources.getMeshSource().getFilesInFolder(ESConfig.TES_MESH_PATH + "characters\\_male\\idleanims"));
-
-		//idleAnimations.add(ESConfig.TES_MESH_PATH + "characters\\_male\\idleanims\\lookingaround.kf");
-
-		nifCharacter = new NifCharacter(skeletonNifFile, fileNames, mediaSources, idleAnimations);
-		addChild(nifCharacter);
-
+		Record baseRecord = master.getRecord(LVLOs[idx].itemFormId);
+		if (baseRecord.getRecordType().equals("WEAP"))
+		{
+			WEAP weap = new WEAP(baseRecord);
+			addWEAP(weap);
+		}
+		else if (baseRecord.getRecordType().equals("ARMO"))
+		{
+			ARMO armo = new ARMO(baseRecord);
+			addARMO(armo);
+		}
+		else if (baseRecord.getRecordType().equals("MISC"))
+		{
+		}
+		else if (baseRecord.getRecordType().equals("AMMO"))
+		{
+		}
+		else if (baseRecord.getRecordType().equals("INGR"))
+		{
+		}
+		else if (baseRecord.getRecordType().equals("ALCH"))
+		{
+		}
+		else if (baseRecord.getRecordType().equals("SLGM"))
+		{
+		}
+		else if (baseRecord.getRecordType().equals("CMNY"))
+		{
+		}
+		else if (baseRecord.getRecordType().equals("LVLI"))
+		{
+			LVLI lvli2 = new LVLI(baseRecord);
+			organiseLVLI(lvli2, master);
+		}
+		else
+		{
+			System.out.println("LVLI record type not converted to j3d " + baseRecord.getRecordType());
+		}
 	}
 
 	private void addARMO(ARMO armo)
