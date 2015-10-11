@@ -129,63 +129,11 @@ public class J3dNPC_ extends J3dRECOTypeCha
 
 	private void organiseCNTOs(CNTO[] cntos, IRecordStore master)
 	{
-
 		for (int i = 0; i < cntos.length; i++)
 		{
 			//	int count = cntos[i].count;
-			Record rec = master.getRecord(cntos[i].itemFormId);
-			if (rec.getRecordType().equals("WEAP"))
-			{
-				WEAP weap = new WEAP(rec);
-				addWEAP(weap);
-			}
-			else if (rec.getRecordType().equals("ARMO"))
-			{
-				ARMO armo = new ARMO(rec);
-				addARMO(armo);
-			}
-			else if (rec.getRecordType().equals("AMMO"))
-			{
-				//AMMO ammo = new AMMO(rec);
-			}
-			else if (rec.getRecordType().equals("MISC"))
-			{
-				//MISC misc = new MISC(rec);
-			}
-			else if (rec.getRecordType().equals("KEYM"))
-			{
-				//KEYM keym = new KEYM(rec);
-			}
-			else if (rec.getRecordType().equals("INGR"))
-			{
-				//INGR keym = new INGR(rec);
-			}
-			else if (rec.getRecordType().equals("LIGH"))
-			{
-				//LIGH ligh = new LIGH(rec);
-			}
-			else if (rec.getRecordType().equals("ALCH"))
-			{
-				//ALCH alch = new ALCH(rec);
-			}
-			else if (rec.getRecordType().equals("BOOK"))
-			{
-				//BOOK book = new BOOK(rec);
-			}
-			else if (rec.getRecordType().equals("NOTE"))
-			{
-				//NOTE book = new NOTE(rec);
-			}
-			else if (rec.getRecordType().equals("LVLI"))
-			{
-				LVLI lvli = new LVLI(rec);
-				organiseLVLI(lvli, master);
-			}
-			else
-			{
-				System.out.println("NPC_ has unknown contained item " + rec.getRecordType());
-			}
-
+			Record baseRecord = master.getRecord(cntos[i].itemFormId);
+			organiseItem(baseRecord, master);
 		}
 	}
 
@@ -197,6 +145,12 @@ public class J3dNPC_ extends J3dRECOTypeCha
 		idx = idx == LVLOs.length ? 0 : idx;
 
 		Record baseRecord = master.getRecord(LVLOs[idx].itemFormId);
+		organiseItem(baseRecord, master);
+
+	}
+
+	private void organiseItem(Record baseRecord, IRecordStore master)
+	{
 		if (baseRecord.getRecordType().equals("WEAP"))
 		{
 			WEAP weap = new WEAP(baseRecord);
