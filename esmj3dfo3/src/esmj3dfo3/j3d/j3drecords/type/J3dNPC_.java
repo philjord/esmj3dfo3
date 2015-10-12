@@ -179,6 +179,9 @@ public class J3dNPC_ extends J3dRECOTypeCha
 		else if (baseRecord.getRecordType().equals("CMNY"))
 		{
 		}
+		else if (baseRecord.getRecordType().equals("KEYM"))
+		{
+		}
 		else if (baseRecord.getRecordType().equals("LVLI"))
 		{
 			LVLI lvli2 = new LVLI(baseRecord);

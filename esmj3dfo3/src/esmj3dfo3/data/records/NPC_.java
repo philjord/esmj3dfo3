@@ -272,11 +272,7 @@ public class NPC_ extends RECO
 			else if (sr.getType().equals("TPLT"))
 			{
 				TPLT = new FormID(bs);
-			}
-			else if (sr.getType().equals("ZNAM"))
-			{
-
-			}
+			}		
 			else if (sr.getType().equals("PNAM"))
 			{
 

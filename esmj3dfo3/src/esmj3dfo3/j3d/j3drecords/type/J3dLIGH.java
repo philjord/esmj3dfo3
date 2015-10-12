@@ -24,7 +24,6 @@ public class J3dLIGH extends J3dRECOType
 		J3dNiAVObject j3dNiAVObject = null;
 		if (ligh.MODL != null)
 		{
-
 			String nifFileName = ligh.MODL.model.str;
 			if (makePhys)
 			{
