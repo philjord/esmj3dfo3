@@ -2,13 +2,17 @@ package esmj3dfo3.j3d.j3drecords.type;
 
 import java.util.ArrayList;
 
+import javax.vecmath.Color3f;
+
 import nif.character.NifCharacter;
+import tools3d.utils.scenegraph.Fadable;
 import utils.ESConfig;
 import utils.source.MediaSources;
 import esmLoader.common.data.record.IRecordStore;
 import esmLoader.common.data.record.Record;
 import esmj3d.data.shared.subrecords.CNTO;
 import esmj3d.data.shared.subrecords.MODL;
+import esmj3d.j3d.BethRenderSettings;
 import esmj3d.j3d.j3drecords.type.J3dRECOTypeCha;
 import esmj3dfo3.data.records.ARMO;
 import esmj3dfo3.data.records.LVLI;
@@ -97,6 +101,10 @@ public class J3dNPC_ extends J3dRECOTypeCha
 
 		nifCharacter = new NifCharacter(skeletonNifFile, fileNames, mediaSources, idleAnimations);
 		addChild(nifCharacter);
+
+		setOutline(new Color3f(1.0f, 1.0f, 0f));
+		if (!BethRenderSettings.isOutlineChars())
+			((Fadable) nifCharacter).setOutline(null);
 
 	}
 
@@ -217,13 +225,6 @@ public class J3dNPC_ extends J3dRECOTypeCha
 		{
 			//TODO:  male female H2H models		 see WEAP	
 		}
-
-	}
-
-	@Override
-	public void renderSettingsUpdated()
-	{
-		// TODO Auto-generated method stub
 
 	}
 

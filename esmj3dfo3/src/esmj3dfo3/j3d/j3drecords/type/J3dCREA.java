@@ -4,13 +4,16 @@ import java.util.ArrayList;
 
 import javax.media.j3d.Transform3D;
 import javax.media.j3d.TransformGroup;
+import javax.vecmath.Color3f;
 
 import nif.character.NifCharacter;
+import tools3d.utils.scenegraph.Fadable;
 import utils.ESConfig;
 import utils.source.MediaSources;
 import esmLoader.common.data.record.IRecordStore;
 import esmLoader.common.data.record.Record;
 import esmj3d.data.shared.subrecords.MODL;
+import esmj3d.j3d.BethRenderSettings;
 import esmj3d.j3d.j3drecords.type.J3dRECOTypeCha;
 import esmj3dfo3.data.records.ARMO;
 import esmj3dfo3.data.records.CREA;
@@ -165,7 +168,7 @@ public class J3dCREA extends J3dRECOTypeCha
 				}
 			}
 
-			idleAnimations.add(ESConfig.TES_MESH_PATH + path + "\\mtidle.kf");
+			//idleAnimations.add(ESConfig.TES_MESH_PATH + path + "\\mtidle.kf");
 			idleAnimations.addAll(mediaSources.getMeshSource().getFilesInFolder(ESConfig.TES_MESH_PATH + path + "\\idleanims"));
 
 			nifCharacter = new NifCharacter(skeletonNifFile, fileNames, mediaSources, idleAnimations);
@@ -190,6 +193,11 @@ public class J3dCREA extends J3dRECOTypeCha
 			//CREA has no NIFs like the will o the wisp (but it has skeleton with particles effects)
 			// let's do these later shall we
 		}
+
+		setOutline(new Color3f(1.0f, 1.0f, 0f));
+		if (!BethRenderSettings.isOutlineChars())
+			((Fadable) nifCharacter).setOutline(null);
+
 	}
 
 	private void addARMO(ARMO armo)
@@ -217,13 +225,6 @@ public class J3dCREA extends J3dRECOTypeCha
 		{
 			//TODO:  male female H2H models		 see WEAP	
 		}
-	}
-
-	@Override
-	public void renderSettingsUpdated()
-	{
-		// TODO Auto-generated method stub
-
 	}
 
 }
