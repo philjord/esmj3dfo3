@@ -10,8 +10,6 @@ import esmj3d.data.shared.subrecords.LString;
 
 public class CONT extends  GenericCONT
 {
-	public LString FULL;
-
 	public DATA DATA;
 
 	public FormID SCRI;
