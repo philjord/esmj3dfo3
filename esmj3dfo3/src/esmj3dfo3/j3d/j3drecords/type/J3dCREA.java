@@ -10,8 +10,6 @@ import nif.character.NifCharacter;
 import tools3d.utils.scenegraph.Fadable;
 import utils.ESConfig;
 import utils.source.MediaSources;
-import esmLoader.common.data.record.IRecordStore;
-import esmLoader.common.data.record.Record;
 import esmj3d.data.shared.subrecords.MODL;
 import esmj3d.j3d.BethRenderSettings;
 import esmj3d.j3d.j3drecords.type.J3dRECOTypeCha;
@@ -20,6 +18,8 @@ import esmj3dfo3.data.records.CREA;
 import esmj3dfo3.data.records.LVLI;
 import esmj3dfo3.data.records.WEAP;
 import esmj3dfo3.data.subrecords.LVLO;
+import esmmanager.common.data.record.IRecordStore;
+import esmmanager.common.data.record.Record;
 
 public class J3dCREA extends J3dRECOTypeCha
 {

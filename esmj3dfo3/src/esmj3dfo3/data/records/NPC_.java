@@ -3,8 +3,6 @@ package esmj3dfo3.data.records;
 import java.util.ArrayList;
 
 import tools.io.ESMByteConvert;
-import esmLoader.common.data.record.Record;
-import esmLoader.common.data.record.Subrecord;
 import esmj3d.data.shared.records.RECO;
 import esmj3d.data.shared.subrecords.CNTO;
 import esmj3d.data.shared.subrecords.FormID;
@@ -18,6 +16,8 @@ import esmj3dfo3.data.subrecords.FGGS;
 import esmj3dfo3.data.subrecords.FGTS;
 import esmj3dfo3.data.subrecords.LNAM;
 import esmj3dfo3.data.subrecords.SNAM;
+import esmmanager.common.data.record.Record;
+import esmmanager.common.data.record.Subrecord;
 
 public class NPC_ extends RECO
 {
