@@ -1,6 +1,8 @@
 package esmj3dfo3.j3d.cell;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
 import java.util.zip.DataFormatException;
 
 import javax.media.j3d.BranchGroup;
@@ -8,33 +10,101 @@ import javax.media.j3d.BranchGroup;
 import utils.ESMUtils;
 import utils.source.MediaSources;
 import esmj3d.j3d.cell.J3dICellFactory;
+import esmj3dfo3.data.records.CELL;
 import esmj3dfo3.data.records.WRLD;
 import esmmanager.common.PluginException;
-import esmmanager.common.data.plugin.IMaster;
 import esmmanager.common.data.plugin.PluginGroup;
 import esmmanager.common.data.plugin.PluginRecord;
-import esmmanager.common.data.record.IRecordStore;
 import esmmanager.common.data.record.Record;
+import esmmanager.loader.CELLPointer;
+import esmmanager.loader.ESMManager;
+import esmmanager.loader.IESMManager;
+import esmmanager.loader.InteriorCELLTopGroup;
 import esmmanager.loader.WRLDChildren;
+import esmmanager.loader.WRLDTopGroup;
 
-public class J3dCellFactory implements J3dICellFactory
+/**
+ * This is also a record store as this is point at which we preload perssistenet and all cells, ready for use (or re-use)
+ * @author phil
+ *
+ */
+public class J3dCellFactory extends J3dICellFactory
 {
-	private IMaster esmManager;
+	private HashMap<Integer, WRLD> wrldByFormId = new HashMap<Integer, WRLD>();
 
-	private IRecordStore recordStore;
-
-	private MediaSources mediaSources;
+	private HashMap<Integer, CELL> cellByFormId = new HashMap<Integer, CELL>();
 
 	public J3dCellFactory()
 	{
-		
+
 	}
-	
-	public void setSources(IMaster esmManager2, IRecordStore recordStore, MediaSources mediaSources)
+
+	public void setSources(IESMManager esmManager2, MediaSources mediaSources)
 	{
 		this.esmManager = esmManager2;
-		this.recordStore = recordStore;
 		this.mediaSources = mediaSources;
+
+		//Carefully laod on a seperate thread, might cause trouble
+		Thread t = new Thread()
+		{
+			public void run()
+			{
+
+				long start = System.currentTimeMillis();
+
+				//let's load all WRLD, CELL amd their persistent children now!
+				//I need to pre load ALL persistent children for all CELLS and keep them
+				List<WRLDTopGroup> WRLDTopGroups = ((ESMManager) esmManager).getWRLDTopGroups();
+				for (WRLDTopGroup WRLDTopGroup : WRLDTopGroups)
+				{
+					for (PluginRecord wrldPR : WRLDTopGroup.WRLDByFormId.values())
+					{
+						WRLD wrld = getWRLD(wrldPR.getFormID());
+						wrldByFormId.put(wrldPR.getFormID(), wrld);
+
+						WRLDChildren children = esmManager.getWRLDChildren(wrldPR.getFormID());
+						PluginGroup cellChildGroups = children.getCellChildren();
+						cachePersistentChildren(cellChildGroups, wrldPR.getFormID());
+					}
+				}
+
+				List<InteriorCELLTopGroup> interiorCELLTopGroups = ((ESMManager) esmManager).getInteriorCELLTopGroups();
+				for (InteriorCELLTopGroup interiorCELLTopGroup : interiorCELLTopGroups)
+				{
+					for (CELLPointer cp : interiorCELLTopGroup.interiorCELLByFormId.values())
+					{
+						try
+						{
+							PluginRecord cellPR = esmManager.getInteriorCELL(cp.formId);
+							CELL cell = new CELL(new Record(cellPR));
+							cellByFormId.put(cellPR.getFormID(), cell);
+
+							PluginGroup cellChildGroups = esmManager.getInteriorCELLChildren(cellPR.getFormID());
+							cachePersistentChildren(cellChildGroups, cellPR.getFormID());
+
+						}
+						catch (DataFormatException e)
+						{
+							e.printStackTrace();
+						}
+						catch (IOException e)
+						{
+							e.printStackTrace();
+						}
+						catch (PluginException e)
+						{
+							e.printStackTrace();
+						}
+					}
+				}
+
+				System.out.println("Persistent Records loaded in " + (System.currentTimeMillis() - start) //
+						+ " WRLD count = " + wrldByFormId.size()//
+						+ " CELL count = " + cellByFormId.size()//
+						+ " record count = " + persistentChildrenByFormId.size());
+			}
+		};
+		t.start();
 
 	}
 
@@ -67,7 +137,7 @@ public class J3dCellFactory implements J3dICellFactory
 		try
 		{
 			PluginRecord record = esmManager.getWRLD(formId);
-			WRLD wrld = new WRLD(new Record(record, -1));
+			WRLD wrld = new WRLD(new Record(record));
 			return wrld;
 		}
 		catch (DataFormatException e)
@@ -106,7 +176,7 @@ public class J3dCellFactory implements J3dICellFactory
 				PluginGroup cellChildren = children.getCellChildren();
 				if (cellChildren != null)
 				{
-					return new J3dCELLPersistent(wrld, recordStore, new Record(cell, -1), ESMUtils.getChildren(cellChildren,
+					return new J3dCELLPersistent(wrld, this, new Record(cell), ESMUtils.getChildren(cellChildren,
 							PluginGroup.CELL_PERSISTENT), makePhys, mediaSources);
 				}
 			}
@@ -142,8 +212,8 @@ public class J3dCellFactory implements J3dICellFactory
 
 				if (cellChildren != null)
 				{
-					return new J3dCELLTemporary(recordStore, new Record(record, -1), ESMUtils.getChildren(cellChildren,
-							PluginGroup.CELL_TEMPORARY), makePhys, mediaSources);
+					return new J3dCELLTemporary(this, new Record(record), ESMUtils.getChildren(cellChildren, PluginGroup.CELL_TEMPORARY),
+							makePhys, mediaSources);
 				}
 			}
 
@@ -195,8 +265,8 @@ public class J3dCellFactory implements J3dICellFactory
 				if (cellChildren != null)
 				{
 					//note stats only not distant
-					return new J3dCELLDistant(recordStore, new Record(record, -1), ESMUtils.getChildren(cellChildren,
-							PluginGroup.CELL_TEMPORARY), makePhys, mediaSources);
+					return new J3dCELLDistant(this, new Record(record), ESMUtils.getChildren(cellChildren, PluginGroup.CELL_TEMPORARY),
+							makePhys, mediaSources);
 				}
 			}
 		}
@@ -226,8 +296,8 @@ public class J3dCellFactory implements J3dICellFactory
 			{
 				PluginGroup cellChildren = esmManager.getInteriorCELLChildren(cellId);
 
-				return new J3dCELLPersistent(null, recordStore, new Record(record, -1), ESMUtils.getChildren(cellChildren,
-						PluginGroup.CELL_PERSISTENT), makePhys, mediaSources);
+				return new J3dCELLPersistent(null, this, new Record(record),
+						ESMUtils.getChildren(cellChildren, PluginGroup.CELL_PERSISTENT), makePhys, mediaSources);
 			}
 		}
 		catch (PluginException e1)
@@ -257,8 +327,8 @@ public class J3dCellFactory implements J3dICellFactory
 			{
 				PluginGroup cellChildren = esmManager.getInteriorCELLChildren(cellId);
 
-				return new J3dCELLTemporary(recordStore, new Record(record, -1), ESMUtils.getChildren(cellChildren,
-						PluginGroup.CELL_TEMPORARY), makePhys, mediaSources);
+				return new J3dCELLTemporary(this, new Record(record), ESMUtils.getChildren(cellChildren, PluginGroup.CELL_TEMPORARY),
+						makePhys, mediaSources);
 			}
 		}
 		catch (PluginException e1)
@@ -288,8 +358,8 @@ public class J3dCellFactory implements J3dICellFactory
 			{
 				PluginGroup cellChildren = esmManager.getInteriorCELLChildren(cellId);
 
-				return new J3dCELLDistant(recordStore, new Record(record, -1), ESMUtils.getChildren(cellChildren,
-						PluginGroup.CELL_TEMPORARY), makePhys, mediaSources);
+				return new J3dCELLDistant(this, new Record(record), ESMUtils.getChildren(cellChildren, PluginGroup.CELL_TEMPORARY),
+						makePhys, mediaSources);
 			}
 		}
 		catch (PluginException e1)
@@ -312,5 +382,4 @@ public class J3dCellFactory implements J3dICellFactory
 	{
 		return esmManager.getName();
 	}
-
 }
