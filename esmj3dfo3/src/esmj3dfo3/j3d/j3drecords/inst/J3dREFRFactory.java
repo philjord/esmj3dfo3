@@ -289,7 +289,7 @@ public class J3dREFRFactory
 		else if (baseRecord.getRecordType().equals("ARMO"))
 		{
 			ARMO armo = new ARMO(baseRecord);
-			return makeJ3dRECODynInst(refr, armo, armo.MODL, makePhys, mediaSources);
+			return makeJ3dRECODynInst(refr, armo, armo.MOD2, makePhys, mediaSources);
 		}
 		else if (baseRecord.getRecordType().equals("BOOK"))
 		{
