@@ -186,6 +186,9 @@ public class J3dCREA extends J3dRECOTypeCha
 				addChild(scaler);
 				scaler.addChild(nifCharacter);
 			}
+			setOutline(new Color3f(1.0f, 1.0f, 0f));
+			if (!BethRenderSettings.isOutlineChars())
+				((Fadable) nifCharacter).setOutline(null);
 
 		}
 		else
@@ -193,10 +196,6 @@ public class J3dCREA extends J3dRECOTypeCha
 			//CREA has no NIFs like the will o the wisp (but it has skeleton with particles effects)
 			// let's do these later shall we
 		}
-
-		setOutline(new Color3f(1.0f, 1.0f, 0f));
-		if (!BethRenderSettings.isOutlineChars())
-			((Fadable) nifCharacter).setOutline(null);
 
 	}
 

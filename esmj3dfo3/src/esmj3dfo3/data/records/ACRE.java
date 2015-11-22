@@ -2,13 +2,14 @@ package esmj3dfo3.data.records;
 
 import java.util.ArrayList;
 
-import tools.io.ESMByteConvert;
 import esmj3d.data.shared.records.InstRECO;
 import esmj3d.data.shared.subrecords.FormID;
+import esmj3d.data.shared.subrecords.XESP;
 import esmj3d.data.shared.subrecords.ZString;
 import esmj3dfo3.data.subrecords.XRGD;
 import esmmanager.common.data.record.Record;
 import esmmanager.common.data.record.Subrecord;
+import tools.io.ESMByteConvert;
 
 //TODO: does not appear in oblivion esm and I cna't load esp files yet
 public class ACRE extends InstRECO
@@ -47,7 +48,7 @@ public class ACRE extends InstRECO
 			}
 			else if (sr.getType().equals("XESP"))
 			{
-				//XESP = new FormID(bs);
+				xesp = new XESP(bs);
 			}
 			else if (sr.getType().equals("XOWN"))
 			{
