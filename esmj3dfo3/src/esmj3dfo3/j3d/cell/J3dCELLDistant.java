@@ -14,9 +14,9 @@ public class J3dCELLDistant extends J3dCELL
 	/*
 	 * Distant for Skyrim and FO3 are just statics that have lods, along with trees
 	 */
-	public J3dCELLDistant(IRecordStore master, Record cellRecord, List<Record> children, boolean makePhys, MediaSources mediaSources)
+	public J3dCELLDistant(IRecordStore master, Record cellRecord, int worldId, List<Record> children, boolean makePhys, MediaSources mediaSources)
 	{
-		super(master, cellRecord, children, makePhys, mediaSources);
+		super(master, cellRecord, worldId, children, makePhys, mediaSources);
 		indexRecords();
 	}
 
@@ -25,7 +25,7 @@ public class J3dCELLDistant extends J3dCELL
 		for (Iterator<Record> i = children.iterator(); i.hasNext();)
 		{
 			Record record = i.next();
-			
+
 			//Fallout trees are only spt files, teh actual trees are STATs? so mustt look for them too
 			// they have an odd lod_flat distant image
 

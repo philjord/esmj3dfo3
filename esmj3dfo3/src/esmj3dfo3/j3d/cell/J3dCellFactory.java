@@ -45,8 +45,7 @@ public class J3dCellFactory extends J3dICellFactory
 		this.mediaSources = mediaSources;
 
 		//Carefully laod on a seperate thread, might cause trouble
-		Thread t = new Thread()
-		{
+		Thread t = new Thread() {
 			public void run()
 			{
 
@@ -162,6 +161,57 @@ public class J3dCellFactory extends J3dICellFactory
 	}
 
 	@Override
+	public Record getParentWRLDLAND(int wrldFormId, int x, int y)
+	{
+
+		WRLD wrld = getWRLD(wrldFormId);
+		// use parent first
+		if (wrld.WNAM != null && wrld.WNAM.formId != -1)
+		{
+			int parentFormId = -1;
+			parentFormId = wrld.WNAM.formId;
+			int cellId = esmManager.getWRLDExtBlockCELLId(parentFormId, x, y);
+			if (cellId != -1)
+			{
+				try
+				{
+					PluginGroup cellChildren = esmManager.getWRLDExtBlockCELLChildren(cellId);
+
+					if (cellChildren != null)
+					{
+						//note distants are also part of close up
+						for (Record record : ESMUtils.getChildren(cellChildren, PluginGroup.CELL_TEMPORARY))
+						{
+							if (record.getRecordType().equals("LAND"))
+								return record;
+						}
+
+						for (Record record : ESMUtils.getChildren(cellChildren, PluginGroup.CELL_DISTANT))
+						{
+							if (record.getRecordType().equals("LAND"))
+								return record;
+						}
+					}
+
+				}
+				catch (PluginException e1)
+				{
+					e1.printStackTrace();
+				}
+				catch (DataFormatException e1)
+				{
+					e1.printStackTrace();
+				}
+				catch (IOException e1)
+				{
+					e1.printStackTrace();
+				}
+			}
+		}
+		return null;
+	}
+
+	@Override
 	public J3dCELLPersistent makeBGWRLDPersistent(int formId, boolean makePhys)
 	{
 		WRLD wrld = getWRLD(formId);
@@ -176,8 +226,7 @@ public class J3dCellFactory extends J3dICellFactory
 				PluginGroup cellChildren = children.getCellChildren();
 				if (cellChildren != null)
 				{
-					return new J3dCELLPersistent(wrld, this, new Record(cell), ESMUtils.getChildren(cellChildren,
-							PluginGroup.CELL_PERSISTENT), makePhys, mediaSources);
+					return new J3dCELLPersistent(wrld, this, new Record(cell), formId, ESMUtils.getChildren(cellChildren, PluginGroup.CELL_PERSISTENT), makePhys, mediaSources);
 				}
 			}
 		}
@@ -192,11 +241,11 @@ public class J3dCellFactory extends J3dICellFactory
 	public J3dCELLTemporary makeBGWRLDTemporary(int wrldFormId, int x, int y, boolean makePhys)
 	{
 		int cellId = esmManager.getWRLDExtBlockCELLId(wrldFormId, x, y);
-		return makeBGWRLDTemporary(cellId, makePhys);
+		return makeBGWRLDTemporary(cellId, wrldFormId, makePhys);
 	}
 
 	@Override
-	public J3dCELLTemporary makeBGWRLDTemporary(int cellId, boolean makePhys)
+	public J3dCELLTemporary makeBGWRLDTemporary(int cellId, int wrldFormId, boolean makePhys)
 	{
 		if (cellId == -1)
 			return null;
@@ -212,8 +261,7 @@ public class J3dCellFactory extends J3dICellFactory
 
 				if (cellChildren != null)
 				{
-					return new J3dCELLTemporary(this, new Record(record), ESMUtils.getChildren(cellChildren, PluginGroup.CELL_TEMPORARY),
-							makePhys, mediaSources);
+					return new J3dCELLTemporary(this, new Record(record), wrldFormId, ESMUtils.getChildren(cellChildren, PluginGroup.CELL_TEMPORARY), makePhys, mediaSources);
 				}
 			}
 
@@ -242,7 +290,7 @@ public class J3dCellFactory extends J3dICellFactory
 	public J3dCELLDistant makeBGWRLDDistant(int wrldFormId, int x, int y, boolean makePhys)
 	{
 		int cellId = esmManager.getWRLDExtBlockCELLId(wrldFormId, x, y);
-		return makeBGWRLDDistant(cellId, makePhys);
+		return makeBGWRLDDistant(cellId, wrldFormId, makePhys);
 	}
 
 	/**
@@ -250,7 +298,7 @@ public class J3dCellFactory extends J3dICellFactory
 	 * @see esmj3d.j3d.cell.J3dICellFactory#makeBGWRLDDistant(int, boolean)
 	 */
 	@Override
-	public J3dCELLDistant makeBGWRLDDistant(int cellId, boolean makePhys)
+	public J3dCELLDistant makeBGWRLDDistant(int cellId, int wrldFormId, boolean makePhys)
 	{
 		if (cellId == -1)
 			return null;
@@ -265,8 +313,7 @@ public class J3dCellFactory extends J3dICellFactory
 				if (cellChildren != null)
 				{
 					//note stats only not distant
-					return new J3dCELLDistant(this, new Record(record), ESMUtils.getChildren(cellChildren, PluginGroup.CELL_TEMPORARY),
-							makePhys, mediaSources);
+					return new J3dCELLDistant(this, new Record(record), wrldFormId, ESMUtils.getChildren(cellChildren, PluginGroup.CELL_TEMPORARY), makePhys, mediaSources);
 				}
 			}
 		}
@@ -296,8 +343,7 @@ public class J3dCellFactory extends J3dICellFactory
 			{
 				PluginGroup cellChildren = esmManager.getInteriorCELLChildren(cellId);
 
-				return new J3dCELLPersistent(null, this, new Record(record),
-						ESMUtils.getChildren(cellChildren, PluginGroup.CELL_PERSISTENT), makePhys, mediaSources);
+				return new J3dCELLPersistent(null, this, new Record(record), -1, ESMUtils.getChildren(cellChildren, PluginGroup.CELL_PERSISTENT), makePhys, mediaSources);
 			}
 		}
 		catch (PluginException e1)
@@ -327,8 +373,7 @@ public class J3dCellFactory extends J3dICellFactory
 			{
 				PluginGroup cellChildren = esmManager.getInteriorCELLChildren(cellId);
 
-				return new J3dCELLTemporary(this, new Record(record), ESMUtils.getChildren(cellChildren, PluginGroup.CELL_TEMPORARY),
-						makePhys, mediaSources);
+				return new J3dCELLTemporary(this, new Record(record), -1, ESMUtils.getChildren(cellChildren, PluginGroup.CELL_TEMPORARY), makePhys, mediaSources);
 			}
 		}
 		catch (PluginException e1)
@@ -358,8 +403,7 @@ public class J3dCellFactory extends J3dICellFactory
 			{
 				PluginGroup cellChildren = esmManager.getInteriorCELLChildren(cellId);
 
-				return new J3dCELLDistant(this, new Record(record), ESMUtils.getChildren(cellChildren, PluginGroup.CELL_TEMPORARY),
-						makePhys, mediaSources);
+				return new J3dCELLDistant(this, new Record(record), -1, ESMUtils.getChildren(cellChildren, PluginGroup.CELL_TEMPORARY), makePhys, mediaSources);
 			}
 		}
 		catch (PluginException e1)
