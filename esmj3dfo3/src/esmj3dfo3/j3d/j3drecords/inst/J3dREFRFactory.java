@@ -268,7 +268,6 @@ public class J3dREFRFactory
 		Record baseRecord = master.getRecord(refr.NAME.formId);
 
 		if (baseRecord.getRecordType().equals("ACTI"))
-
 		{
 			ACTI acti = new ACTI(baseRecord);
 			if (acti.MODL != null)
@@ -282,37 +281,31 @@ public class J3dREFRFactory
 			}
 		}
 		else if (baseRecord.getRecordType().equals("ADDN"))
-
 		{
 			ADDN addn = new ADDN(baseRecord);
 			return makeJ3dRECODynInst(refr, addn, addn.MODL, makePhys, mediaSources);
 		}
 		else if (baseRecord.getRecordType().equals("ALCH"))
-
 		{
 			ALCH alch = new ALCH(baseRecord);
 			return makeJ3dRECODynInst(refr, alch, alch.MODL, makePhys, mediaSources);
 		}
 		else if (baseRecord.getRecordType().equals("AMMO"))
-
 		{
 			AMMO ammo = new AMMO(baseRecord);
 			return makeJ3dRECODynInst(refr, ammo, ammo.MODL, makePhys, mediaSources);
 		}
 		else if (baseRecord.getRecordType().equals("ARMO"))
-
 		{
 			ARMO armo = new ARMO(baseRecord);
 			return makeJ3dRECODynInst(refr, armo, armo.MOD2, makePhys, mediaSources);
 		}
 		else if (baseRecord.getRecordType().equals("BOOK"))
-
 		{
 			BOOK book = new BOOK(baseRecord);
 			return makeJ3dRECODynInst(refr, book, book.MODL, makePhys, mediaSources);
 		}
 		else if (baseRecord.getRecordType().equals("CONT"))
-
 		{
 			CONT cont = new CONT(baseRecord);
 			J3dRECOStatInst j3dinst = new J3dRECOStatInst(refr, true, makePhys);
@@ -320,104 +313,88 @@ public class J3dREFRFactory
 			return j3dinst;
 		}
 		else if (baseRecord.getRecordType().equals("FURN"))
-
 		{
 			FURN furn = new FURN(baseRecord);
 			return makeJ3dRECOActionInst(refr, furn, furn.MODL, makePhys, mediaSources);
 		}
 		else if (baseRecord.getRecordType().equals("GRAS"))
-
 		{
 			GRAS gras = new GRAS(baseRecord);
 			return makeJ3dRECOStatInst(refr, gras, gras.MODL, makePhys, mediaSources);
 		}
 		else if (baseRecord.getRecordType().equals("KEYM"))
-
 		{
 			KEYM keym = new KEYM(baseRecord);
 			return makeJ3dRECODynInst(refr, keym, keym.MODL, makePhys, mediaSources);
 		}
 		else if (baseRecord.getRecordType().equals("MISC"))
-
 		{
 			MISC misc = new MISC(baseRecord);
 			return makeJ3dRECODynInst(refr, misc, misc.MODL, makePhys, mediaSources);
 		}
 		else if (baseRecord.getRecordType().equals("MSTT"))
-
 		{
 			MSTT mstt = new MSTT(baseRecord);
 			return makeJ3dRECODynInst(refr, mstt, mstt.MODL, makePhys, mediaSources);
 		}
 		else if (baseRecord.getRecordType().equals("NOTE"))
-
 		{
 			NOTE note = new NOTE(baseRecord);
 			return makeJ3dRECODynInst(refr, note, note.MODL, makePhys, mediaSources);
 		}
 		else if (baseRecord.getRecordType().equals("PWAT"))
-
 		{
 			PWAT pwat = new PWAT(baseRecord);
 			return makeJ3dRECOStatInst(refr, pwat, pwat.MODL, makePhys, mediaSources);
 		}
 		else if (baseRecord.getRecordType().equals("STAT"))
-
 		{
 			STAT stat = new STAT(baseRecord);
 			return makeJ3dRECOStatInst(refr, stat, stat.MODL, makePhys, mediaSources);
 		}
 		else if (baseRecord.getRecordType().equals("SCOL"))
-
 		{
 			//SCOL are just exactly like STATS
 			SCOL scol = new SCOL(baseRecord);
 			return makeJ3dRECOStatInst(refr, scol, scol.MODL, makePhys, mediaSources);
 		}
 		else if (baseRecord.getRecordType().equals("TACT"))
-
 		{
 			TACT tact = new TACT(baseRecord);
 			return makeJ3dRECOActionInst(refr, tact, tact.MODL, makePhys, mediaSources);
 		}
 		else if (baseRecord.getRecordType().equals("TERM"))
-
 		{
 			TERM term = new TERM(baseRecord);
 			return makeJ3dRECOActionInst(refr, term, term.MODL, makePhys, mediaSources);
 		}
 		else if (baseRecord.getRecordType().equals("WEAP"))
-
 		{
 			WEAP weap = new WEAP(baseRecord);
 			return makeJ3dRECODynInst(refr, weap, weap.MODL, makePhys, mediaSources);
 		}
 		else if (baseRecord.getRecordType().equals("ASPC"))
-
 		{
 			//ASPC aspc = new ASPC(baseRecord);
 		}
 		else if (baseRecord.getRecordType().equals("IDLM"))
-
 		{
 			//IDLM idlm = new IDLM(baseRecord);
 		}
 		else if (baseRecord.getRecordType().equals("DOOR"))
-
 		{
 			return new J3dRECOStatInst(refr, new J3dDOOR(new DOOR(baseRecord), makePhys, mediaSources), true, makePhys);
 		}
 		else if (baseRecord.getRecordType().equals("LIGH"))
-
 		{
 			return new J3dRECOStatInst(refr, new J3dLIGH(new LIGH(baseRecord), makePhys, mediaSources), true, makePhys);
 		}
 		else if (baseRecord.getRecordType().equals("TREE"))
-
 		{
 			TREE tree = new TREE(baseRecord);
 			String treeNif = tree.MODL.model.str;
-			J3dRECOStatInst j3dinst = TreeMaker.makeTree(refr, makePhys, mediaSources, treeNif, tree.billBoardWidth, tree.billBoardHeight, false);
+			J3dRECOStatInst j3dinst = TreeMaker.makeTree(refr, makePhys, mediaSources, treeNif, tree.billBoardWidth, tree.billBoardHeight,
+					false);
 			return j3dinst;
 		}
 		else if (baseRecord.getRecordType().equals("SOUN"))
