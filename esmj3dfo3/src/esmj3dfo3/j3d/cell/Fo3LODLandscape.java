@@ -42,6 +42,7 @@ public class Fo3LODLandscape extends MorphingLandscape
 				BSMultiBoundNode root = (BSMultiBoundNode) blocks.root();
 
 				TransformGroup tg = new TransformGroup();
+				tg.clearCapabilities(); 
 				Transform3D t = new Transform3D(ConvertFromNif.toJ3d(root.rotation), ConvertFromNif.toJ3d(root.translation), root.scale);
 				tg.setTransform(t);
 
@@ -72,6 +73,7 @@ public class Fo3LODLandscape extends MorphingLandscape
 						}
 
 						Shape3D shape = new Shape3D();
+						shape.clearCapabilities();
 						shape.setGeometry(baseItsa);
 
 						BSShaderPPLightingProperty lp = getLightingProperty(niTriShape, blocks);

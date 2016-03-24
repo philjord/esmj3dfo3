@@ -137,20 +137,20 @@ public class J3dCELL extends J3dCELLGeneral implements UpdateListener
 				{
 					Record parentLANDrec = ((J3dCellFactory) master).getParentWRLDLAND(worldId, (int) instCell.getTrans().x, (int) instCell.getTrans().y);
 					if (parentLANDrec != null)
-						j3dLAND = new J3dLAND(new LAND(parentLANDrec));
+						j3dLAND = new J3dLAND(new LAND(parentLANDrec), cellLocation);
 					else
-						j3dLAND = new J3dLAND(new LAND(record));
+						j3dLAND = new J3dLAND(new LAND(record), cellLocation);
 				}
 				else
 				{
 					Record parentLANDrec = ((J3dCellFactory) master).getParentWRLDLAND(worldId, (int) instCell.getTrans().x, (int) instCell.getTrans().y);
 					if (parentLANDrec != null)
-						j3dLAND = new J3dLAND(new LAND(parentLANDrec), master, mediaSources.getTextureSource());
+						j3dLAND = new J3dLAND(new LAND(parentLANDrec), master, mediaSources.getTextureSource(), cellLocation);
 					else
-						j3dLAND = new J3dLAND(new LAND(record), master, mediaSources.getTextureSource());
+						j3dLAND = new J3dLAND(new LAND(record), master, mediaSources.getTextureSource(), cellLocation);
 				}
 
-				j3dLAND.setLocation(cellLocation);
+				
 				ret = j3dLAND;
 			}
 			else if (record.getRecordType().equals("PGRD"))
