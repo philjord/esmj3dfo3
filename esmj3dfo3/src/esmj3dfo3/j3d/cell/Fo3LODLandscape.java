@@ -7,6 +7,7 @@ import javax.media.j3d.Shape3D;
 import javax.media.j3d.Transform3D;
 import javax.media.j3d.TransformGroup;
 
+import esmj3d.j3d.cell.MorphingLandscape;
 import nif.NiObjectList;
 import nif.NifFile;
 import nif.NifJ3dVisRoot;
@@ -23,7 +24,6 @@ import nif.niobject.bs.BSShaderTextureSet;
 import utils.convert.ConvertFromNif;
 import utils.source.MeshSource;
 import utils.source.TextureSource;
-import esmj3d.j3d.cell.MorphingLandscape;
 
 public class Fo3LODLandscape extends MorphingLandscape
 {

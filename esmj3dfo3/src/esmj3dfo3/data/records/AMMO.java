@@ -1,6 +1,6 @@
 package esmj3dfo3.data.records;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import esmj3d.data.shared.records.RECO;
 import esmj3d.data.shared.subrecords.ANAM;
@@ -29,72 +29,72 @@ public class AMMO extends RECO
 
 		super(recordData);
 
-		ArrayList<Subrecord> subrecords = recordData.getSubrecords();
+		List<Subrecord> subrecords = recordData.getSubrecords();
 		for (int i = 0; i < subrecords.size(); i++)
 		{
 			Subrecord sr = subrecords.get(i);
-			byte[] bs = sr.getData();
+			byte[] bs = sr.getSubrecordData();
 
-			if (sr.getType().equals("EDID"))
+			if (sr.getSubrecordType().equals("EDID"))
 			{
 				EDID = new ZString(bs);
 			}
-			else if (sr.getType().equals("FULL"))
+			else if (sr.getSubrecordType().equals("FULL"))
 			{
 				FULL = new LString(bs);
 			}
-			else if (sr.getType().equals("MODL"))
+			else if (sr.getSubrecordType().equals("MODL"))
 			{
 				MODL = new MODL(bs);
 			}
 
-			else if (sr.getType().equals("MODT"))
+			else if (sr.getSubrecordType().equals("MODT"))
 			{
 				MODL.addMODTSub(bs);
 			}
-			else if (sr.getType().equals("ICON"))
+			else if (sr.getSubrecordType().equals("ICON"))
 			{
 				ICON = new ZString(bs);
 			}
-			else if (sr.getType().equals("DATA"))
+			else if (sr.getSubrecordType().equals("DATA"))
 			{
 				DATA = new DATA(bs);
 			}
-			else if (sr.getType().equals("OBND"))
+			else if (sr.getSubrecordType().equals("OBND"))
 			{
 			}
-			else if (sr.getType().equals("MICO"))
+			else if (sr.getSubrecordType().equals("MICO"))
 			{
 			}
-			else if (sr.getType().equals("YNAM"))
+			else if (sr.getSubrecordType().equals("YNAM"))
 			{
 			}
-			else if (sr.getType().equals("ZNAM"))
+			else if (sr.getSubrecordType().equals("ZNAM"))
 			{
 			}
-			else if (sr.getType().equals("ONAM"))
+			else if (sr.getSubrecordType().equals("ONAM"))
 			{
 			}
 			//FALLOUTNV only ////////////////////////////
-			else if (sr.getType().equals("DAT2"))
+			else if (sr.getSubrecordType().equals("DAT2"))
 			{
 
 			}
-			else if (sr.getType().equals("QNAM"))
+			else if (sr.getSubrecordType().equals("QNAM"))
 			{
 
 			}
-			else if (sr.getType().equals("RCIL"))
+			else if (sr.getSubrecordType().equals("RCIL"))
 			{
 
 			} 
-			else if (sr.getType().equals("SCRI"))
+			else if (sr.getSubrecordType().equals("SCRI"))
 			{
 
 			}
 			else
 			{
-				System.out.println("unhandled : " + sr.getType() + " in record " + recordData + " in " + this);
+				System.out.println("unhandled : " + sr.getSubrecordType() + " in record " + recordData + " in " + this);
 			}
 		}
 	}

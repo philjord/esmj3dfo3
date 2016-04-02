@@ -1,6 +1,7 @@
 package esmj3dfo3.data.records;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import esmj3d.data.shared.records.RECO;
 import esmj3d.data.shared.subrecords.ZString;
@@ -26,35 +27,35 @@ public class LVLC extends RECO
 
 		ArrayList<LVLO> LVLOsl = new ArrayList<LVLO>();
 
-		ArrayList<Subrecord> subrecords = recordData.getSubrecords();
+		List<Subrecord> subrecords = recordData.getSubrecords();
 		for (int i = 0; i < subrecords.size(); i++)
 		{
 			Subrecord sr = subrecords.get(i);
-			byte[] bs = sr.getData();
+			byte[] bs = sr.getSubrecordData();
 
-			if (sr.getType().equals("EDID"))
+			if (sr.getSubrecordType().equals("EDID"))
 			{
 				EDID = new ZString(bs);
 			}
-			else if (sr.getType().equals("LVLD"))
+			else if (sr.getSubrecordType().equals("LVLD"))
 			{
 				LVLD = new LVLD(bs);
 			}
-			else if (sr.getType().equals("LVLF"))
+			else if (sr.getSubrecordType().equals("LVLF"))
 			{
 				LVLF = new LVLF(bs);
 			}
-			else if (sr.getType().equals("LVLO"))
+			else if (sr.getSubrecordType().equals("LVLO"))
 			{
 				LVLOsl.add(new LVLO(bs));
 			}
-			else if (sr.getType().equals("OBND"))
+			else if (sr.getSubrecordType().equals("OBND"))
 			{
 
 			}
 			else
 			{
-				System.out.println("unhandled : " + sr.getType() + " in record " + recordData + " in " + this);
+				System.out.println("unhandled : " + sr.getSubrecordType() + " in record " + recordData + " in " + this);
 			}
 
 			// transfer to arrays

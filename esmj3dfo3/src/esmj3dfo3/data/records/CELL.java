@@ -1,12 +1,12 @@
 package esmj3dfo3.data.records;
 
-import java.util.ArrayList;
+import java.util.List;
 
-import tools.io.ESMByteConvert;
 import esmj3d.data.shared.records.CommonCELL;
 import esmj3d.data.shared.subrecords.FormID;
 import esmmanager.common.data.record.Record;
 import esmmanager.common.data.record.Subrecord;
+import tools.io.ESMByteConvert;
 
 public class CELL extends CommonCELL
 {
@@ -31,57 +31,57 @@ public class CELL extends CommonCELL
 	{
 		super(recordData);
 
-		ArrayList<Subrecord> subrecords = recordData.getSubrecords();
+		List<Subrecord> subrecords = recordData.getSubrecords();
 		for (int i = 0; i < subrecords.size(); i++)
 		{
 			Subrecord sr = subrecords.get(i);
-			byte[] bs = sr.getData();
+			byte[] bs = sr.getSubrecordData();
 
-			if (sr.getType().equals("DATA"))
+			if (sr.getSubrecordType().equals("DATA"))
 			{
 				DATA = new DATA(bs);
 			}
 			// in tes4
-			else if (sr.getType().equals("XCMT"))
+			else if (sr.getSubrecordType().equals("XCMT"))
 			{
 				musicType = bs[0];
 			}
-			else if (sr.getType().equals("XRNK"))
+			else if (sr.getSubrecordType().equals("XRNK"))
 			{
 				XRNK = ESMByteConvert.extractInt(bs, 0);
 			}
 			// in tes5
-			else if (sr.getType().equals("LNAM"))
+			else if (sr.getSubrecordType().equals("LNAM"))
 			{
 
 			}
-			else if (sr.getType().equals("LTMP"))
+			else if (sr.getSubrecordType().equals("LTMP"))
 			{
 				LTMP = new FormID(bs);
 			}
-			else if (sr.getType().equals("XCMO"))
+			else if (sr.getSubrecordType().equals("XCMO"))
 			{
 				XCMO = new FormID(bs);
 			}
-			else if (sr.getType().equals("XCIM"))
+			else if (sr.getSubrecordType().equals("XCIM"))
 			{
 				XCIM = new FormID(bs);
 			}
-			else if (sr.getType().equals("XCAS"))
+			else if (sr.getSubrecordType().equals("XCAS"))
 			{
 				XCAS = new FormID(bs);
 			}
-			else if (sr.getType().equals("XEZN"))
+			else if (sr.getSubrecordType().equals("XEZN"))
 			{
 				XEZN = new FormID(bs);
 			}
 			// diff from xnam in tes5
-			else if (sr.getType().equals("XNAM"))
+			else if (sr.getSubrecordType().equals("XNAM"))
 			{
 
 			}
 			// only in fo3
-			else if (sr.getType().equals("XCET"))
+			else if (sr.getSubrecordType().equals("XCET"))
 			{
 
 			}

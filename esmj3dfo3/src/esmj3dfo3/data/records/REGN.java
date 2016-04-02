@@ -1,6 +1,6 @@
 package esmj3dfo3.data.records;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import esmj3d.data.shared.records.RECO;
 import esmj3d.data.shared.subrecords.ZString;
@@ -14,76 +14,76 @@ public class REGN extends RECO
 	public REGN(Record recordData)
 	{
 		super(recordData);
-		ArrayList<Subrecord> subrecords = recordData.getSubrecords();
+		List<Subrecord> subrecords = recordData.getSubrecords();
 		for (int i = 0; i < subrecords.size(); i++)
 		{
 			Subrecord sr = subrecords.get(i);
-			byte[] bs = sr.getData();
+			byte[] bs = sr.getSubrecordData();
 
-			if (sr.getType().equals("EDID"))
+			if (sr.getSubrecordType().equals("EDID"))
 			{
 				EDID = new ZString(bs);
 			}
-			else if (sr.getType().equals("ICON"))
+			else if (sr.getSubrecordType().equals("ICON"))
 			{
 
 			}
-			else if (sr.getType().equals("WNAM"))
+			else if (sr.getSubrecordType().equals("WNAM"))
 			{
 
 			}
-			else if (sr.getType().equals("RCLR"))
+			else if (sr.getSubrecordType().equals("RCLR"))
 			{
 
 			}
-			else if (sr.getType().equals("RDWT"))
+			else if (sr.getSubrecordType().equals("RDWT"))
 			{
 
 			}
-			else if (sr.getType().equals("RDAT"))
+			else if (sr.getSubrecordType().equals("RDAT"))
 			{
 
 			}
-			else if (sr.getType().equals("RDOT"))
+			else if (sr.getSubrecordType().equals("RDOT"))
 			{
 
 			}
-			else if (sr.getType().equals("RDSD"))
+			else if (sr.getSubrecordType().equals("RDSD"))
 			{
 
 			}
-			else if (sr.getType().equals("RDMD"))
+			else if (sr.getSubrecordType().equals("RDMD"))
 			{
 
 			}
-			else if (sr.getType().equals("RPLI"))
+			else if (sr.getSubrecordType().equals("RPLI"))
 			{
 
 			}
-			else if (sr.getType().equals("RDMP"))
+			else if (sr.getSubrecordType().equals("RDMP"))
 			{
 
 			}
-			else if (sr.getType().equals("RPLD"))
+			else if (sr.getSubrecordType().equals("RPLD"))
 			{
 
 			}
 			//FALLOUTNV only ////////////////////////////
-			else if (sr.getType().equals("RDSI"))
+			else if (sr.getSubrecordType().equals("RDSI"))
 			{
 
 			}
-			else if (sr.getType().equals("RDSB"))
+			else if (sr.getSubrecordType().equals("RDSB"))
 			{
 
 			}
-			else if (sr.getType().equals("RDID"))
+			else if (sr.getSubrecordType().equals("RDID"))
 			{
 
 			}
 			else
 			{
-				System.out.println("unhandled : " + sr.getType() + " in record " + recordData + " in " + this);
+				System.out.println("unhandled : " + sr.getSubrecordType() + " in record " + recordData + " in " + this);
 			}
 		}
 	}

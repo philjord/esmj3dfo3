@@ -1,6 +1,6 @@
 package esmj3dfo3.data.records;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import esmj3d.data.shared.records.GenericSOUN;
 import esmj3dfo3.data.subrecords.SNDX;
@@ -14,37 +14,37 @@ public class SOUN extends GenericSOUN
 	public SOUN(Record recordData)
 	{
 		super(recordData);
-		ArrayList<Subrecord> subrecords = recordData.getSubrecords();
+		List<Subrecord> subrecords = recordData.getSubrecords();
 		for (int i = 0; i < subrecords.size(); i++)
 		{
 			Subrecord sr = subrecords.get(i);
-			byte[] bs = sr.getData();
+			byte[] bs = sr.getSubrecordData();
 
-			if (sr.getType().equals("SNDD"))
+			if (sr.getSubrecordType().equals("SNDD"))
 			{
 				//
 			}
-			else if (sr.getType().equals("SNDX"))
+			else if (sr.getSubrecordType().equals("SNDX"))
 			{
 				SNDX = new SNDX(bs);
 			}
-			else if (sr.getType().equals("OBND"))
+			else if (sr.getSubrecordType().equals("OBND"))
 			{
 
 			}
-			else if (sr.getType().equals("ANAM"))
+			else if (sr.getSubrecordType().equals("ANAM"))
 			{
 
 			}
-			else if (sr.getType().equals("GNAM"))
+			else if (sr.getSubrecordType().equals("GNAM"))
 			{
 
 			}
-			else if (sr.getType().equals("HNAM"))
+			else if (sr.getSubrecordType().equals("HNAM"))
 			{
 
 			}
-			else if (sr.getType().equals("RNAM"))
+			else if (sr.getSubrecordType().equals("RNAM"))
 			{
 
 			}

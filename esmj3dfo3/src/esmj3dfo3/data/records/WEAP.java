@@ -1,6 +1,6 @@
 package esmj3dfo3.data.records;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import esmj3d.data.shared.records.RECO;
 import esmj3d.data.shared.subrecords.LString;
@@ -35,219 +35,219 @@ public class WEAP extends RECO
 	{
 		super(recordData);
 
-		ArrayList<Subrecord> subrecords = recordData.getSubrecords();
+		List<Subrecord> subrecords = recordData.getSubrecords();
 		for (int i = 0; i < subrecords.size(); i++)
 		{
 			Subrecord sr = subrecords.get(i);
-			byte[] bs = sr.getData();
+			byte[] bs = sr.getSubrecordData();
 
-			if (sr.getType().equals("EDID"))
+			if (sr.getSubrecordType().equals("EDID"))
 			{
 				EDID = new ZString(bs);
 			}
-			else if (sr.getType().equals("FULL"))
+			else if (sr.getSubrecordType().equals("FULL"))
 			{
 				FULL = new LString(bs);
 			}
-			else if (sr.getType().equals("DATA"))
+			else if (sr.getSubrecordType().equals("DATA"))
 			{
 				DATA = new DATA(bs);
 			}
-			else if (sr.getType().equals("MODL"))
+			else if (sr.getSubrecordType().equals("MODL"))
 			{
 				MODL = new MODL(bs);
 			}
 
-			else if (sr.getType().equals("MODT"))
+			else if (sr.getSubrecordType().equals("MODT"))
 			{
 				MODL.addMODTSub(bs);
 			}
-			else if (sr.getType().equals("MOD2"))
+			else if (sr.getSubrecordType().equals("MOD2"))
 			{
 				MOD2 = new MODL(bs);
 			}
 
-			else if (sr.getType().equals("MO2T"))
+			else if (sr.getSubrecordType().equals("MO2T"))
 			{
 				MOD2.addMODTSub(bs);
 			}
-			else if (sr.getType().equals("MOD3"))
+			else if (sr.getSubrecordType().equals("MOD3"))
 			{
 				MOD3 = new MODL(bs);
 			}
 
-			else if (sr.getType().equals("MO3T"))
+			else if (sr.getSubrecordType().equals("MO3T"))
 			{
 				MOD3.addMODTSub(bs);
 			}
-			else if (sr.getType().equals("MOD4"))
+			else if (sr.getSubrecordType().equals("MOD4"))
 			{
 				MOD4 = new MODL(bs);
 			}
 
-			else if (sr.getType().equals("MO4T"))
+			else if (sr.getSubrecordType().equals("MO4T"))
 			{
 				MOD4.addMODTSub(bs);
 			}
-			else if (sr.getType().equals("ICON"))
+			else if (sr.getSubrecordType().equals("ICON"))
 			{
 				ICON = new ZString(bs);
 			}
-			else if (sr.getType().equals("OBND"))
+			else if (sr.getSubrecordType().equals("OBND"))
 			{
 
 			}
-			else if (sr.getType().equals("WNAM"))
+			else if (sr.getSubrecordType().equals("WNAM"))
 			{
 
 			}
-			else if (sr.getType().equals("SCRI"))
-			{
-
-			}
-
-			else if (sr.getType().equals("DSTF"))
-			{
-
-			}
-			else if (sr.getType().equals("DEST"))
-			{
-
-			}
-			else if (sr.getType().equals("TNAM"))
-			{
-
-			}
-			else if (sr.getType().equals("VNAM"))
+			else if (sr.getSubrecordType().equals("SCRI"))
 			{
 
 			}
 
-			else if (sr.getType().equals("NAM0"))
+			else if (sr.getSubrecordType().equals("DSTF"))
 			{
 
 			}
-			else if (sr.getType().equals("YNAM"))
+			else if (sr.getSubrecordType().equals("DEST"))
 			{
 
 			}
-			else if (sr.getType().equals("NAM8"))
+			else if (sr.getSubrecordType().equals("TNAM"))
 			{
 
 			}
-			else if (sr.getType().equals("NAM9"))
-			{
-
-			}
-			else if (sr.getType().equals("NNAM"))
-			{
-				//string
-			}
-			else if (sr.getType().equals("NAM6"))
-			{
-
-			}
-			else if (sr.getType().equals("NAM7"))
-			{
-
-			}
-			else if (sr.getType().equals("BIPL"))
-			{
-
-			}
-			else if (sr.getType().equals("DNAM"))
-			{
-
-			}
-			else if (sr.getType().equals("XNAM"))
-			{
-
-			}
-			else if (sr.getType().equals("EAMT"))
-			{
-
-			}
-			else if (sr.getType().equals("ETYP"))
+			else if (sr.getSubrecordType().equals("VNAM"))
 			{
 
 			}
 
-			else if (sr.getType().equals("ZNAM"))
+			else if (sr.getSubrecordType().equals("NAM0"))
 			{
 
 			}
-			else if (sr.getType().equals("CRDT"))
+			else if (sr.getSubrecordType().equals("YNAM"))
 			{
 
 			}
-			else if (sr.getType().equals("EITM"))
+			else if (sr.getSubrecordType().equals("NAM8"))
 			{
 
 			}
-			else if (sr.getType().equals("INAM"))
+			else if (sr.getSubrecordType().equals("NAM9"))
 			{
 
 			}
-			else if (sr.getType().equals("MICO"))
+			else if (sr.getSubrecordType().equals("NNAM"))
 			{
 				//string
 			}
-			else if (sr.getType().equals("UNAM"))
+			else if (sr.getSubrecordType().equals("NAM6"))
 			{
 
 			}
-			else if (sr.getType().equals("MODD"))
+			else if (sr.getSubrecordType().equals("NAM7"))
 			{
 
 			}
-			else if (sr.getType().equals("REPL"))
+			else if (sr.getSubrecordType().equals("BIPL"))
 			{
 
 			}
-			else if (sr.getType().equals("SNAM"))
+			else if (sr.getSubrecordType().equals("DNAM"))
 			{
 
 			}
-			else if (sr.getType().equals("DATA"))
+			else if (sr.getSubrecordType().equals("XNAM"))
 			{
 
 			}
-			else if (sr.getType().equals("DSTD"))
+			else if (sr.getSubrecordType().equals("EAMT"))
 			{
 
 			}
-			else if (sr.getType().equals("VANM"))
+			else if (sr.getSubrecordType().equals("ETYP"))
 			{
 
 			}
-			else if (sr.getType().equals("VATS"))
+
+			else if (sr.getSubrecordType().equals("ZNAM"))
+			{
+
+			}
+			else if (sr.getSubrecordType().equals("CRDT"))
+			{
+
+			}
+			else if (sr.getSubrecordType().equals("EITM"))
+			{
+
+			}
+			else if (sr.getSubrecordType().equals("INAM"))
+			{
+
+			}
+			else if (sr.getSubrecordType().equals("MICO"))
+			{
+				//string
+			}
+			else if (sr.getSubrecordType().equals("UNAM"))
+			{
+
+			}
+			else if (sr.getSubrecordType().equals("MODD"))
+			{
+
+			}
+			else if (sr.getSubrecordType().equals("REPL"))
+			{
+
+			}
+			else if (sr.getSubrecordType().equals("SNAM"))
+			{
+
+			}
+			else if (sr.getSubrecordType().equals("DATA"))
+			{
+
+			}
+			else if (sr.getSubrecordType().equals("DSTD"))
+			{
+
+			}
+			else if (sr.getSubrecordType().equals("VANM"))
+			{
+
+			}
+			else if (sr.getSubrecordType().equals("VATS"))
 			{
 
 			}
 			//FALLOUTNV only ////////////////////////////
-			else if (sr.getType().equals("MODS"))
+			else if (sr.getSubrecordType().equals("MODS"))
 			{
 
 			}
-			else if (sr.getType().startsWith("MWD"))//1-7
+			else if (sr.getSubrecordType().startsWith("MWD"))//1-7
 			{
 
 			}
-			else if (sr.getType().startsWith("WNM"))//1-7
+			else if (sr.getSubrecordType().startsWith("WNM"))//1-7
 			{
 
 			}
-			else if (sr.getType().startsWith("WMI"))//1-3
+			else if (sr.getSubrecordType().startsWith("WMI"))//1-3
 			{
 
 			}
-			else if (sr.getType().startsWith("WMS"))//1-2
+			else if (sr.getSubrecordType().startsWith("WMS"))//1-2
 			{
 
 			}
 			else
 			{
-				System.out.println("unhandled : " + sr.getType() + " in record " + recordData + " in " + this);
+				System.out.println("unhandled : " + sr.getSubrecordType() + " in record " + recordData + " in " + this);
 			}
 		}
 	}
