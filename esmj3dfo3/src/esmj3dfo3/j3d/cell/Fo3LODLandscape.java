@@ -1,7 +1,6 @@
 package esmj3dfo3.j3d.cell;
 
 import javax.media.j3d.BranchGroup;
-import javax.media.j3d.Group;
 import javax.media.j3d.IndexedGeometryArray;
 import javax.media.j3d.Shape3D;
 import javax.media.j3d.Transform3D;
@@ -10,7 +9,6 @@ import javax.media.j3d.TransformGroup;
 import esmj3d.j3d.cell.MorphingLandscape;
 import nif.NiObjectList;
 import nif.NifFile;
-import nif.NifJ3dVisRoot;
 import nif.NifToJ3d;
 import nif.basic.NifRef;
 import nif.j3d.J3dNiTriShape;
@@ -74,8 +72,6 @@ public class Fo3LODLandscape extends MorphingLandscape
 
 						Shape3D shape = new Shape3D();
 						shape.clearCapabilities();
-						shape.setPickable(false);
-						shape.setCollidable(false);
 						shape.setGeometry(baseItsa);
 
 						BSShaderPPLightingProperty lp = getLightingProperty(niTriShape, blocks);
@@ -116,7 +112,7 @@ public class Fo3LODLandscape extends MorphingLandscape
 
 	}
 
-	private Group createBlocks(int lodX, int lodY, int scale, String worldFormName, MeshSource meshSource, TextureSource textureSource)
+/*	private Group createBlocks(int lodX, int lodY, int scale, String worldFormName, MeshSource meshSource, TextureSource textureSource)
 	{
 		String meshName = "landscape\\lod\\" + worldFormName + "\\blocks\\" + worldFormName + ".level" + scale + ".x" + lodX + ".y" + lodY
 				+ ".nif";
@@ -135,8 +131,8 @@ public class Fo3LODLandscape extends MorphingLandscape
 		System.out.println("but null");
 		return null;
 	}
-
-	private BSShaderPPLightingProperty getLightingProperty(NiTriShape niTriShape, NiObjectList blocks)
+*/
+	private static BSShaderPPLightingProperty getLightingProperty(NiTriShape niTriShape, NiObjectList blocks)
 	{
 		for (NifRef pnr : niTriShape.properties)
 		{
