@@ -74,6 +74,8 @@ public class Fo3LODLandscape extends MorphingLandscape
 
 						Shape3D shape = new Shape3D();
 						shape.clearCapabilities();
+						shape.setPickable(false);
+						shape.setCollidable(false);
 						shape.setGeometry(baseItsa);
 
 						BSShaderPPLightingProperty lp = getLightingProperty(niTriShape, blocks);
