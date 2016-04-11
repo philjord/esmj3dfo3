@@ -171,6 +171,11 @@ public class J3dCellFactory extends J3dICellFactory
 							makePhys, mediaSources);
 				}
 			}
+			else
+			{
+				// normally just asking off the edge of map should be fine
+				//System.out.println("record == null! " + wrldFormId +" " +x+" "+y);
+			}
 
 		}
 		catch (PluginException e1)
