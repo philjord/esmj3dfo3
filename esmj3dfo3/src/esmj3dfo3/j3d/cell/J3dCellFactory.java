@@ -5,6 +5,8 @@ import java.util.zip.DataFormatException;
 
 import javax.media.j3d.BranchGroup;
 
+import esmj3d.j3d.cell.AIActorLocator;
+import esmj3d.j3d.cell.AICellGeneral;
 import esmj3d.j3d.cell.J3dICellFactory;
 import esmj3dfo3.data.records.WRLD;
 import esmmanager.common.PluginException;
@@ -326,5 +328,19 @@ public class J3dCellFactory extends J3dICellFactory
 	public String getMainESMFileName()
 	{
 		return esmManager.getName();
+	}
+	
+	@Override
+	public AICellGeneral makeAICell(int cellId, AIActorLocator aiActorLocator)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public AICellGeneral makeAICell(int wrldFormId, int x, int y, AIActorLocator aiActorLocator)
+	{
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

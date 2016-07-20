@@ -41,7 +41,7 @@ public class J3dNPC_ extends J3dRECOTypeCha
 
 	public J3dNPC_(NPC_ npc_, IRecordStore master, MediaSources mediaSources)
 	{
-		super(npc_);
+		super(npc_, false);
 
 		female = npc_.ACBS.isFemale();
 
