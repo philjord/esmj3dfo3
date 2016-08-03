@@ -1,6 +1,7 @@
 package esmj3dfo3.j3d.j3drecords.type;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.media.j3d.Transform3D;
 import javax.media.j3d.TransformGroup;
@@ -168,9 +169,9 @@ public class J3dCREA extends J3dRECOTypeCha
 				}
 			}
 
-			//idleAnimations.add(ESConfig.TES_MESH_PATH + path + "\\mtidle.kf");
-			idleAnimations.addAll(mediaSources.getMeshSource().getFilesInFolder(ESConfig.TES_MESH_PATH + path + "\\idleanims"));
+			addIdleAnimations( idleAnimations, mediaSources.getMeshSource().getFilesInFolder(ESConfig.TES_MESH_PATH + path + "\\idleanims"));
 
+			
 			nifCharacter = new NifCharacter(skeletonNifFile, fileNames, mediaSources, idleAnimations);
 
 			if (crea.BNAM.baseScale == 1)
@@ -199,6 +200,7 @@ public class J3dCREA extends J3dRECOTypeCha
 
 	}
 
+	
 	private void addARMO(ARMO armo)
 	{
 
