@@ -13,13 +13,13 @@ import esmj3d.j3d.j3drecords.inst.J3dRECOInst;
 import esmj3d.j3d.j3drecords.inst.J3dRECOStatInst;
 import esmj3d.j3d.j3drecords.type.J3dCONT;
 import esmj3d.j3d.j3drecords.type.J3dDOOR;
-import esmj3d.j3d.j3drecords.type.J3dLIGH;
+import esmj3d.j3d.j3drecords.type.J3dGeneralLIGH;
 import esmj3d.j3d.j3drecords.type.J3dRECOType;
 import esmj3d.j3d.j3drecords.type.J3dRECOTypeActionable;
 import esmj3d.j3d.j3drecords.type.J3dRECOTypeCha;
 import esmj3d.j3d.j3drecords.type.J3dRECOTypeDynamic;
 import esmj3d.j3d.j3drecords.type.J3dRECOTypeStatic;
-import esmj3d.j3d.j3drecords.type.J3dSOUN;
+import esmj3d.j3d.j3drecords.type.J3dGeneralSOUN;
 import esmj3d.j3d.trees.TreeMaker;
 import esmj3dfo3.data.records.ACTI;
 import esmj3dfo3.data.records.ADDN;
@@ -387,7 +387,7 @@ public class J3dREFRFactory
 		}
 		else if (baseRecord.getRecordType().equals("LIGH"))
 		{
-			return new J3dRECOStatInst(refr, new J3dLIGH(new LIGH(baseRecord), makePhys, mediaSources), true, makePhys);
+			return new J3dRECOStatInst(refr, new J3dGeneralLIGH(new LIGH(baseRecord), makePhys, mediaSources), true, makePhys);
 		}
 		else if (baseRecord.getRecordType().equals("TREE"))
 		{
@@ -402,7 +402,7 @@ public class J3dREFRFactory
 		{
 			if (!makePhys)
 			{
-				return new J3dRECOStatInst(refr, new J3dSOUN(new SOUN(baseRecord), master, mediaSources.getSoundSource()), false, makePhys);
+				return new J3dRECOStatInst(refr, new J3dGeneralSOUN(new SOUN(baseRecord), master, mediaSources), false, makePhys);
 			}
 		}
 		else if (baseRecord.getRecordType().equals("LVLC"))
