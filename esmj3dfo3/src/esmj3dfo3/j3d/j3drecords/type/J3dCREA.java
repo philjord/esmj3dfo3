@@ -3,10 +3,9 @@ package esmj3dfo3.j3d.j3drecords.type;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.vecmath.Color3f;
-
 import org.jogamp.java3d.Transform3D;
 import org.jogamp.java3d.TransformGroup;
+import org.jogamp.vecmath.Color3f;
 
 import esmj3d.data.shared.subrecords.MODL;
 import esmj3d.j3d.BethRenderSettings;
