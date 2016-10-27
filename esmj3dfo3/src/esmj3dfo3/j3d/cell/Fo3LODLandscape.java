@@ -1,10 +1,10 @@
 package esmj3dfo3.j3d.cell;
 
-import javax.media.j3d.BranchGroup;
-import javax.media.j3d.IndexedGeometryArray;
-import javax.media.j3d.Shape3D;
-import javax.media.j3d.Transform3D;
-import javax.media.j3d.TransformGroup;
+import org.jogamp.java3d.BranchGroup;
+import org.jogamp.java3d.IndexedGeometryArray;
+import org.jogamp.java3d.Shape3D;
+import org.jogamp.java3d.Transform3D;
+import org.jogamp.java3d.TransformGroup;
 
 import esmj3d.j3d.cell.MorphingLandscape;
 import nif.NiObjectList;
