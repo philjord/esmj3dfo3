@@ -2,10 +2,10 @@ package esmj3dfo3.data.records;
 
 import java.util.List;
 
+import esmio.common.data.record.Record;
+import esmio.common.data.record.Subrecord;
 import esmj3d.data.shared.records.CommonCELL;
 import esmj3d.data.shared.subrecords.FormID;
-import esmmanager.common.data.record.Record;
-import esmmanager.common.data.record.Subrecord;
 import tools.io.ESMByteConvert;
 
 public class CELL extends CommonCELL

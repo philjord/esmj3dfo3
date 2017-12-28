@@ -2,6 +2,8 @@ package esmj3dfo3.j3d.j3drecords.inst;
 
 import org.jogamp.java3d.Node;
 
+import esmio.common.data.record.IRecordStore;
+import esmio.common.data.record.Record;
 import esmj3d.data.shared.records.CommonREFR;
 import esmj3d.data.shared.records.RECO;
 import esmj3d.data.shared.subrecords.MODL;
@@ -51,8 +53,6 @@ import esmj3dfo3.data.records.WEAP;
 import esmj3dfo3.data.subrecords.LVLO;
 import esmj3dfo3.j3d.j3drecords.type.J3dCREA;
 import esmj3dfo3.j3d.j3drecords.type.J3dNPC_;
-import esmmanager.common.data.record.IRecordStore;
-import esmmanager.common.data.record.Record;
 import utils.source.MediaSources;
 
 public class J3dREFRFactory

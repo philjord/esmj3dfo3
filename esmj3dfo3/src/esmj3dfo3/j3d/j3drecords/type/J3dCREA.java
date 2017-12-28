@@ -7,6 +7,8 @@ import org.jogamp.java3d.Transform3D;
 import org.jogamp.java3d.TransformGroup;
 import org.jogamp.vecmath.Color3f;
 
+import esmio.common.data.record.IRecordStore;
+import esmio.common.data.record.Record;
 import esmj3d.data.shared.subrecords.MODL;
 import esmj3d.j3d.BethRenderSettings;
 import esmj3d.j3d.j3drecords.type.J3dRECOTypeCha;
@@ -15,8 +17,6 @@ import esmj3dfo3.data.records.CREA;
 import esmj3dfo3.data.records.LVLI;
 import esmj3dfo3.data.records.WEAP;
 import esmj3dfo3.data.subrecords.LVLO;
-import esmmanager.common.data.record.IRecordStore;
-import esmmanager.common.data.record.Record;
 import nif.character.NifCharacter;
 import tools3d.utils.scenegraph.Fadable;
 import utils.ESConfig;
