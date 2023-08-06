@@ -18,7 +18,7 @@ public class LVLO
 	{
 		level = ESMByteConvert.extractShort(bytes, 0);
 		unknown1 = ESMByteConvert.extractShort(bytes, 2);
-		itemFormId = ESMByteConvert.extractInt(bytes, 4);
+		itemFormId = ESMByteConvert.extractInt3(bytes, 4);
 		count = ESMByteConvert.extractShort(bytes, 8);
 		unknown2 = ESMByteConvert.extractShort(bytes, 10);
 	}
