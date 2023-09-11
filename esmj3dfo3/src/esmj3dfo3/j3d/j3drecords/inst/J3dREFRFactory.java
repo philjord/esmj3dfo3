@@ -262,10 +262,13 @@ public class J3dREFRFactory
 			return null;
 
 		// doesn't exist in fallout.esm
-		if (refr.NAME.formId == 32 || refr.NAME.formId == 23)
+		if (refr.NAME == null || refr.NAME.formId == 32 || refr.NAME.formId == 23)
 			return null;
 
 		Record baseRecord = master.getRecord(refr.NAME.formId);
+		
+		if(baseRecord == null)
+			return null;
 
 		if (baseRecord.getRecordType().equals("ACTI"))
 		{

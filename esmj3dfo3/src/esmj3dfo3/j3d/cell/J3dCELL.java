@@ -79,10 +79,10 @@ public class J3dCELL extends J3dCELLGeneral implements UpdateListener
 		catch (NullPointerException e)
 		{
 			if (e.getStackTrace().length > 0)
-				System.out.println("J3dCELL " + cell.formId + " - null pointer making record " + record + " " + record.getRecordType()
+				System.out.println("J3dCELL.makeJ3dRECOFar " + cell.formId + " - null pointer making record " + record + " " + record.getRecordType()
 						+ " in " + e.getStackTrace()[0]);
 			else
-				System.out.println("J3dCELL " + cell.formId + " - null pointer making record " + record + " " + record.getRecordType());
+				System.out.println("J3dCELL.makeJ3dRECOFar " + cell.formId + " - null pointer making record " + record + " " + record.getRecordType());
 
 			if (record.getRecordType().equals("REFR"))
 			{
@@ -178,11 +178,12 @@ public class J3dCELL extends J3dCELLGeneral implements UpdateListener
 		}
 		catch (NullPointerException e)
 		{
+			//e.printStackTrace();
 			if (e.getStackTrace().length > 0)
-				System.out.println("J3dCELL " + cell.formId + " - null pointer making record " + record + " " + record.getRecordType()
+				System.out.println("J3dCELL.makeJ3dRECO " + cell.formId + " - null pointer making record " + record + " " + record.getRecordType()
 						+ " in " + e.getStackTrace()[0]);
 			else
-				System.out.println("J3dCELL " + cell.formId + " - null pointer making record " + record + " " + record.getRecordType());
+				System.out.println("J3dCELL.makeJ3dRECO " + cell.formId + " - null pointer making record " + record + " " + record.getRecordType());
 
 			if (record.getRecordType().equals("REFR"))
 			{
@@ -209,7 +210,7 @@ public class J3dCELL extends J3dCELLGeneral implements UpdateListener
 			REFR refr = new REFR(record);
 
 			// doesn't exist in fallout.esm
-			if (refr.NAME.formId == 32 || refr.NAME.formId == 23)
+			if (refr.NAME == null || refr.NAME.formId == 32 || refr.NAME.formId == 23)
 				return false;
 
 			Record baseRecord = master.getRecord(refr.NAME.formId);
