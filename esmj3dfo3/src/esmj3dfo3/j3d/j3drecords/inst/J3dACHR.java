@@ -1,7 +1,7 @@
 package esmj3dfo3.j3d.j3drecords.inst;
 
-import esmio.common.data.record.IRecordStore;
-import esmio.common.data.record.Record;
+import esfilemanager.common.data.record.IRecordStore;
+import esfilemanager.common.data.record.Record;
 import esmj3d.j3d.j3drecords.inst.J3dRECOChaInst;
 import esmj3dfo3.data.records.ACHR;
 import esmj3dfo3.data.records.NPC_;
