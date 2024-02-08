@@ -30,6 +30,10 @@ public class J3dCELL extends J3dCELLGeneral implements UpdateListener
 	protected CELL cell;
 
 	private ArrayList<J3dRECOInst> j3dRECOInsts = new ArrayList<J3dRECOInst>();
+	
+	protected J3dLAND j3dLAND;
+
+	
 
 	public J3dCELL(IRecordStore master, Record cellRecord, int worldId, List<Record> children, boolean makePhys, MediaSources mediaSources)
 	{
@@ -135,8 +139,8 @@ public class J3dCELL extends J3dCELLGeneral implements UpdateListener
 				}
 			}
 			else if (record.getRecordType().equals("LAND"))
-			{
-				J3dLAND j3dLAND;
+			{		
+				// this record might not exists or might be superceeded by the parents land so it's got a pointer to the land and a getter below
 				if (makePhys)
 				{
 					Record parentLANDrec = ((J3dCellFactory) master).getParentWRLDLAND(worldId, (int) instCell.getTrans().x,
@@ -150,10 +154,12 @@ public class J3dCELL extends J3dCELLGeneral implements UpdateListener
 				{
 					Record parentLANDrec = ((J3dCellFactory) master).getParentWRLDLAND(worldId, (int) instCell.getTrans().x,
 							(int) instCell.getTrans().y);
+										
 					if (parentLANDrec != null)
 						j3dLAND = new J3dLAND(new LAND(parentLANDrec), master, mediaSources.getTextureSource());
 					else
 						j3dLAND = new J3dLAND(new LAND(record), master, mediaSources.getTextureSource());
+					
 				}
 				j3dLAND.setLocation(cellLocation, new Quat4f(0, 0, 0, 1));
 
@@ -202,6 +208,36 @@ public class J3dCELL extends J3dCELLGeneral implements UpdateListener
 		return ret;
 	}
 
+	
+	@Override
+	public J3dLAND getJ3dLAND() {
+		//If  didn't load land from a record above, check if the parent land should be used
+		if(j3dLAND == null) {		
+			if (makePhys)
+			{
+				Record parentLANDrec = ((J3dCellFactory) master).getParentWRLDLAND(worldId, (int) instCell.getTrans().x,
+						(int) instCell.getTrans().y);
+				if (parentLANDrec != null) {
+					j3dLAND = new J3dLAND(new LAND(parentLANDrec));
+					j3dLAND.setLocation(cellLocation, new Quat4f(0, 0, 0, 1));
+				}
+			}
+			else
+			{
+				Record parentLANDrec = ((J3dCellFactory) master).getParentWRLDLAND(worldId, (int) instCell.getTrans().x,
+						(int) instCell.getTrans().y);
+									
+				if (parentLANDrec != null) {
+					j3dLAND = new J3dLAND(new LAND(parentLANDrec), master, mediaSources.getTextureSource());
+					j3dLAND.setLocation(cellLocation, new Quat4f(0, 0, 0, 1));
+				}				
+			}
+
+		}
+		
+		return j3dLAND;
+	}
+	
 	protected boolean isVisibleDistant(Record record)
 	{
 		// ALL stats are not part of distant for now, do they have LODs in them?

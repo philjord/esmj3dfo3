@@ -21,6 +21,9 @@ public class J3dCELLTemporary extends J3dCELL
 
 	private void indexRecords()
 	{
+		// if we load no land we might be supposed to load from the parent world instead
+		J3dLAND j3dLAND = null;		
+		
 		for (Iterator<Record> i = children.iterator(); i.hasNext();)
 		{
 			Record record = i.next();
@@ -28,14 +31,28 @@ public class J3dCELLTemporary extends J3dCELL
 			addJ3dRECOInst(jri);
 
 			if (jri instanceof J3dLAND)
-			{
-				J3dLAND l = (J3dLAND) jri;
+			{ 
+				j3dLAND = (J3dLAND) jri;
+			 
+				 
 				float wl = getWaterLevel(cell.XCLW);
-				if (wl > l.getLowestHeight())
+				if (wl > j3dLAND.getLowestHeight())
 				{
 					addChild(makeWater(wl, J3dCELLPersistent.waterApp));
 				}
 			}
+		}
+		
+		if(j3dLAND == null  ) {
+			// ask the cell for it's parents land if that should be loaded
+			j3dLAND = getJ3dLAND();		
+			if(j3dLAND != null) {
+				System.out.println("asked for pare but didn't get it for "+this.instCell.getTrans());
+				getJ3dLAND();
+				addJ3dRECOInst(j3dLAND);
+			} 
+			else
+				System.out.println("asked for pare and did get it for "+this.instCell.getTrans());
 		}
 	}
 }

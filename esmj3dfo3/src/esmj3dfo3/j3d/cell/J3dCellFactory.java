@@ -87,8 +87,9 @@ public class J3dCellFactory extends J3dICellFactory
 
 		WRLD wrld = getWRLD(wrldFormId);
 		// use parent first
-		if (wrld.WNAM != null && wrld.WNAM.formId != -1)
+		if (wrld.WNAM != null && wrld.WNAM.formId != -1 && (wrld.PNAM & 0x01) != 0 )
 		{
+						
 			int parentFormId = -1;
 			parentFormId = wrld.WNAM.formId;
 

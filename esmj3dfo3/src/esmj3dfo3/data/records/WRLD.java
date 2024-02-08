@@ -7,12 +7,23 @@ import esfilemanager.common.data.record.Subrecord;
 import esmj3d.data.shared.records.CommonWRLD;
 import esmj3d.data.shared.subrecords.ZString;
 import esmj3dfo3.data.subrecords.SNAM_d;
+import tools.io.ESMByteConvert;
+
+
+// skyrim is after fo3 so it's between these 2
+//https://en.uesp.net/wiki/Oblivion_Mod:Mod_File_Format/WRLD
+// FO3?	
+//https://en.uesp.net/wiki/Skyrim_Mod:Mod_File_Format/WRLD
+
+//https://geck.uesp.net/wiki/Main_Page might describe what's possible
 
 public class WRLD extends CommonWRLD
 {
 	public SNAM_d SNAM = null;
 
 	public ZString ICON = null;
+	
+	public int PNAM = 0;
 
 	public WRLD(Record recordData)
 	{
@@ -54,7 +65,16 @@ public class WRLD extends CommonWRLD
 			}
 			else if (sr.getSubrecordType().equals("PNAM"))
 			{
-				//
+				PNAM = ESMByteConvert.extractShort(bs, 0);
+				/*PNAM 	unknown 	uint16 	Use flags - Set if parts are inherited from parent worldspace WNAM
+				    0x01 - Use Land Data (DNAM)
+				    0x02 - Use LOD Data (NAM3, NAM4)
+				    0x04 - Use Map Data (MNAM, MODL)
+				    0x08 - Use Water Data (NAM2)
+				    0x10 - unknown
+				    0x20 - Use Climate Data (CNAM)
+				    0x40 - Use Sky Cell 
+				    */
 			}
 			else if (sr.getSubrecordType().equals("NAM3"))
 			{
