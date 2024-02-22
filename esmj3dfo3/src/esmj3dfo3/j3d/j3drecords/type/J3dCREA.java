@@ -169,7 +169,8 @@ public class J3dCREA extends J3dRECOTypeCha
 				}
 			}
 
-			addIdleAnimations( idleAnimations, mediaSources.getMeshSource().getFilesInFolder(ESConfig.TES_MESH_PATH + path + "\\idleanims"));
+			//FIXME:!!! idleanims aren't even nothing like the idles! mtidle seem to be the main one
+			addIdleAnimations( idleAnimations, mediaSources.getMeshSource().getFilesInFolder(ESConfig.TES_MESH_PATH + path + "\\idleanims"), new String[]{"idle"});
 
 			
 			nifCharacter = new NifCharacter(skeletonNifFile, fileNames, mediaSources, idleAnimations);

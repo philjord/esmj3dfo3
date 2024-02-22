@@ -96,7 +96,9 @@ public class J3dNPC_ extends J3dRECOTypeCha
 
 		ArrayList<String> idleAnimations = new ArrayList<String>();
 
-		addIdleAnimations( idleAnimations, mediaSources.getMeshSource().getFilesInFolder(ESConfig.TES_MESH_PATH + "characters\\_male\\idleanims"));
+		
+		//FIXME:!!! idleanims aren't even nothing like the idles! mtidle seem to be the main one		
+		addIdleAnimations( idleAnimations, mediaSources.getMeshSource().getFilesInFolder(ESConfig.TES_MESH_PATH + "characters\\_male\\idleanims"), new String[]{"idle"});
 
 		//idleAnimations.add(ESConfig.TES_MESH_PATH + "characters\\_male\\idleanims\\lookingaround.kf");
 

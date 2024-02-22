@@ -200,11 +200,11 @@ public class CREA extends RECO
 			}
 			else if (sr.getSubrecordType().equals("CSDI"))
 			{
-				BNAM = new BNAM(bs);
+				//BNAM = new BNAM(bs);
 			}
 			else if (sr.getSubrecordType().equals("CSDC"))
 			{
-				BNAM = new BNAM(bs);
+				//BNAM = new BNAM(bs);
 			}
 			else if (sr.getSubrecordType().equals("BNAM"))
 			{
