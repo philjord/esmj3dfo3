@@ -1,7 +1,6 @@
 package esmj3dfo3.j3d.cell;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import org.jogamp.java3d.Node;
 import org.jogamp.vecmath.Quat4f;
@@ -35,9 +34,9 @@ public class J3dCELL extends J3dCELLGeneral implements UpdateListener
 
 	
 
-	public J3dCELL(IRecordStore master, Record cellRecord, int worldId, List<Record> children, boolean makePhys, MediaSources mediaSources)
+	public J3dCELL(IRecordStore master, Record cellRecord, int worldId, boolean makePhys, MediaSources mediaSources)
 	{
-		super(master, worldId, children, makePhys, mediaSources);
+		super(master, worldId, makePhys, mediaSources);
 		cell = new CELL(cellRecord);
 		setCell(cell);
 
@@ -99,6 +98,9 @@ public class J3dCELL extends J3dCELLGeneral implements UpdateListener
 		return ret;
 	}
 
+	//FIXME: these Record holding are expensive and slower, I need to swap all Record to RECO first then make J3dRECOInst out of them 
+	// that way the super heavy String nature of Record and SubRecord are swapped to light class types and all the ones I don't currently use
+	// can be dropped earlier, also the J3d hangs on to the RECO so I'm forced to have 2 copies of same data
 	@Override
 	public J3dRECOInst makeJ3dRECO(Record record)
 	{
