@@ -1,7 +1,6 @@
 package esmj3dfo3.j3d.j3drecords.type;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import org.jogamp.java3d.Transform3D;
 import org.jogamp.java3d.TransformGroup;
@@ -19,7 +18,6 @@ import esmj3dfo3.data.records.WEAP;
 import esmj3dfo3.data.subrecords.LVLO;
 import nif.character.NifCharacter;
 import tools3d.utils.scenegraph.Fadable;
-import utils.ESConfig;
 import utils.source.MediaSources;
 
 public class J3dCREA extends J3dRECOTypeCha
@@ -170,10 +168,11 @@ public class J3dCREA extends J3dRECOTypeCha
 			}
 
 			//FIXME:!!! idleanims aren't even nothing like the idles! mtidle seem to be the main one
-			addIdleAnimations( idleAnimations, mediaSources.getMeshSource().getFilesInFolder(ESConfig.TES_MESH_PATH + path + "\\idleanims"), new String[]{"idle"});
+			//addIdleAnimations( idleAnimations, mediaSources.getMeshSource().getFilesInFolder(ESConfig.TES_MESH_PATH + path + "\\idleanims"), new String[]{"idle"});
 
 			
-			nifCharacter = new NifCharacter(skeletonNifFile, fileNames, mediaSources, idleAnimations);
+			nifCharacter = new NifCharacter(skeletonNifFile, fileNames, mediaSources);
+			nifCharacter.setIdleAnimations(idleAnimations);
 
 			if (crea.BNAM.baseScale == 1)
 			{

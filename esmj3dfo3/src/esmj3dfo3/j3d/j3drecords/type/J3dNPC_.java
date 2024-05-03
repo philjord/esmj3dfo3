@@ -7,6 +7,7 @@ import org.jogamp.vecmath.Color3f;
 import esfilemanager.common.data.record.IRecordStore;
 import esfilemanager.common.data.record.Record;
 import esmj3d.data.shared.subrecords.CNTO;
+import esmj3d.data.shared.subrecords.FormID;
 import esmj3d.data.shared.subrecords.MODL;
 import esmj3d.j3d.BethRenderSettings;
 import esmj3d.j3d.j3drecords.type.J3dRECOTypeCha;
@@ -14,6 +15,7 @@ import esmj3dfo3.data.records.ARMO;
 import esmj3dfo3.data.records.LVLI;
 import esmj3dfo3.data.records.LVLN;
 import esmj3dfo3.data.records.NPC_;
+import esmj3dfo3.data.records.PACK;
 import esmj3dfo3.data.records.RACE;
 import esmj3dfo3.data.records.WEAP;
 import esmj3dfo3.data.subrecords.LVLO;
@@ -95,14 +97,22 @@ public class J3dNPC_ extends J3dRECOTypeCha
 		fileNames.add(weapStr);
 
 		ArrayList<String> idleAnimations = new ArrayList<String>();
+		
+		
+		for(FormID id : npc_.PKIDsl) {
+			PACK pack = new PACK(master.getRecord(id.formId));
+			System.out.println("this " + this + " " + pack);
+			
+		}
 
 		
 		//FIXME:!!! idleanims aren't even nothing like the idles! mtidle seem to be the main one		
-		addIdleAnimations( idleAnimations, mediaSources.getMeshSource().getFilesInFolder(ESConfig.TES_MESH_PATH + "characters\\_male\\idleanims"), new String[]{"idle"});
+		//addIdleAnimations( idleAnimations, mediaSources.getMeshSource().getFilesInFolder(ESConfig.TES_MESH_PATH + "characters\\_male\\idleanims"), new String[]{"idle"});
 
-		//idleAnimations.add(ESConfig.TES_MESH_PATH + "characters\\_male\\idleanims\\lookingaround.kf");
+		idleAnimations.add(ESConfig.TES_MESH_PATH + "characters\\_male\\idleanims\\lookingaround.kf");
 
-		nifCharacter = new NifCharacter(skeletonNifFile, fileNames, mediaSources, idleAnimations);
+		nifCharacter = new NifCharacter(skeletonNifFile, fileNames, mediaSources);
+		nifCharacter.setIdleAnimations(idleAnimations);
 		addChild(nifCharacter);
 
 		setOutline(new Color3f(1.0f, 1.0f, 0f));
