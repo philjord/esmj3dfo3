@@ -40,9 +40,9 @@ public class J3dCREA extends J3dRECOTypeCha
 		//MODL is a bone file and the NIFZ are no path othe files to add
 		if (crea.NIFZ != null && crea.MODL != null)
 		{
-			String path = crea.MODL.model.str.substring(0, crea.MODL.model.str.lastIndexOf("\\"));
+			String path = crea.MODL.model.substring(0, crea.MODL.model.lastIndexOf("\\"));
 
-			String skeletonNifFile = crea.MODL.model.str;
+			String skeletonNifFile = crea.MODL.model;
 
 			ArrayList<String> fileNames = new ArrayList<String>();
 
@@ -210,17 +210,17 @@ public class J3dCREA extends J3dRECOTypeCha
 			m = armo.MOD3;
 		}
 
-		helmetStr = armo.BMDT.isHair() ? m.model.str : helmetStr;
-		bodyStr = armo.BMDT.isUpperBody() ? m.model.str : bodyStr;
-		handLStr = armo.BMDT.isHand() ? m.model.str : handLStr;
-		handRStr = armo.BMDT.isHand() ? m.model.str : handRStr;
+		helmetStr = armo.BMDT.isHair() ? m.model : helmetStr;
+		bodyStr = armo.BMDT.isUpperBody() ? m.model : bodyStr;
+		handLStr = armo.BMDT.isHand() ? m.model : handLStr;
+		handRStr = armo.BMDT.isHand() ? m.model : handRStr;
 	}
 
 	private void addWEAP(WEAP weap)
 	{
 		if (weap.MODL != null)
 		{
-			weapStr = weap.MODL.model.str;
+			weapStr = weap.MODL.model;
 		}
 		else
 		{

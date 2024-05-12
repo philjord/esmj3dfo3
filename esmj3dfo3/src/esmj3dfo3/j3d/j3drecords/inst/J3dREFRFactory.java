@@ -64,7 +64,7 @@ public class J3dREFRFactory
 		if (modl != null)
 		{
 			J3dRECODynInst j3dinst = new J3dRECODynInst(refr, true, makePhys);
-			j3dinst.setJ3dRECOType(new J3dRECOTypeDynamic(reco, modl.model.str, makePhys, mediaSources));
+			j3dinst.setJ3dRECOType(new J3dRECOTypeDynamic(reco, modl.model, makePhys, mediaSources));
 			return j3dinst;
 		}
 		else
@@ -79,7 +79,7 @@ public class J3dREFRFactory
 		if (modl != null)
 		{
 			J3dRECOStatInst j3dinst = new J3dRECOStatInst(refr, true, makePhys);
-			j3dinst.setJ3dRECOType(new J3dRECOTypeActionable(reco, modl.model.str, makePhys, mediaSources));
+			j3dinst.setJ3dRECOType(new J3dRECOTypeActionable(reco, modl.model, makePhys, mediaSources));
 			return j3dinst;
 		}
 		else
@@ -94,7 +94,7 @@ public class J3dREFRFactory
 		if (modl != null)
 		{
 			J3dRECOStatInst j3dinst = new J3dRECOStatInst(refr, true, makePhys);
-			String statNif = modl.model.str;
+			String statNif = modl.model;
 
 			// megatongatehouse01_lod_pa.nif is the lod for the dist "post atomic" (I believe)
 
@@ -178,20 +178,20 @@ public class J3dREFRFactory
 			if (type.equals("ACTI"))
 			{
 				ACTI acti = new ACTI(baseRecord);
-				nif = acti.MODL.model.str;
+				nif = acti.MODL.model;
 				reco = acti;
 			}
 			else if (type.equals("SCOL"))
 			{
 				//SCOL are just exactly like STATS
 				SCOL scol = new SCOL(baseRecord);
-				nif = scol.MODL.model.str;
+				nif = scol.MODL.model;
 				reco = scol;
 			}
 			else if (type.equals("STAT"))
 			{
 				STAT stat = new STAT(baseRecord);
-				nif = stat.MODL.model.str;
+				nif = stat.MODL.model;
 				reco = stat;
 			}
 
@@ -242,7 +242,7 @@ public class J3dREFRFactory
 		else if (type.equals("TREE"))
 		{
 			TREE tree = new TREE(baseRecord);
-			String treeNif = tree.MODL.model.str;
+			String treeNif = tree.MODL.model;
 			Node node = TreeMaker.makeTreeFar(refr, false, mediaSources, treeNif, tree.billBoardWidth, tree.billBoardHeight);
 			return node;
 		}
@@ -395,7 +395,7 @@ public class J3dREFRFactory
 		else if (baseRecord.getRecordType().equals("TREE"))
 		{
 			TREE tree = new TREE(baseRecord);
-			String treeNif = tree.MODL.model.str;
+			String treeNif = tree.MODL.model;
 			J3dRECOStatInst j3dinst = TreeMaker.makeTree(refr, makePhys, mediaSources, treeNif, tree.billBoardWidth, tree.billBoardHeight,
 					false);
 			return j3dinst;

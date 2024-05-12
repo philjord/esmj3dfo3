@@ -21,7 +21,7 @@ public class WRLD extends CommonWRLD
 {
 	public SNAM_d SNAM = null;
 
-	public ZString ICON = null;
+	public String ICON = null;
 	
 	public int PNAM = 0;
 
@@ -45,7 +45,7 @@ public class WRLD extends CommonWRLD
 			else if (sr.getSubrecordType().equals("ICON"))
 			{
 				//ICON 	zstring 	Map filename
-				ICON = new ZString(bs);
+				ICON = ZString.toString(bs);
 			}
 			else if (sr.getSubrecordType().equals("NAM0"))
 			{

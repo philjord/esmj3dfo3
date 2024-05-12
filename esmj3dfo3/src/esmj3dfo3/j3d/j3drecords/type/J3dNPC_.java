@@ -61,7 +61,7 @@ public class J3dNPC_ extends J3dRECOTypeCha
 		}
 		else
 		{
-			headStr = modls[0].model.str;
+			headStr = modls[0].model;
 			bodyStr = ESConfig.TES_MESH_PATH + "characters\\_male\\upperbody.nif";
 			handLStr = ESConfig.TES_MESH_PATH + "characters\\_male\\lefthand.nif";
 			handRStr = ESConfig.TES_MESH_PATH + "characters\\_male\\righthand.nif";
@@ -222,17 +222,17 @@ public class J3dNPC_ extends J3dRECOTypeCha
 			m = armo.MOD3;
 		}
 
-		helmetStr = armo.BMDT.isHair() ? m.model.str : helmetStr;
-		bodyStr = armo.BMDT.isUpperBody() ? m.model.str : bodyStr;
-		handLStr = armo.BMDT.isHand() ? m.model.str : handLStr;
-		handRStr = armo.BMDT.isHand() ? m.model.str : handRStr;
+		helmetStr = armo.BMDT.isHair() ? m.model : helmetStr;
+		bodyStr = armo.BMDT.isUpperBody() ? m.model : bodyStr;
+		handLStr = armo.BMDT.isHand() ? m.model : handLStr;
+		handRStr = armo.BMDT.isHand() ? m.model : handRStr;
 	}
 
 	private void addWEAP(WEAP weap)
 	{
 		if (weap.MODL != null)
 		{
-			weapStr = weap.MODL.model.str;
+			weapStr = weap.MODL.model;
 		}
 		else
 		{

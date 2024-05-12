@@ -10,7 +10,7 @@ import esmj3d.data.shared.subrecords.CNTO;
 import esmj3d.data.shared.subrecords.FormID;
 import esmj3d.data.shared.subrecords.LString;
 import esmj3d.data.shared.subrecords.MODL;
-import esmj3d.data.shared.subrecords.ZString;
+
 import esmj3dfo3.data.subrecords.ACBS;
 import esmj3dfo3.data.subrecords.AIDT;
 import esmj3dfo3.data.subrecords.CSDC;
@@ -23,7 +23,7 @@ import tools.io.ESMByteConvert;
 
 public class CREA extends RECO
 {
-	public ZString EDID = null;
+	
 
 	public LString FULL = null;
 
@@ -110,7 +110,7 @@ public class CREA extends RECO
 
 			if (sr.getSubrecordType().equals("EDID"))
 			{
-				EDID = new ZString(bs);
+				setEDID(bs);
 			}
 			else if (sr.getSubrecordType().equals("FULL"))
 			{

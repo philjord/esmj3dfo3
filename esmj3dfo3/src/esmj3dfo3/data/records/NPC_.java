@@ -10,7 +10,6 @@ import esmj3d.data.shared.subrecords.CNTO;
 import esmj3d.data.shared.subrecords.FormID;
 import esmj3d.data.shared.subrecords.LString;
 import esmj3d.data.shared.subrecords.MODL;
-import esmj3d.data.shared.subrecords.ZString;
 import esmj3dfo3.data.subrecords.ACBS;
 import esmj3dfo3.data.subrecords.AIDT;
 import esmj3dfo3.data.subrecords.FGGA;
@@ -22,7 +21,7 @@ import tools.io.ESMByteConvert;
 
 public class NPC_ extends RECO
 {
-	public ZString EDID = null;
+	
 
 	public LString FULL = null;
 
@@ -129,16 +128,16 @@ public class NPC_ extends RECO
 
 	public byte Luc;
 
-	
+
+	public ArrayList<SNAM> SNAMsl = new ArrayList<SNAM>();
+	public ArrayList<FormID> SPLOsl = new ArrayList<FormID>();
+	public ArrayList<CNTO> CNTOsl = new ArrayList<CNTO>();
+	public ArrayList<FormID> PKIDsl = new ArrayList<FormID>();
 
 	public NPC_(Record recordData)
 	{
 		super(recordData);
 
-		ArrayList<SNAM> SNAMsl = new ArrayList<SNAM>();
-		ArrayList<FormID> SPLOsl = new ArrayList<FormID>();
-		ArrayList<CNTO> CNTOsl = new ArrayList<CNTO>();
-		ArrayList<FormID> PKIDsl = new ArrayList<FormID>();
 
 		List<Subrecord> subrecords = recordData.getSubrecords();
 		for (int i = 0; i < subrecords.size(); i++)
@@ -148,7 +147,7 @@ public class NPC_ extends RECO
 
 			if (sr.getSubrecordType().equals("EDID"))
 			{
-				EDID = new ZString(bs);
+				setEDID(bs);
 			}
 			else if (sr.getSubrecordType().equals("FULL"))
 			{

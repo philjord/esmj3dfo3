@@ -94,9 +94,10 @@ public class CELL extends CommonCELL
 		}
 	}
 
+	@Override
 	public String showDetails()
 	{
-		return "CELL : (" + formId + "|" + Integer.toHexString(formId) + ") " + EDID.str + " : " + FULL.str;
+		return super.showDetails() + " : " + FULL.str;
 	}
 
 	public class DATA

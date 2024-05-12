@@ -4,10 +4,10 @@ import esmj3d.data.shared.subrecords.ZString;
 
 public class XSED
 {
-	public ZString string;
+	public String string;
 
 	public XSED(byte[] bytes)
 	{
-		string = new ZString(bytes);
+		string = ZString.toString(bytes);
 	}
 }

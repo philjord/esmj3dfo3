@@ -24,7 +24,7 @@ import tools.io.ESMByteConvert;
 
 public class RACE extends RECO
 {
-	public ZString EDID = null;
+	
 
 	public LString FULL = null;
 
@@ -49,7 +49,7 @@ public class RACE extends RECO
 
 	public MODB[] MODBs = null;
 
-	public ZString[] ICONs = null;
+	public String[] ICONs = null;
 
 	public boolean NAM1 = false;
 
@@ -82,7 +82,7 @@ public class RACE extends RECO
 		ArrayList<INDX> INDXsl = new ArrayList<INDX>();
 		ArrayList<MODL> MODLsl = new ArrayList<MODL>();
 		ArrayList<MODB> MODBsl = new ArrayList<MODB>();
-		ArrayList<ZString> ICONsl = new ArrayList<ZString>();
+		ArrayList<String> ICONsl = new ArrayList<String>();
 
 		List<Subrecord> subrecords = recordData.getSubrecords();
 		for (int i = 0; i < subrecords.size(); i++)
@@ -92,7 +92,7 @@ public class RACE extends RECO
 
 			if (sr.getSubrecordType().equals("EDID"))
 			{
-				EDID = new ZString(bs);
+				setEDID(bs);
 			}
 			else if (sr.getSubrecordType().equals("FULL"))
 			{
@@ -136,7 +136,7 @@ public class RACE extends RECO
 			}
 			else if (sr.getSubrecordType().equals("ICON"))
 			{
-				ICONsl.add(new ZString(bs));
+				ICONsl.add(ZString.toString(bs));
 			}
 			else if (sr.getSubrecordType().equals("NAM1"))
 			{
@@ -218,7 +218,7 @@ public class RACE extends RECO
 			MODBs = new MODB[MODBsl.size()];
 			MODBsl.toArray(MODBs);
 
-			ICONs = new ZString[ICONsl.size()];
+			ICONs = new String[ICONsl.size()];
 			ICONsl.toArray(ICONs);
 
 			//extract data data

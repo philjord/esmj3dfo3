@@ -12,7 +12,7 @@ import esmj3dfo3.data.subrecords.BMDT;
 
 public class ARMO extends RECO
 {
-	public ZString EDID;
+	
 
 	public FormID SCRI;
 
@@ -26,9 +26,9 @@ public class ARMO extends RECO
 
 	public MODL MOD4; // female ground 
 
-	public ZString ICON;
+	public String ICON;
 
-	public ZString ICO2;
+	public String ICO2;
 
 	public DATA DATA;
 
@@ -45,7 +45,7 @@ public class ARMO extends RECO
 
 			if (sr.getSubrecordType().equals("EDID"))
 			{
-				EDID = new ZString(bs);
+				setEDID(bs);
 			}
 			else if (sr.getSubrecordType().equals("FULL"))
 			{
@@ -97,11 +97,11 @@ public class ARMO extends RECO
 			}
 			else if (sr.getSubrecordType().equals("ICON"))
 			{
-				ICON = new ZString(bs);
+				ICON = ZString.toString(bs);
 			}
 			else if (sr.getSubrecordType().equals("ICO2"))
 			{
-				ICO2 = new ZString(bs);
+				ICO2 = ZString.toString(bs);
 			}
 			else if (sr.getSubrecordType().equals("DATA"))
 			{
