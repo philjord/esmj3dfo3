@@ -106,7 +106,7 @@ public class J3dCELL extends J3dCELLGeneral implements UpdateListener
 	{
 		//does it start disabled? ignore if so
 		//TODO: what is the disable flag?
-		if ((record.getRecordFlags1() & 0x800) != 0)
+		if ((record.getRecordFlags() & 0x800) != 0)
 		{
 			return null;
 		}
@@ -258,8 +258,8 @@ public class J3dCELL extends J3dCELLGeneral implements UpdateListener
 				{
 					return true;
 				}
-				else if ((baseRecord.getRecordFlags1() & RECO.VisibleWhenDistant_Flag) != 0//
-						|| (baseRecord.getRecordFlags1() & RECO.HasTreeLOD_Flag) != 0)
+				else if ((baseRecord.getRecordFlags() & RECO.VisibleWhenDistant_Flag) != 0//
+						|| (baseRecord.getRecordFlags() & RECO.HasTreeLOD_Flag) != 0)
 				{
 					//anythig with LOD, STAT, SCOL, ACTI
 					return true;
