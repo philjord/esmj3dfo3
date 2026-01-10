@@ -101,8 +101,7 @@ public class J3dNPC_ extends J3dRECOTypeCha
 		
 		for(FormID id : npc_.PKIDsl) {
 			PACK pack = new PACK(master.getRecord(id.formId));
-			System.out.println("this " + this + " " + pack);
-			
+			//System.out.println("this " + this + " " + pack);			
 		}
 
 		
